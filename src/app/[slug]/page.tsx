@@ -28,11 +28,6 @@ const sidebarLinks: Record<string, { label: string; href: string }[]> = {
 
 type PageParams = { slug: string };
 
-export async function generateStaticParams() {
-  const slugs = await getPageSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
-
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
   const { slug } = await params;
   const page = await getPageBySlug(slug);

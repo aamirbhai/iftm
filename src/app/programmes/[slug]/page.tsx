@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
@@ -16,11 +18,6 @@ const levelColors: Record<string, string> = {
 };
 
 type ProgrammeParams = { slug: string };
-
-export async function generateStaticParams() {
-  const slugs = await getProgrammeSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({ params }: { params: Promise<ProgrammeParams> }): Promise<Metadata> {
   const { slug } = await params;

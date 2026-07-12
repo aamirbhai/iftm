@@ -11,11 +11,6 @@ export const revalidate = 60;
 
 type BlogParams = { slug: string };
 
-export async function generateStaticParams() {
-  const slugs = await getPostSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
-
 export async function generateMetadata({
   params,
 }: {

@@ -11,11 +11,6 @@ export const revalidate = 60;
 
 type NewsParams = { slug: string };
 
-export async function generateStaticParams() {
-  const slugs = await getNewsSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
-
 export async function generateMetadata({ params }: { params: Promise<NewsParams> }): Promise<Metadata> {
   const { slug } = await params;
   const article = await getNewsBySlug(slug);
