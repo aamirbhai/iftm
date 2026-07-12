@@ -39,10 +39,10 @@ export interface WordPressPost {
   content: string;
   date: string;
   modified: string;
-  featuredImage?: WordPressImage;
-  categories: WordPressCategory[];
-  tags: WordPressTag[];
-  author: WordPressAuthor;
+  featuredImage?: { node: WordPressImage };
+  categories: { nodes: WordPressCategory[] };
+  tags: { nodes: WordPressTag[] };
+  author: { node: WordPressAuthor };
   acf?: {
     readTime?: string;
     authorName?: string;
@@ -57,7 +57,7 @@ export interface WordPressNews {
   content: string;
   date: string;
   modified: string;
-  featuredImage?: WordPressImage;
+  featuredImage?: { node: WordPressImage };
   acf?: {
     department?: string;
     sourceUrl?: string;
