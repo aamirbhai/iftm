@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getNews } from "@/lib/wordpress";
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "News & Updates | IFTM University Moradabad",

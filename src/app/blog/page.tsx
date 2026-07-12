@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getPosts } from "@/lib/wordpress";
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Blog | IFTM University Moradabad",

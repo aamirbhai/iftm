@@ -1,4 +1,5 @@
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,8 +8,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getPageBySlug, getPageSlugs } from "@/lib/wordpress";
-
-export const revalidate = 60;
 
 // Static sidebar links per page slug
 const sidebarLinks: Record<string, { label: string; href: string }[]> = {

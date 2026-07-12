@@ -1,4 +1,5 @@
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,8 +8,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProgrammeBySlug, getProgrammeSlugs } from "@/lib/wordpress";
 import ProgrammeTabs from "./ProgrammeTabs";
-
-export const revalidate = 60;
 
 const levelColors: Record<string, string> = {
   Diploma: "bg-orange-500",
