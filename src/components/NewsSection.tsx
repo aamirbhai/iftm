@@ -1,72 +1,81 @@
-"use client";
-
 import Link from "next/link";
+import { getNews } from "@/lib/wordpress";
 
-const newsItems = [
-  {
-    date: "15 Mar 2026",
-    title: "Admissions Open 2026-27 | Apply Now",
-    description: "IFTM University invites applications for all UG, PG, Diploma and Ph.D. programmes. Scholarships available for meritorious students.",
-    href: "https://admissions.iftm.ac.in",
-    img: "/images/gallery/campus1.jpg",
-  },
-  {
-    date: "2024",
-    title: "NAAC 'A' Grade Accreditation Achieved",
-    description: "IFTM University has been accredited with NAAC 'A' Grade by the National Assessment and Accreditation Council for academic excellence.",
-    href: "/naac",
-    img: "/images/gallery/campus2.jpg",
-  },
-  {
-    date: "2025-26",
-    title: "MoU with Leading Industry Partners",
-    description: "New collaborations with TCS, Infosys, Wipro, HCL for student training, internships and placement opportunities.",
-    href: "/mou",
-    img: "/images/gallery/campus3.jpg",
-  },
-  {
-    date: "2025",
-    title: "Campus Infrastructure Upgraded",
-    description: "New smart classrooms, advanced laboratories and modern library facilities added to enhance student learning experience.",
-    href: "/news",
-    img: "/images/gallery/campus4.jpg",
-  },
-];
+export default async function NewsSection() {
+  const data = await getNews(4);
+  const news = data?.nodes || [];
 
-const noticeItems = [
-  {
-    date: "10 Jul 2026",
-    title: "Examination Schedule Released",
-    description: "End semester examination schedule for all programmes has been released. Check the ERP portal for details.",
-    dept: "Examination Cell",
-  },
-  {
-    date: "05 Jul 2026",
-    title: "Scholarship Applications Open",
-    description: "Merit-based and need-based scholarship applications are now open for the 2026-27 academic session.",
-    dept: "Scholarship Cell",
-  },
-  {
-    date: "01 Jul 2026",
-    title: "Hostel Allotment Notice",
-    description: "Hostel room allotment for new students will begin from 15th July. Apply through the student portal.",
-    dept: "Hostel Office",
-  },
-  {
-    date: "28 Jun 2026",
-    title: "Library New Timing",
-    description: "Library will remain open from 8 AM to 10 PM during the examination period for student convenience.",
-    dept: "Central Library",
-  },
-  {
-    date: "25 Jun 2026",
-    title: "Placement Drive Notice",
-    description: "TCS campus placement drive scheduled for B.Tech/MCA students. Register on the CRC portal before 30th June.",
-    dept: "Training & Placement",
-  },
-];
+  // Fallback to static data if WordPress is not configured
+  const newsItems = news.length > 0 ? news.map(item => ({
+    date: new Date(item.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
+    title: item.title,
+    description: item.excerpt?.replace(/<[^>]*>/g, "").substring(0, 120) + "..." || "",
+    href: `/news/${item.slug}`,
+    img: item.featuredImage?.node?.sourceUrl || "/images/gallery/campus1.jpg",
+  })) : [
+    {
+      date: "15 Mar 2026",
+      title: "Admissions Open 2026-27 | Apply Now",
+      description: "IFTM University invites applications for all UG, PG, Diploma and Ph.D. programmes. Scholarships available for meritorious students.",
+      href: "https://admissions.iftm.ac.in",
+      img: "/images/gallery/campus1.jpg",
+    },
+    {
+      date: "2024",
+      title: "NAAC 'A' Grade Accreditation Achieved",
+      description: "IFTM University has been accredited with NAAC 'A' Grade by the National Assessment and Accreditation Council for academic excellence.",
+      href: "/naac",
+      img: "/images/gallery/campus2.jpg",
+    },
+    {
+      date: "2025-26",
+      title: "MoU with Leading Industry Partners",
+      description: "New collaborations with TCS, Infosys, Wipro, HCL for student training, internships and placement opportunities.",
+      href: "/mou",
+      img: "/images/gallery/campus3.jpg",
+    },
+    {
+      date: "2025",
+      title: "Campus Infrastructure Upgraded",
+      description: "New smart classrooms, advanced laboratories and modern library facilities added to enhance student learning experience.",
+      href: "/news",
+      img: "/images/gallery/campus4.jpg",
+    },
+  ];
 
-export default function NewsSection() {
+  const noticeItems = [
+    {
+      date: "10 Jul 2026",
+      title: "Examination Schedule Released",
+      description: "End semester examination schedule for all programmes has been released. Check the ERP portal for details.",
+      dept: "Examination Cell",
+    },
+    {
+      date: "05 Jul 2026",
+      title: "Scholarship Applications Open",
+      description: "Merit-based and need-based scholarship applications are now open for the 2026-27 academic session.",
+      dept: "Scholarship Cell",
+    },
+    {
+      date: "01 Jul 2026",
+      title: "Hostel Allotment Notice",
+      description: "Hostel room allotment for new students will begin from 15th July. Apply through the student portal.",
+      dept: "Hostel Office",
+    },
+    {
+      date: "28 Jun 2026",
+      title: "Library New Timing",
+      description: "Library will remain open from 8 AM to 10 PM during the examination period for student convenience.",
+      dept: "Central Library",
+    },
+    {
+      date: "25 Jun 2026",
+      title: "Placement Drive Notice",
+      description: "TCS campus placement drive scheduled for B.Tech/MCA students. Register on the CRC portal before 30th June.",
+      dept: "Training & Placement",
+    },
+  ];
+
   return (
     <section className="py-14 md:py-20 bg-white">
       <div className="max-w-[1400px] mx-auto px-4 md:px-6">

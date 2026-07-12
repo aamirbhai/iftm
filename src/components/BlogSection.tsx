@@ -1,59 +1,69 @@
-"use client";
-
 import Link from "next/link";
+import { getPosts } from "@/lib/wordpress";
 
-const blogs = [
-  {
-    title: "Top Career Options After B.Pharm in 2026",
-    excerpt: "Discover the best career opportunities available after completing B.Pharm including pharma industry, research, government jobs, and higher studies.",
-    date: "10 Jul 2026",
-    category: "Pharmacy",
-    img: "/images/buildings/7.jpg",
-    href: "/blog/career-after-bpharm",
-  },
-  {
-    title: "Why Choose IFTM for Engineering? A Complete Guide",
-    excerpt: "Learn why IFTM University is the best choice for engineering aspirants with NAAC A Grade, industry partnerships, and excellent placements.",
-    date: "05 Jul 2026",
-    category: "Engineering",
-    img: "/images/buildings/4.jpg",
-    href: "/blog/why-iftm-engineering",
-  },
-  {
-    title: "NEP 2020: How IFTM is Transforming Education",
-    excerpt: "IFTM University is at the forefront of implementing the National Education Policy 2020 with multidisciplinary approach and outcome-based education.",
-    date: "28 Jun 2026",
-    category: "Education",
-    img: "/images/buildings/campus2.jpg",
-    href: "/blog/nep-2020-iftm",
-  },
-  {
-    title: "Campus Life at IFTM: Beyond Academics",
-    excerpt: "Explore the vibrant campus life at IFTM with sports, cultural events, student clubs, and holistic development opportunities.",
-    date: "20 Jun 2026",
-    category: "Campus Life",
-    img: "/images/buildings/14.jpg",
-    href: "/blog/campus-life-iftm",
-  },
-  {
-    title: "IFTM Placement Records: Top Recruiters & Packages",
-    excerpt: "A detailed look at IFTM's placement statistics, top recruiting companies, and the highest packages offered to students.",
-    date: "15 Jun 2026",
-    category: "Placements",
-    img: "/images/buildings/campus1.jpg",
-    href: "/blog/placement-records",
-  },
-  {
-    title: "Scholarship Opportunities at IFTM University 2026-27",
-    excerpt: "Complete guide to merit-based, need-based, and government scholarships available for IFTM students in the upcoming academic session.",
-    date: "10 Jun 2026",
-    category: "Admissions",
-    img: "/images/buildings/campus5.jpg",
-    href: "/blog/scholarships-2026",
-  },
-];
+export default async function BlogSection() {
+  const data = await getPosts(6);
+  const posts = data?.nodes || [];
 
-export default function BlogSection() {
+  // Fallback to static data if WordPress is not configured
+  const blogs = posts.length > 0 ? posts.map(post => ({
+    title: post.title,
+    excerpt: post.excerpt?.replace(/<[^>]*>/g, "").substring(0, 120) + "..." || "",
+    date: new Date(post.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
+    category: post.categories?.nodes?.[0]?.name || "General",
+    img: post.featuredImage?.node?.sourceUrl || "/images/buildings/7.jpg",
+    href: `/blog/${post.slug}`,
+  })) : [
+    {
+      title: "Top Career Options After B.Pharm in 2026",
+      excerpt: "Discover the best career opportunities available after completing B.Pharm including pharma industry, research, government jobs, and higher studies.",
+      date: "10 Jul 2026",
+      category: "Pharmacy",
+      img: "/images/buildings/7.jpg",
+      href: "/blog/career-after-bpharm",
+    },
+    {
+      title: "Why Choose IFTM for Engineering? A Complete Guide",
+      excerpt: "Learn why IFTM University is the best choice for engineering aspirants with NAAC A Grade, industry partnerships, and excellent placements.",
+      date: "05 Jul 2026",
+      category: "Engineering",
+      img: "/images/buildings/4.jpg",
+      href: "/blog/why-iftm-engineering",
+    },
+    {
+      title: "NEP 2020: How IFTM is Transforming Education",
+      excerpt: "IFTM University is at the forefront of implementing the National Education Policy 2020 with multidisciplinary approach and outcome-based education.",
+      date: "28 Jun 2026",
+      category: "Education",
+      img: "/images/buildings/campus2.jpg",
+      href: "/blog/nep-2020-iftm",
+    },
+    {
+      title: "Campus Life at IFTM: Beyond Academics",
+      excerpt: "Explore the vibrant campus life at IFTM with sports, cultural events, student clubs, and holistic development opportunities.",
+      date: "20 Jun 2026",
+      category: "Campus Life",
+      img: "/images/buildings/14.jpg",
+      href: "/blog/campus-life-iftm",
+    },
+    {
+      title: "IFTM Placement Records: Top Recruiters & Packages",
+      excerpt: "A detailed look at IFTM's placement statistics, top recruiting companies, and the highest packages offered to students.",
+      date: "15 Jun 2026",
+      category: "Placements",
+      img: "/images/buildings/campus1.jpg",
+      href: "/blog/placement-records",
+    },
+    {
+      title: "Scholarship Opportunities at IFTM University 2026-27",
+      excerpt: "Complete guide to merit-based, need-based, and government scholarships available for IFTM students in the upcoming academic session.",
+      date: "10 Jun 2026",
+      category: "Admissions",
+      img: "/images/buildings/campus5.jpg",
+      href: "/blog/scholarships-2026",
+    },
+  ];
+
   return (
     <section className="py-14 md:py-20 bg-white">
       <div className="max-w-[1400px] mx-auto px-4 md:px-6">
