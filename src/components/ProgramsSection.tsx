@@ -26,15 +26,24 @@ export default async function ProgramsSection() {
     );
   }
 
+  // Auto-detect level from title
+  function guessLevel(title: string): "Diploma" | "UG" | "PG" | "Ph.D." {
+    const t = title.toLowerCase();
+    if (t.includes("ph.d") || t.includes("phd")) return "Ph.D.";
+    if (t.includes("m.com") || t.includes("mba") || t.includes("mca") || t.includes("m.sc") || t.includes("m.tech") || t.includes("llm") || t.includes("m.ed") || t.includes("m.pharm") || t.includes("m.lib") || t.includes("msw") || t.startsWith("m.a") || t.startsWith("ma ")) return "PG";
+    if (t.includes("diploma") || t.includes("d.pharm") || t.includes("b.lib")) return "Diploma";
+    return "UG";
+  }
+
   // Transform WordPress data for the client component
   const transformedProgrammes = programmes.map((p) => ({
     id: p.id,
     title: p.title,
     slug: p.slug,
     school: p.programmeDetails?.school || "IFTM University",
-    level: "UG" as "Diploma" | "UG" | "PG" | "Ph.D.",
+    level: (p.programmeFields?.level as "Diploma" | "UG" | "PG" | "Ph.D.") || guessLevel(p.title),
     duration: p.programmeDetails?.duration || "",
-    fee: p.programmeDetails?.fee || "",
+    fee: p.programmeDetails?.fee || p.programmeFields?.fee || "",
     image: p.featuredImage?.node?.sourceUrl,
   }));
 

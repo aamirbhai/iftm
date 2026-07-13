@@ -41,12 +41,21 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
 
   if (!programme) notFound();
 
+  // Auto-detect level from title if Meta Box field is empty
+  function guessLevel(title: string): string {
+    const t = title.toLowerCase();
+    if (t.includes("ph.d") || t.includes("phd")) return "Ph.D.";
+    if (t.includes("m.com") || t.includes("mba") || t.includes("mca") || t.includes("m.sc") || t.includes("m.tech") || t.includes("llm") || t.includes("m.ed") || t.includes("m.pharm") || t.includes("m.lib") || t.includes("msw") || t.startsWith("m.a") || t.startsWith("ma ")) return "PG";
+    if (t.includes("diploma") || t.includes("d.pharm") || t.includes("b.lib")) return "Diploma";
+    return "UG";
+  }
+
   const details = programme.programmeDetails;
   const fields = programme.programmeFields;
   const school = details?.school || "IFTM University";
   const duration = details?.duration || "";
   const fee = details?.fee || fields?.fee || "";
-  const level = details?.level?.[0] || fields?.level || "UG";
+  const level = details?.level?.[0] || fields?.level || guessLevel(programme.title);
   const eligibility = fields?.eligibility || "";
   const overview = fields?.overview || "";
   const curriculum = fields?.curriculum || "";

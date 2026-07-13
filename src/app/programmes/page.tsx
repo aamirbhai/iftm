@@ -30,6 +30,14 @@ const schoolIcons: Record<string, string> = {
   "School of Sciences": "fa-flask",
 };
 
+function guessLevel(title: string): "Diploma" | "UG" | "PG" | "Ph.D." {
+  const t = title.toLowerCase();
+  if (t.includes("ph.d") || t.includes("phd")) return "Ph.D.";
+  if (t.includes("m.com") || t.includes("mba") || t.includes("mca") || t.includes("m.sc") || t.includes("m.tech") || t.includes("llm") || t.includes("m.ed") || t.includes("m.pharm") || t.includes("m.lib") || t.includes("msw") || t.startsWith("m.a") || t.startsWith("ma ")) return "PG";
+  if (t.includes("diploma") || t.includes("d.pharm") || t.includes("b.lib")) return "Diploma";
+  return "UG";
+}
+
 function groupBySchool(programmes: WordPressProgramme[]) {
   const groups = new Map<string, WordPressProgramme[]>();
   for (const p of programmes) {
@@ -81,7 +89,7 @@ export default async function ProgrammesPage() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {school.programmes.map((programme) => {
-                        const pLevel = programme.programmeDetails?.level?.[0] || "UG";
+                        const pLevel = programme.programmeDetails?.level?.[0] || programme.programmeFields?.level || guessLevel(programme.title);
                         const pDuration = programme.programmeDetails?.duration || "";
                         const pImage = programme.featuredImage?.node?.sourceUrl;
                         return (
@@ -99,7 +107,7 @@ export default async function ProgrammesPage() {
                                   loading="lazy"
                                 />
                                 <div className="absolute top-3 left-3">
-                                  <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase text-white ${levelColors["UG"]}`}>
+                                  <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase text-white ${levelColors[pLevel] || levelColors["UG"]}`}>
                                     {pLevel}
                                   </span>
                                 </div>
@@ -107,7 +115,7 @@ export default async function ProgrammesPage() {
                             )}
                             <div className="p-4">
                               {!pImage && (
-                                <span className={`inline-block px-2 py-1 rounded text-[9px] font-bold uppercase text-white mb-2 ${levelColors["UG"]}`}>
+                                <span className={`inline-block px-2 py-1 rounded text-[9px] font-bold uppercase text-white mb-2 ${levelColors[pLevel] || levelColors["UG"]}`}>
                                   {pLevel}
                                 </span>
                               )}
