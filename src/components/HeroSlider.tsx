@@ -221,8 +221,8 @@ export default function HeroSlider() {
             <div className="max-w-[900px] mx-auto animate-fade-in">
                 {/* NAAC Badge - Small green bg with yellow text */}
                 <div className="inline-block mb-6">
-                  <span className="bg-green-600/90 backdrop-blur-sm text-iftm-gold text-[11px] font-bold uppercase tracking-[0.25em] px-4 py-1.5 rounded-full border border-green-500/50">
-                    NAAC &apos;A&apos; Grade Accredited
+                  <span className="bg-green-600/90 backdrop-blur-sm text-iftm-gold text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full border border-green-500/40">
+                    NAAC &apos;A&apos; Grade
                   </span>
                 </div>
 

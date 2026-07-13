@@ -168,7 +168,7 @@ export default function Header({ solid = false }: { solid?: boolean }) {
                 <span className="text-white font-bold text-[10px] md:text-base">NAAC</span>
                 <span className="text-white font-medium text-[8px] md:text-[10px]">GRADE</span>
               </div>
-              <span className="text-iftm-gold font-black text-2xl md:text-4xl leading-none">A</span>
+              <span className="bg-iftm-gold text-iftm-navy font-black text-2xl md:text-4xl leading-none w-8 h-8 md:w-11 md:h-11 flex items-center justify-center rounded-sm">A</span>
             </div>
           </Link>
 
