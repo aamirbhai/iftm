@@ -71,6 +71,12 @@ export interface WordPressProgramme {
   content: string;
   modified: string;
   featuredImage?: WordPressImage;
+  programmeDetails?: {
+    school?: string;
+    level?: string[];
+    duration?: string;
+    fee?: string;
+  };
   acf?: {
     school?: string;
     level?: 'UG' | 'PG' | 'Diploma' | 'Ph.D.';
