@@ -68,97 +68,85 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
       <Header />
       <main className="min-h-screen">
         {/* ═══ Attractive Hero Section ═══ */}
-        <section className="relative pt-[72px] md:pt-[80px] overflow-hidden">
-          {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-iftm-navy via-[#0a0f2e] to-[#151b4a]" />
-          
-          {/* Decorative Elements */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-iftm-primary/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-10 right-20 w-96 h-96 bg-iftm-gold/5 rounded-full blur-[120px]" />
-          <div className="absolute top-40 right-40 w-20 h-20 border border-white/10 rounded-full" />
-          <div className="absolute bottom-20 left-1/3 w-16 h-16 border border-iftm-gold/20 rounded-full" />
+        <section className="relative pt-[72px] md:pt-[80px] overflow-hidden min-h-[400px]">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img
+              src={bannerImage}
+              alt={programme.title}
+              className="w-full h-full object-cover"
+              loading="eager"
+              fetchPriority="high"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-iftm-navy/95 via-iftm-navy/80 to-iftm-navy/40" />
+          </div>
 
           <div className="relative max-w-[1400px] mx-auto px-4 md:px-6 py-12 md:py-16">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 items-center">
-              {/* Left Content */}
-              <div>
-                {/* Breadcrumb */}
-                <nav className="mb-6">
-                  <ol className="flex items-center gap-2 text-white/60 text-sm">
-                    <li><Link href="/" className="hover:text-iftm-gold transition-colors">Home</Link></li>
-                    <li>/</li>
-                    <li><Link href="/programmes" className="hover:text-iftm-gold transition-colors">Programmes</Link></li>
-                    <li>/</li>
-                    <li className="text-iftm-gold truncate max-w-[200px]">{programme.title}</li>
-                  </ol>
-                </nav>
+            {/* Breadcrumb */}
+            <nav className="mb-6">
+              <ol className="flex items-center gap-2 text-white/60 text-sm">
+                <li><Link href="/" className="hover:text-iftm-gold transition-colors">Home</Link></li>
+                <li>/</li>
+                <li><Link href="/programmes" className="hover:text-iftm-gold transition-colors">Programmes</Link></li>
+                <li>/</li>
+                <li className="text-iftm-gold truncate max-w-[200px]">{programme.title}</li>
+              </ol>
+            </nav>
 
-                <span className="inline-block px-4 py-1.5 bg-iftm-gold/20 text-iftm-gold text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-                  {level} Programme
-                </span>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
-                  {programme.title}
-                </h1>
-                {school && (
-                  <p className="text-white/70 text-lg mb-6">{school}</p>
-                )}
+            <span className="inline-block px-4 py-1.5 bg-iftm-gold/20 text-iftm-gold text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+              {level} Programme
+            </span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 max-w-3xl">
+              {programme.title}
+            </h1>
+            {school && (
+              <p className="text-white/70 text-lg mb-6">{school}</p>
+            )}
 
-                {/* Quick Stats */}
-                <div className="flex flex-wrap gap-4 mb-8">
-                  {duration && (
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
-                      <span className="text-white/60 text-[10px] uppercase tracking-wider block">Duration</span>
-                      <p className="text-white font-semibold text-sm">{duration}</p>
-                    </div>
-                  )}
-                  {fee && (
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
-                      <span className="text-white/60 text-[10px] uppercase tracking-wider block">Fee</span>
-                      <p className="text-white font-semibold text-sm">{fee}</p>
-                    </div>
-                  )}
-                  {level && (
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
-                      <span className="text-white/60 text-[10px] uppercase tracking-wider block">Level</span>
-                      <p className="text-white font-semibold text-sm">{level}</p>
-                    </div>
-                  )}
-                  {eligibility && (
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
-                      <span className="text-white/60 text-[10px] uppercase tracking-wider block">Eligibility</span>
-                      <p className="text-white font-semibold text-sm line-clamp-1">{eligibility}</p>
-                    </div>
-                  )}
+            {/* Quick Stats */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              {duration && (
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+                  <span className="text-white/60 text-[10px] uppercase tracking-wider block">Duration</span>
+                  <p className="text-white font-semibold text-sm">{duration}</p>
                 </div>
-
-                {/* CTAs */}
-                <div className="flex flex-wrap gap-4">
-                  <a
-                    href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-8 py-3.5 bg-iftm-primary text-white font-bold rounded-xl hover:bg-iftm-primary-dark transition-all hover:-translate-y-0.5 shadow-lg shadow-iftm-primary/30"
-                  >
-                    Apply Now
-                  </a>
-                  <a
-                    href="#overview"
-                    className="px-8 py-3.5 bg-white/10 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/20 transition-all"
-                  >
-                    Explore More
-                  </a>
+              )}
+              {fee && (
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+                  <span className="text-white/60 text-[10px] uppercase tracking-wider block">Fee</span>
+                  <p className="text-white font-semibold text-sm">{fee}</p>
                 </div>
-              </div>
+              )}
+              {level && (
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+                  <span className="text-white/60 text-[10px] uppercase tracking-wider block">Level</span>
+                  <p className="text-white font-semibold text-sm">{level}</p>
+                </div>
+              )}
+              {eligibility && (
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+                  <span className="text-white/60 text-[10px] uppercase tracking-wider block">Eligibility</span>
+                  <p className="text-white font-semibold text-sm line-clamp-1">{eligibility}</p>
+                </div>
+              )}
+            </div>
 
-              {/* Right - Programme Image (Clean, no frame) */}
-              <div className="hidden lg:block">
-                <img
-                  src={bannerImage}
-                  alt={programme.title}
-                  className="w-full h-auto max-h-[500px] object-contain rounded-2xl"
-                  loading="eager"
-                />
-              </div>
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3.5 bg-iftm-primary text-white font-bold rounded-xl hover:bg-iftm-primary-dark transition-all hover:-translate-y-0.5 shadow-lg shadow-iftm-primary/30"
+              >
+                Apply Now
+              </a>
+              <a
+                href="#overview"
+                className="px-8 py-3.5 bg-white/10 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/20 transition-all"
+              >
+                Explore More
+              </a>
             </div>
 
             {/* Tab Navigation inside Hero */}
