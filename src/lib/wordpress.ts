@@ -297,6 +297,12 @@ export async function getProgrammeBySlug(slug: string) {
         slug
         content
         modified
+        programmeDetails {
+          school
+          level
+          duration
+          fee
+        }
         featuredImage {
           node {
             ...ImageFields
