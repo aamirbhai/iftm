@@ -13,6 +13,18 @@ const nextConfig: NextConfig = {
       ],
     },
   ],
+  async rewrites() {
+    return [
+      {
+        source: "/videos/hls/:path*",
+        destination: "https://4.lfabhawalpur.com/hls/:path*",
+      },
+      {
+        source: "/videos/hls_mobile/:path*",
+        destination: "https://4.lfabhawalpur.com/hls_mobile/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
