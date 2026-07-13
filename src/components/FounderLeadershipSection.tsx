@@ -57,16 +57,14 @@ export default function FounderLeadershipSection() {
   }, [isPaused, nextSlide]);
 
   return (
-    <section className="py-16 bg-iftm-light relative overflow-hidden">
-      {/* Decorative */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-iftm-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-iftm-gold/5 rounded-full blur-3xl" />
+    <section className="relative overflow-hidden">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch">
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-
-          {/* ═══ LEFT: Founder ═══ */}
-          <div className="text-center lg:text-left">
+          {/* ═══ LEFT: Founder (Light BG) ═══ */}
+          <div className="py-16 px-4 md:px-10 bg-iftm-light relative">
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-iftm-primary/5 rounded-full blur-3xl" />
+            <div className="relative z-10 text-center lg:text-left">
             {/* Section Label */}
             <span className="text-iftm-primary text-xs font-bold uppercase tracking-[2px] mb-2 block">
               In Loving Memory
@@ -117,31 +115,31 @@ export default function FounderLeadershipSection() {
                 </p>
               </div>
             </div>
+            </div>
           </div>
 
-          {/* ═══ Divider ═══ */}
-          <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-y-1/2 w-px h-[80%] bg-gradient-to-b from-transparent via-iftm-border to-transparent" />
-
-          {/* ═══ RIGHT: Leadership Carousel ═══ */}
+          {/* ═══ RIGHT: Leadership Carousel (Golden BG) ═══ */}
           <div
+            className="py-16 px-4 md:px-10 bg-gradient-to-br from-amber-600 via-amber-500 to-yellow-500 relative"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
+            <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-white/5 rounded-full blur-3xl" />
             {/* Section Label */}
-            <span className="text-iftm-primary text-xs font-bold uppercase tracking-[2px] mb-2 block text-center lg:text-left">
+            <span className="text-white/70 text-xs font-bold uppercase tracking-[2px] mb-2 block text-center lg:text-left">
               University Leadership
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-iftm-dark mb-6 text-center lg:text-left">
-              Message from <span className="text-iftm-primary">Leadership</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center lg:text-left">
+              Message from <span className="text-iftm-dark">Leadership</span>
             </h2>
 
             {/* Leadership Card */}
-            <div className="bg-white rounded-2xl shadow-lg border border-iftm-border overflow-hidden">
+            <div className="bg-white/15 backdrop-blur-sm rounded-2xl border border-white/20 overflow-hidden">
               <div key={activeIndex} className="animate-fade-in">
                 <div className="flex flex-col sm:flex-row items-center gap-6 p-6">
                   {/* Leader Image */}
                   <div className="flex-shrink-0">
-                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-iftm-primary/20">
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/30">
                       <Image
                         src={leaders[activeIndex].image}
                         alt={leaders[activeIndex].name}
@@ -154,12 +152,12 @@ export default function FounderLeadershipSection() {
 
                   {/* Leader Info */}
                   <div className="flex-1 text-center sm:text-left">
-                    <p className="text-iftm-text text-sm leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-white/90 text-sm leading-relaxed mb-4 line-clamp-3">
                       &ldquo;{leaders[activeIndex].message}&rdquo;
                     </p>
                     <div>
-                      <p className="text-iftm-dark font-bold text-sm">{leaders[activeIndex].name}</p>
-                      <p className="text-iftm-primary text-xs">{leaders[activeIndex].role}</p>
+                      <p className="text-white font-bold text-sm">{leaders[activeIndex].name}</p>
+                      <p className="text-iftm-dark text-xs font-semibold">{leaders[activeIndex].role}</p>
                     </div>
                   </div>
                 </div>
@@ -173,8 +171,8 @@ export default function FounderLeadershipSection() {
                     onClick={() => setActiveIndex(index)}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
                       index === activeIndex
-                        ? "bg-iftm-primary w-6"
-                        : "bg-iftm-border w-2 hover:bg-iftm-primary/50"
+                        ? "bg-white w-6"
+                        : "bg-white/30 w-2 hover:bg-white/50"
                     }`}
                     aria-label={`Leader ${index + 1}`}
                   />
@@ -190,8 +188,8 @@ export default function FounderLeadershipSection() {
                   onClick={() => setActiveIndex(index)}
                   className={`w-12 h-12 rounded-full overflow-hidden border-2 transition-all ${
                     index === activeIndex
-                      ? "border-iftm-primary scale-110"
-                      : "border-iftm-border opacity-50 hover:opacity-80"
+                      ? "border-white scale-110"
+                      : "border-white/30 opacity-60 hover:opacity-90"
                   }`}
                 >
                   <Image
