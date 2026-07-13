@@ -131,6 +131,14 @@ export default function RootLayout({
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        {/* HLS.js preload for hero video streaming */}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link
+          rel="preload"
+          href="https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js"
+          as="script"
+          crossOrigin="anonymous"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

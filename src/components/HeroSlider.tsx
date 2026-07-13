@@ -55,15 +55,17 @@ const bannerSlides = [
   { title: "69+ Acres Green Campus", subtitle: "World-class infrastructure with modern facilities", color: "from-amber-700 to-orange-900" },
 ];
 
-/* ─── Lazy Video Hook ─── */
-function useLazyVideo(threshold = 0.1) {
-  const ref = useRef<HTMLDivElement>(null);
+/* ─── HLS Video Component (TMU-style adaptive streaming) ─── */
+function LazyHeroVideo() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const hlsRef = useRef<any>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
 
+  // IntersectionObserver for lazy loading
   useEffect(() => {
-    const el = ref.current;
+    const el = containerRef.current;
     if (!el) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -71,31 +73,105 @@ function useLazyVideo(threshold = 0.1) {
           observer.disconnect();
         }
       },
-      { rootMargin: "200px", threshold }
+      { rootMargin: "200px", threshold: 0.1 }
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold]);
+  }, []);
 
-  return { ref, shouldLoad };
-}
-
-/* ─── Lazy Video Component ─── */
-function LazyHeroVideo() {
-  const { ref, shouldLoad } = useLazyVideo(0.1);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
+  // HLS initialization (TMU-style)
   useEffect(() => {
-    if (shouldLoad && videoRef.current) {
-      videoRef.current.load();
+    if (!shouldLoad || !videoRef.current) return;
+    const video = videoRef.current;
+    video.loop = true;
+    video.muted = true;
+
+    const hlsDesktopUrl = process.env.NEXT_PUBLIC_HLS_URL;
+    const hlsMobileUrl = process.env.NEXT_PUBLIC_HLS_MOBILE_URL;
+    const fallbackUrl = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/videos/hero.mp4";
+
+    function loadHls(Hls: any, url: string) {
+      const hls = new Hls({
+        capLevelToPlayerSize: true,
+        autoStartLoad: true,
+        maxBufferLength: 4,
+        maxMaxBufferLength: 4,
+        maxBufferSize: 2 * 1000 * 1000,
+      });
+      hls.loadSource(url);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play().catch((e: any) => console.warn("HLS play failed:", e));
+      });
+      hls.on(Hls.Events.ERROR, (_event: any, data: any) => {
+        if (data.fatal) {
+          hls.destroy();
+          console.error("HLS stream failed, falling back to MP4");
+          video.src = fallbackUrl;
+          video.play().catch(() => {});
+        }
+      });
+      hlsRef.current = hls;
     }
+
+    function initHls() {
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const hlsUrl = isMobile && hlsMobileUrl ? hlsMobileUrl : hlsDesktopUrl;
+
+      if (hlsUrl && typeof window !== "undefined") {
+        // Load hls.js from CDN
+        if ((window as any).Hls) {
+          const Hls = (window as any).Hls;
+          if (Hls.isSupported()) {
+            loadHls(Hls, hlsUrl);
+            return;
+          }
+        }
+        // Dynamic import of hls.js
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js";
+        script.async = true;
+        script.crossOrigin = "anonymous";
+        script.onload = () => {
+          const Hls = (window as any).Hls;
+          if (Hls && Hls.isSupported()) {
+            loadHls(Hls, hlsUrl);
+          } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+            // Safari native HLS
+            video.src = hlsUrl;
+            video.play().catch(() => {});
+          } else {
+            // Final fallback to MP4
+            video.src = fallbackUrl;
+            video.play().catch(() => {});
+          }
+        };
+        script.onerror = () => {
+          video.src = fallbackUrl;
+          video.play().catch(() => {});
+        };
+        document.head.appendChild(script);
+      } else {
+        // No HLS URL configured, use MP4 fallback
+        video.src = fallbackUrl;
+        video.play().catch(() => {});
+      }
+    }
+
+    initHls();
+
+    return () => {
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
+        hlsRef.current = null;
+      }
+    };
   }, [shouldLoad]);
 
   return (
-    <div ref={ref} className="absolute inset-0">
+    <div ref={containerRef} className="absolute inset-0">
       {/* Dark gradient fallback while video loads */}
       <div className="absolute inset-0 bg-gradient-to-br from-iftm-navy via-iftm-dark to-black" />
-
       {shouldLoad && (
         <video
           ref={videoRef}
@@ -105,9 +181,7 @@ function LazyHeroVideo() {
           loop
           playsInline
           preload="none"
-        >
-          <source src={process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/videos/hero.mp4"} type="video/mp4" />
-        </video>
+        />
       )}
     </div>
   );
