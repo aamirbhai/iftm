@@ -1,4 +1,5 @@
-export const revalidate = 3600;
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
