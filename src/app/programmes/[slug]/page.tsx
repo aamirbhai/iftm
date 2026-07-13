@@ -117,19 +117,20 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             >
               Apply Now
             </a>
+            {/* Tab Navigation inside Hero */}
+            <div className="mt-8">
+              <ProgrammeTabs
+                tabs={[
+                  { id: "overview", label: "Overview" },
+                  ...(eligibility ? [{ id: "eligibility", label: "Eligibility" }] : []),
+                  ...(curriculum ? [{ id: "curriculum", label: "Curriculum" }] : []),
+                  ...(careerProspects ? [{ id: "career", label: "Career Prospects" }] : []),
+                  { id: "faqs", label: "FAQs" },
+                ].filter(Boolean)}
+              />
+            </div>
           </div>
         </section>
-
-        {/* ═══ Tab Navigation ═══ */}
-        <ProgrammeTabs
-          tabs={[
-            { id: "overview", label: "Overview" },
-            ...(eligibility ? [{ id: "eligibility", label: "Eligibility" }] : []),
-            ...(curriculum ? [{ id: "curriculum", label: "Curriculum" }] : []),
-            ...(careerProspects ? [{ id: "career", label: "Career Prospects" }] : []),
-            { id: "faqs", label: "FAQs" },
-          ].filter(Boolean)}
-        />
 
         {/* ═══ About Programme ═══ */}
         <section className="py-12 md:py-16 bg-white">

@@ -19,7 +19,6 @@ export default function ProgrammeTabs({ tabs }: Props) {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 400);
 
-      // Find which section is currently in view
       for (const tab of tabs) {
         const el = document.getElementById(tab.id);
         if (el) {
@@ -47,10 +46,10 @@ export default function ProgrammeTabs({ tabs }: Props) {
 
   return (
     <div
-      className={`z-30 transition-all duration-300 ${
+      className={`transition-all duration-300 ${
         isSticky
-          ? "fixed top-[72px] left-0 right-0 bg-white/95 backdrop-blur-md shadow-md border-b border-iftm-border"
-          : "relative bg-iftm-light rounded-xl"
+          ? "fixed top-[72px] left-0 right-0 z-40 bg-iftm-navy/95 backdrop-blur-md shadow-lg"
+          : "relative"
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-4 md:px-6">
@@ -59,10 +58,10 @@ export default function ProgrammeTabs({ tabs }: Props) {
             <button
               key={tab.id}
               onClick={() => scrollToSection(tab.id)}
-              className={`px-4 py-3 text-sm font-semibold whitespace-nowrap transition-all rounded-t-lg ${
+              className={`px-5 py-3 text-sm font-semibold whitespace-nowrap transition-all border-b-2 ${
                 activeTab === tab.id
-                  ? "text-iftm-primary border-b-2 border-iftm-primary bg-white"
-                  : "text-iftm-text-light hover:text-iftm-dark hover:bg-white/50"
+                  ? "text-iftm-gold border-iftm-gold"
+                  : "text-white/60 border-transparent hover:text-white hover:border-white/30"
               }`}
             >
               {tab.label}
