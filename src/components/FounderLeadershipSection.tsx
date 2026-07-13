@@ -57,7 +57,7 @@ export default function FounderLeadershipSection() {
   }, [isPaused, nextSlide]);
 
   return (
-    <section className="py-16 bg-gradient-to-br from-iftm-navy via-iftm-navy to-iftm-dark relative overflow-hidden">
+    <section className="py-16 bg-iftm-light relative overflow-hidden">
       {/* Decorative */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-iftm-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-iftm-gold/5 rounded-full blur-3xl" />
@@ -68,7 +68,7 @@ export default function FounderLeadershipSection() {
           {/* ═══ LEFT: Founder ═══ */}
           <div className="text-center lg:text-left">
             {/* Section Label */}
-            <span className="text-iftm-gold text-xs font-bold uppercase tracking-[2px] mb-2 block">
+            <span className="text-iftm-primary text-xs font-bold uppercase tracking-[2px] mb-2 block">
               In Loving Memory
             </span>
 
@@ -76,7 +76,7 @@ export default function FounderLeadershipSection() {
               {/* Founder Image */}
               <div className="flex-shrink-0">
                 <div className="relative inline-block">
-                  <div className="w-[200px] h-[240px] rounded-2xl overflow-hidden border-2 border-iftm-gold/30 shadow-2xl">
+                  <div className="w-[200px] h-[240px] rounded-2xl overflow-hidden border-2 border-iftm-primary/20 shadow-xl">
                     <Image
                       src={founder.image}
                       alt={founder.name}
@@ -85,7 +85,7 @@ export default function FounderLeadershipSection() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-iftm-gold/90 text-iftm-dark text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full whitespace-nowrap">
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-iftm-primary text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full whitespace-nowrap shadow-lg">
                     In Loving Memory
                   </div>
                 </div>
@@ -93,26 +93,26 @@ export default function FounderLeadershipSection() {
 
               {/* Founder Quote */}
               <div className="flex-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" className="text-iftm-gold/20 mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" className="text-iftm-primary/15 mb-3">
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
 
-                <blockquote className="text-iftm-gold text-lg md:text-xl font-light italic leading-relaxed mb-4">
+                <blockquote className="text-iftm-primary text-lg md:text-xl font-semibold italic leading-relaxed mb-4">
                   {founder.quote}
                 </blockquote>
 
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="h-[2px] w-12 bg-iftm-gold/40" />
-                  <p className="text-iftm-gold font-bold text-sm">
+                  <div className="h-[2px] w-12 bg-iftm-primary/30" />
+                  <p className="text-iftm-primary font-bold text-sm">
                     — {founder.name}
                   </p>
                 </div>
 
-                <p className="text-white/60 text-sm leading-relaxed">
+                <p className="text-iftm-text text-sm leading-relaxed">
                   {founder.description}
                 </p>
 
-                <p className="text-white/30 text-xs italic mt-4">
+                <p className="text-iftm-text-light text-xs italic mt-4">
                   Forever in our hearts. His legacy continues to inspire.
                 </p>
               </div>
@@ -120,7 +120,7 @@ export default function FounderLeadershipSection() {
           </div>
 
           {/* ═══ Divider ═══ */}
-          <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-y-1/2 w-px h-[80%] bg-gradient-to-b from-transparent via-iftm-gold/20 to-transparent" />
+          <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-y-1/2 w-px h-[80%] bg-gradient-to-b from-transparent via-iftm-border to-transparent" />
 
           {/* ═══ RIGHT: Leadership Carousel ═══ */}
           <div
@@ -128,20 +128,20 @@ export default function FounderLeadershipSection() {
             onMouseLeave={() => setIsPaused(false)}
           >
             {/* Section Label */}
-            <span className="text-iftm-gold text-xs font-bold uppercase tracking-[2px] mb-2 block text-center lg:text-left">
+            <span className="text-iftm-primary text-xs font-bold uppercase tracking-[2px] mb-2 block text-center lg:text-left">
               University Leadership
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center lg:text-left">
-              Message from <span className="text-iftm-gold">Leadership</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-iftm-dark mb-6 text-center lg:text-left">
+              Message from <span className="text-iftm-primary">Leadership</span>
             </h2>
 
             {/* Leadership Card */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-lg border border-iftm-border overflow-hidden">
               <div key={activeIndex} className="animate-fade-in">
                 <div className="flex flex-col sm:flex-row items-center gap-6 p-6">
                   {/* Leader Image */}
                   <div className="flex-shrink-0">
-                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-iftm-gold/30">
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-iftm-primary/20">
                       <Image
                         src={leaders[activeIndex].image}
                         alt={leaders[activeIndex].name}
@@ -154,12 +154,12 @@ export default function FounderLeadershipSection() {
 
                   {/* Leader Info */}
                   <div className="flex-1 text-center sm:text-left">
-                    <p className="text-white/80 text-sm leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-iftm-text text-sm leading-relaxed mb-4 line-clamp-3">
                       &ldquo;{leaders[activeIndex].message}&rdquo;
                     </p>
                     <div>
-                      <p className="text-white font-bold text-sm">{leaders[activeIndex].name}</p>
-                      <p className="text-iftm-gold text-xs">{leaders[activeIndex].role}</p>
+                      <p className="text-iftm-dark font-bold text-sm">{leaders[activeIndex].name}</p>
+                      <p className="text-iftm-primary text-xs">{leaders[activeIndex].role}</p>
                     </div>
                   </div>
                 </div>
@@ -173,8 +173,8 @@ export default function FounderLeadershipSection() {
                     onClick={() => setActiveIndex(index)}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
                       index === activeIndex
-                        ? "bg-iftm-gold w-6"
-                        : "bg-white/20 w-2 hover:bg-white/40"
+                        ? "bg-iftm-primary w-6"
+                        : "bg-iftm-border w-2 hover:bg-iftm-primary/50"
                     }`}
                     aria-label={`Leader ${index + 1}`}
                   />
@@ -190,8 +190,8 @@ export default function FounderLeadershipSection() {
                   onClick={() => setActiveIndex(index)}
                   className={`w-12 h-12 rounded-full overflow-hidden border-2 transition-all ${
                     index === activeIndex
-                      ? "border-iftm-gold scale-110"
-                      : "border-white/20 opacity-50 hover:opacity-80"
+                      ? "border-iftm-primary scale-110"
+                      : "border-iftm-border opacity-50 hover:opacity-80"
                   }`}
                 >
                   <Image
