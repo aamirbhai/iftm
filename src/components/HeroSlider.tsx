@@ -219,47 +219,42 @@ export default function HeroSlider() {
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="max-w-[1400px] mx-auto px-4 md:px-6 w-full text-center">
             <div className="max-w-[900px] mx-auto animate-fade-in">
-                {/* Skewed badge */}
-                <div className="inline-block mb-5">
-                  <div
-                    className="bg-iftm-primary px-6 py-1.5 inline-block"
-                    style={{ transform: "skewX(-12deg)" }}
-                  >
-                    <span
-                      className="text-white font-bold text-sm uppercase tracking-widest"
-                      style={{ transform: "skewX(12deg)", display: "inline-block" }}
-                    >
-                      NAAC &apos;A&apos; Grade University
-                    </span>
-                  </div>
+                {/* NAAC Badge - Small green bg with yellow text */}
+                <div className="inline-block mb-6">
+                  <span className="bg-green-600/90 backdrop-blur-sm text-iftm-gold text-[11px] font-bold uppercase tracking-[0.25em] px-4 py-1.5 rounded-full border border-green-500/50">
+                    NAAC &apos;A&apos; Grade Accredited
+                  </span>
                 </div>
 
-                <h1 className="text-5xl md:text-6xl lg:text-8xl font-extrabold text-white leading-[1.1] mb-4">
-                  IFTM{" "}
-                  <span className="text-iftm-gold">University</span>
+                {/* University Name - Attractive styling */}
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.15] mb-6">
+                  <span className="block text-white/90 font-light text-xl md:text-2xl lg:text-3xl tracking-[0.15em] uppercase mb-2" style={{ fontFamily: "var(--font-heading)" }}>
+                    Welcome to
+                  </span>
+                  <span className="bg-gradient-to-r from-white via-white to-iftm-gold bg-clip-text text-transparent">
+                    IFTM
+                  </span>{" "}
+                  <span className="text-iftm-gold">
+                    University
+                  </span>
                 </h1>
-                <p className="text-white/85 text-lg md:text-xl lg:text-2xl mb-3 max-w-[700px] mx-auto font-medium leading-relaxed">
-                  Transforming Minds, Empowering Futures
-                </p>
-                <p className="text-white/60 text-base md:text-lg mb-10 max-w-[600px] mx-auto">
-                  Moradabad&apos;s Premier Institution for Pharmacy, Engineering, Management, Law &amp; Medical Education
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <a
-                    href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-8 py-4 bg-iftm-primary text-white font-semibold text-sm uppercase tracking-wider rounded-lg hover:bg-iftm-primary-dark transition-all hover:-translate-y-0.5 shadow-lg shadow-iftm-primary/30"
-                  >
-                    Apply Now
-                  </a>
-                  <Link
-                    href="/programmes"
-                    className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/50 font-semibold text-sm uppercase tracking-wider rounded-lg hover:bg-white hover:text-iftm-dark transition-all"
-                  >
-                    Explore Programmes
-                  </Link>
+
+                {/* Decorative line */}
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  <div className="w-12 h-[1px] bg-iftm-gold/50" />
+                  <div className="w-2 h-2 rounded-full bg-iftm-gold" />
+                  <div className="w-12 h-[1px] bg-iftm-gold/50" />
                 </div>
+
+                {/* Slogan - Elegant font */}
+                <p className="text-white text-xl md:text-2xl lg:text-3xl mb-4 max-w-[700px] mx-auto font-light tracking-wide" style={{ fontFamily: "var(--font-heading)" }}>
+                  Transforming Minds, <span className="text-iftm-gold font-medium">Empowering Futures</span>
+                </p>
+
+                {/* Subtitle */}
+                <p className="text-white/55 text-sm md:text-base lg:text-lg max-w-[550px] mx-auto tracking-wide leading-relaxed">
+                  Moradabad&apos;s Premier Institution for Pharmacy, Engineering, Management &amp; Law
+                </p>
             </div>
           </div>
         </div>
