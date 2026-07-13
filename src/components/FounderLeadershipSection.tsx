@@ -120,7 +120,7 @@ export default function FounderLeadershipSection() {
 
           {/* ═══ RIGHT: Leadership Carousel (Golden BG) ═══ */}
           <div
-            className="py-16 px-4 md:px-10 bg-gradient-to-br from-amber-600 via-amber-500 to-yellow-500 relative"
+            className="py-16 px-4 md:px-10 bg-gradient-to-br from-red-900 via-red-800 to-red-700 relative"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -157,7 +157,7 @@ export default function FounderLeadershipSection() {
                     </p>
                     <div>
                       <p className="text-white font-bold text-sm">{leaders[activeIndex].name}</p>
-                      <p className="text-iftm-dark text-xs font-semibold">{leaders[activeIndex].role}</p>
+                      <p className="text-white/70 text-xs font-semibold">{leaders[activeIndex].role}</p>
                     </div>
                   </div>
                 </div>
