@@ -2,6 +2,7 @@ export const revalidate = 3600;
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ProgrammeTabs from "@/components/ProgrammeTabs";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -119,6 +120,17 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
           </div>
         </section>
 
+        {/* ═══ Tab Navigation ═══ */}
+        <ProgrammeTabs
+          tabs={[
+            { id: "overview", label: "Overview" },
+            ...(eligibility ? [{ id: "eligibility", label: "Eligibility" }] : []),
+            ...(curriculum ? [{ id: "curriculum", label: "Curriculum" }] : []),
+            ...(careerProspects ? [{ id: "career", label: "Career Prospects" }] : []),
+            { id: "faqs", label: "FAQs" },
+          ].filter(Boolean)}
+        />
+
         {/* ═══ About Programme ═══ */}
         <section className="py-12 md:py-16 bg-white">
           <div className="max-w-[1400px] mx-auto px-4 md:px-6">
@@ -133,6 +145,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 </p>
 
                 {/* Programme Content */}
+                <div id="overview" className="scroll-mt-28" />
                 {programme.content && (
                   <article
                     className="prose prose-lg max-w-none mb-10
@@ -146,6 +159,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 )}
 
                 {/* Overview from Meta Box */}
+                <div id="overview-content" className="scroll-mt-28" />
                 {overview && (
                   <div className="mb-10">
                     <h3 className="text-xl font-bold text-iftm-dark mb-4 flex items-center gap-2">
@@ -164,6 +178,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 )}
 
                 {/* Eligibility from Meta Box */}
+                <div id="eligibility" className="scroll-mt-28" />
                 {eligibility && (
                   <div className="bg-iftm-light rounded-2xl p-6 md:p-8 mb-10">
                     <h3 className="text-xl font-bold text-iftm-dark mb-4 flex items-center gap-2">
@@ -177,6 +192,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 )}
 
                 {/* Curriculum from Meta Box */}
+                <div id="curriculum" className="scroll-mt-28" />
                 {curriculum && (
                   <div className="mb-10">
                     <h3 className="text-xl font-bold text-iftm-dark mb-4 flex items-center gap-2">
@@ -195,6 +211,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 )}
 
                 {/* Career Prospects from Meta Box */}
+                <div id="career" className="scroll-mt-28" />
                 {careerProspects && (
                   <div className="mb-10">
                     <h3 className="text-xl font-bold text-iftm-dark mb-4 flex items-center gap-2">
@@ -266,6 +283,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 )}
 
                 {/* FAQs */}
+                <div id="faqs" className="scroll-mt-28" />
                 <div className="mt-10">
                   <h3 className="text-xl font-bold text-iftm-dark mb-6">Frequently Asked Questions</h3>
                   <div className="space-y-3">
