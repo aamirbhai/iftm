@@ -33,7 +33,7 @@ const schoolIcons: Record<string, string> = {
 function groupBySchool(programmes: WordPressProgramme[]) {
   const groups = new Map<string, WordPressProgramme[]>();
   for (const p of programmes) {
-    const school = "Other Programmes";
+    const school = p.programmeDetails?.school || "IFTM University";
     const arr = groups.get(school) ?? [];
     arr.push(p);
     groups.set(school, arr);
@@ -80,26 +80,53 @@ export default async function ProgrammesPage() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {school.programmes.map((programme) => (
-                        <Link
-                          key={programme.slug}
-                          href={`/programmes/${programme.slug}`}
-                          className="flex items-center gap-3 p-4 bg-white rounded-xl border border-iftm-border hover:border-iftm-primary/30 hover:shadow-md transition-all group"
-                        >
-                          <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase text-white ${levelColors["UG"]}`}>
-                            UG
-                          </span>
-                          <div className="flex-1 min-w-0">
-                            <h3 className="text-iftm-dark text-sm font-semibold truncate group-hover:text-iftm-primary transition-colors">
-                              {programme.title}
-                            </h3>
-                            <p className="text-iftm-text-light text-xs"></p>
-                          </div>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-iftm-text-light group-hover:text-iftm-primary transition-colors flex-shrink-0">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                          </svg>
-                        </Link>
-                      ))}
+                      {school.programmes.map((programme) => {
+                        const pLevel = programme.programmeDetails?.level?.[0] || "UG";
+                        const pDuration = programme.programmeDetails?.duration || "";
+                        const pImage = programme.featuredImage?.sourceUrl;
+                        return (
+                          <Link
+                            key={programme.slug}
+                            href={`/programmes/${programme.slug}`}
+                            className="group bg-white rounded-xl border border-iftm-border overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                          >
+                            {pImage && (
+                              <div className="relative h-[160px] overflow-hidden">
+                                <img
+                                  src={pImage}
+                                  alt={programme.title}
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  loading="lazy"
+                                />
+                                <div className="absolute top-3 left-3">
+                                  <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase text-white ${levelColors["UG"]}`}>
+                                    {pLevel}
+                                  </span>
+                                </div>
+                              </div>
+                            )}
+                            <div className="p-4">
+                              {!pImage && (
+                                <span className={`inline-block px-2 py-1 rounded text-[9px] font-bold uppercase text-white mb-2 ${levelColors["UG"]}`}>
+                                  {pLevel}
+                                </span>
+                              )}
+                              <h3 className="text-iftm-dark text-sm font-semibold group-hover:text-iftm-primary transition-colors line-clamp-2">
+                                {programme.title}
+                              </h3>
+                              {pDuration && (
+                                <p className="text-iftm-text-light text-xs mt-1">{pDuration}</p>
+                              )}
+                              <div className="flex items-center gap-1 text-iftm-primary text-xs font-semibold mt-3 group-hover:gap-2 transition-all">
+                                View Details
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                  <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
