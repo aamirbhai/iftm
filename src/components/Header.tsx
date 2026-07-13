@@ -125,7 +125,7 @@ const navItems = [
   { label: "Explore Programmes", href: "/programmes" },
 ];
 
-export default function Header() {
+export default function Header({ solid = false }: { solid?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
@@ -144,9 +144,11 @@ export default function Header() {
       {/* Header - Fixed, transparent to solid on scroll */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-black/30 backdrop-blur-md shadow-lg"
-            : "bg-transparent"
+          solid
+            ? "bg-[#080c24] shadow-lg"
+            : isScrolled
+              ? "bg-black/30 backdrop-blur-md shadow-lg"
+              : "bg-transparent"
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-4 md:px-6 relative">

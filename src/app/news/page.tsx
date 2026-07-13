@@ -27,7 +27,7 @@ export default async function NewsPage() {
 
   return (
     <>
-      <Header />
+      <Header solid />
       <main className="min-h-screen bg-white">
         {/* Page Header */}
         <div className="pt-[90px] md:pt-[110px]">
