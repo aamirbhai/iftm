@@ -5,8 +5,8 @@ import Link from "next/link";
 export default function StickySidebar() {
   return (
     <>
-      {/* ─── Left Sidebar: 360° + WhatsApp (Circles) ─── */}
-      <div className="fixed left-4 bottom-28 z-[999] flex flex-col items-center gap-3">
+      {/* ─── Left Sidebar: 360° + WhatsApp (Circles) - Desktop Only ─── */}
+      <div className="fixed left-4 bottom-28 z-[999] hidden md:flex flex-col items-center gap-3">
         {/* 360° View - Circle */}
         <Link
           href="/360-view"
@@ -44,38 +44,16 @@ export default function StickySidebar() {
         </Link>
       </div>
 
-      {/* ─── Mobile Bottom Bar ─── */}
-      <div className="fixed bottom-0 left-0 right-0 z-[999] md:hidden bg-white/95 backdrop-blur-lg border-t border-iftm-border/50 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-        <div className="grid grid-cols-3 gap-0">
-          {/* 360° View */}
-          <Link
-            href="/360-view"
-            className="flex flex-col items-center justify-center py-3 text-iftm-navy hover:bg-iftm-light transition-colors"
-          >
-            <span className="text-base font-extrabold leading-none">360°</span>
-            <span className="text-[9px] uppercase tracking-wider mt-0.5 text-iftm-text-light">View</span>
-          </Link>
-
-          {/* Admission */}
-          <Link
-            href="/admissions"
-            className="flex flex-col items-center justify-center py-3 bg-iftm-primary text-white"
-          >
-            <i className="fas fa-graduation-cap text-base mb-0.5" />
-            <span className="text-[9px] uppercase tracking-wider font-bold">Admission</span>
-          </Link>
-
-          {/* WhatsApp */}
-          <a
-            href="https://api.whatsapp.com/send/?phone=919639004077&text=Hello%20IFTM%2C%20I%20am%20seeking%20admission-related%20information.&type=phone_number&app_absent=0"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col items-center justify-center py-3 text-green-600 hover:bg-green-50 transition-colors"
-          >
-            <i className="fab fa-whatsapp text-xl mb-0.5" />
-            <span className="text-[9px] uppercase tracking-wider text-iftm-text-light">Chat</span>
-          </a>
-        </div>
+      {/* ─── Mobile Bottom Bar - Only Admission ─── */}
+      <div className="fixed bottom-0 left-0 right-0 z-[999] md:hidden">
+        <Link
+          href="/admissions"
+          className="flex items-center justify-center gap-2 py-3.5 bg-iftm-primary text-white shadow-[0_-4px_20px_rgba(0,0,0,0.15)]"
+        >
+          <i className="fas fa-graduation-cap text-base" />
+          <span className="text-sm uppercase tracking-wider font-bold">Admissions Open 2026-27</span>
+          <i className="fas fa-arrow-right text-xs" />
+        </Link>
       </div>
     </>
   );
