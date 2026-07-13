@@ -155,7 +155,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 <img
                   src={bannerImage}
                   alt={programme.title}
-                  className="w-full h-[450px] object-cover rounded-2xl"
+                  className="w-full h-auto max-h-[500px] object-contain rounded-2xl"
                   loading="eager"
                 />
               </div>
