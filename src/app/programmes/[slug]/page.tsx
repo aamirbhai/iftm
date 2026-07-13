@@ -150,52 +150,14 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                 </div>
               </div>
 
-              {/* Right - Programme Image */}
-              <div className="hidden lg:block relative">
-                <div className="relative">
-                  <div className="relative w-full h-[450px] rounded-2xl overflow-hidden">
-                    <img
-                      src={bannerImage}
-                      alt={programme.title}
-                      className="w-full h-full object-cover"
-                      loading="eager"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-iftm-navy/50 via-transparent to-transparent" />
-                  </div>
-                  
-                  {/* Floating Badge 1 */}
-                  <div className="absolute -left-4 top-16 bg-white rounded-xl p-4 shadow-xl animate-float">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-green-600">
-                          <path d="M20 6L9 17l-5-5" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="text-iftm-dark font-bold text-sm">NAAC</p>
-                        <p className="text-iftm-primary font-black text-lg leading-none">A Grade</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Floating Badge 2 */}
-                  {fee && (
-                    <div className="absolute -right-4 bottom-16 bg-white rounded-xl p-4 shadow-xl animate-float-delayed">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-iftm-primary/10 rounded-full flex items-center justify-center">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-iftm-primary">
-                            <line x1="12" y1="1" x2="12" y2="23" />
-                            <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-iftm-dark font-bold text-sm">Fee</p>
-                          <p className="text-iftm-primary font-semibold text-xs">{fee}</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+              {/* Right - Programme Image (Clean, no frame) */}
+              <div className="hidden lg:block">
+                <img
+                  src={bannerImage}
+                  alt={programme.title}
+                  className="w-full h-[450px] object-cover rounded-2xl"
+                  loading="eager"
+                />
               </div>
             </div>
 
