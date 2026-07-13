@@ -3,8 +3,7 @@ export const dynamic = 'force-dynamic';
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import ProgramsSection from "@/components/ProgramsSection";
-import FounderSection from "@/components/FounderSection";
-import LeadershipSection from "@/components/LeadershipSection";
+import FounderLeadershipSection from "@/components/FounderLeadershipSection";
 import RecruitersAwardsTestimonials from "@/components/RecruitersAwardsTestimonials";
 import NewsSection from "@/components/NewsSection";
 import CampusGallerySection from "@/components/CampusGallerySection";
@@ -18,8 +17,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <HeroSlider />
-      <FounderSection />
-      <LeadershipSection />
+      <FounderLeadershipSection />
       <ProgramsSection />
       <RecruitersAwardsTestimonials />
       <NewsSection />
