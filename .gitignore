@@ -44,3 +44,8 @@ next-env.d.ts
 # open-next
 .open-next
 .wrangler
+
+# video files (too large for git - use CDN)
+public/videos/*.mp4
+public/videos/hls/
+public/videos/hls_mobile/
