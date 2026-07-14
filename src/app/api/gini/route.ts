@@ -24,7 +24,7 @@ async function callMiMoAPI(messages: ChatMessage[]): Promise<string> {
     return "I'm having trouble connecting right now. Please contact our admission office at +91-591-2486021 for assistance.";
   }
   try {
-    const response = await fetch("https://platform.xiaomimimo.com/v1/chat/completions", {
+    const response = await fetch("https://api.xiaomimimo.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
