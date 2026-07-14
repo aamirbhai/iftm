@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Teko } from "next/font/google";
 import "./globals.css";
 import StickySidebar from "@/components/StickySidebar";
+import GiniChatbot from "@/components/GiniChatbot";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-heading",
@@ -153,6 +154,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-white text-[#333] font-[family-name:var(--font-heading)]">
         {children}
         <StickySidebar />
+        <GiniChatbot />
       </body>
     </html>
   );
