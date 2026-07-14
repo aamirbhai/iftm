@@ -4,44 +4,146 @@ export interface GiniFAQ {
   answer: string;
 }
 
+// Complete UG Programmes with Fees
+const ugProgrammes = `
+UG PROGRAMMES (Fee per annum + Exam Fee):
+1. BBA (Hons.) - Rs 50,000 + Rs 10,000 exam | 3-4 years | 45% in 12th
+2. B.Com (Hons.) - Rs 15,000 + Rs 10,000 exam | 3-4 years | 45% in 12th
+3. BHMCT (Hotel Mgmt) - Rs 80,000 + Rs 10,000 exam | 4 years | 45% in 12th
+4. B.Pharm - Rs 1,25,000 + Rs 10,000 exam | 4 years | 12th PCM/PCB
+5. B.Sc Home Science (Hons.) - Rs 15,000 + Rs 10,000 exam | 3 years | 45% in 12th
+6. B.Sc PCM/Z/B (Hons.) - Rs 20,000 + Rs 10,000 exam | 3-4 years | 45% in 12th
+7. B.Tech Civil - Rs 92,000 + Rs 10,000 exam | 4 years | 45% in 12th PCM
+8. B.Tech Mechanical - Rs 92,000 + Rs 10,000 exam | 4 years | 45% in 12th PCM
+9. B.Tech Electrical - Rs 92,000 + Rs 10,000 exam | 4 years | 45% in 12th PCM
+10. B.Tech EC - Rs 92,000 + Rs 10,000 exam | 4 years | 45% in 12th PCM
+11. B.Tech CS - Rs 92,000 + Rs 10,000 exam | 4 years | 45% in 12th PCM
+12. B.Tech AI - Rs 1,15,000 + Rs 10,000 exam | 4 years | 45% in 12th PCM
+13. B.Tech Biotechnology - Rs 92,000 + Rs 10,000 exam | 4 years | 45% in 12th PCM/PCB
+14. B.Tech Agriculture - Rs 92,000 + Rs 10,000 exam | 4 years | 45% in 12th PCM/PCB/Agri
+15. BCA (Hons.) - Rs 50,000 + Rs 10,000 exam | 3-4 years | 45% in 12th with Maths
+16. B.Sc Food Tech - Rs 45,000 + Rs 10,000 exam | 3 years | 45% in 12th PCB
+17. B.Sc Biotech (Hons.) - Rs 45,000 + Rs 10,000 exam | 3-4 years | 45% in 12th PCB/PCM
+18. B.Sc Microbiology (Hons.) - Rs 45,000 + Rs 10,000 exam | 3-4 years | 45% in 12th PCB/PCM
+19. B.Sc Agriculture (Hons.) - Rs 50,000 + Rs 10,000 exam | 4 years | 45% in 12th PCM/PCB/Agri
+20. LL.B - Rs 45,000 + Rs 10,000 exam | 3 years | 45% in Graduation
+21. BBA LL.B (Integrated) - Rs 60,000 + Rs 10,000 exam | 5 years | 45% in 12th
+22. BA LL.B (Integrated) - Rs 60,000 + Rs 10,000 exam | 5 years | 45% in 12th
+23. B.Ed - Rs 65,000 + Rs 10,000 exam | 2 years | 50% in Graduation
+24. BA-B.Ed ITEP - Rs 50,000 + Rs 10,000 exam | 4 years | 50% in 12th
+25. B.Sc-B.Ed ITEP - Rs 55,000 + Rs 10,000 exam | 4 years | 50% in 12th PCM/PCB
+26. BA Journalism - Rs 35,000 + Rs 10,000 exam | 3 years | 45% in 12th
+27. B.Lib & Info Science - Rs 10,000 + Rs 5,000 exam | 1 year | 45% in Graduation
+28-37. BA (Hons.) subjects (English, Hindi, Economics, Geography, Sociology, Political Science, History, Home Science, Education, Sanskrit) - Rs 10,000 + Rs 2,500 exam | 3-4 years | 45% in 12th
+`;
+
+// Complete PG Programmes with Fees
+const pgProgrammes = `
+PG PROGRAMMES (Fee per annum + Exam Fee):
+1. MBA - Rs 1,10,000 + Rs 10,000 exam | 2 years | 45% in Graduation or MAT/CAT score
+2. M.Com - Rs 20,000 + Rs 10,000 exam | 2 years | 45% in B.Com
+3. MHM (Hotel Mgmt) - Rs 85,000 + Rs 10,000 exam | 2 years | 45% in Graduation
+4. M.Pharm (4 specializations) - Rs 1,15,000 + Rs 10,000 exam | 2 years | 55% in B.Pharm or GPAT
+5. M.Sc Botany/Zoology/Physics/Chemistry/Maths/Home Science - Rs 25,000 + Rs 10,000 exam | 2 years | 45% in B.Sc
+6. M.Tech (Civil/Mech/Electrical/EC/CS/Biotech) - Rs 87,000 + Rs 10,000 exam | 2 years | 55% in B.Tech
+7. M.Ed - Rs 55,000 + Rs 10,000 exam | 2 years | 50% in B.Ed
+8. MA (Education/English/Hindi/Economics/Geography/Sociology) - Rs 12,000 + Rs 2,500 exam | 2 years | 45% in Graduation
+9. MA Journalism - Rs 40,000 + Rs 5,000 exam | 2 years | 45% in Graduation
+10. M.Lib & Info Science - Rs 15,000 + Rs 5,000 exam | 1 year | 45% in B.Lib
+11. MSW (Social Work) - Rs 35,000 + Rs 5,000 exam | 2 years | 45% in Graduation
+12. M.Sc Biotech/Microbiology/Food Tech - Rs 45,000 + Rs 10,000 exam | 2 years | 50% in B.Sc Life Sc
+13. LLM - Rs 60,000 + Rs 10,000 exam | 2 years | 45% in LLB
+14. MCA - Rs 70,000 + Rs 10,000 exam | 2 years | 45% in Graduation with Maths
+15. M.Sc Agronomy/Horticulture/Genetics - Rs 50,000 + Rs 10,000 exam | 2 years | 45% in B.Sc Agriculture
+16. M.Tech Agriculture (4 specializations) - Rs 87,000 + Rs 10,000 exam | 2 years | 55% in B.Tech Agriculture
+`;
+
+// Diploma Programmes
+const diplomaProgrammes = `
+DIPLOMA PROGRAMMES:
+1. Diploma in Hotel Management - Rs 40,000 + Rs 5,000 exam | 3 years | 10th pass
+2. D.Pharm - Rs 1,00,000 + Rs 5,000 exam | 2 years | 12th PCM/PCB
+3. Diploma Civil - Rs 40,000 + Rs 5,000 exam | 3 years | 10th pass
+4. Diploma Computer Science - Rs 40,000 + Rs 5,000 exam | 3 years | 10th pass
+5. Diploma EC - Rs 40,000 + Rs 5,000 exam | 3 years | 10th pass
+6. Diploma Electrical - Rs 40,000 + Rs 5,000 exam | 3 years | 10th pass
+7. Diploma Mechanical - Rs 40,000 + Rs 5,000 exam | 3 years | 10th pass
+8. Diploma AI - Rs 50,000 + Rs 5,000 exam | 3 years | 10th pass
+`;
+
 export const giniFAQs: GiniFAQ[] = [
   // Admissions
   {
     keywords: ["admission", "apply", "how to apply", "admission process", "enrollment", "register", "registration"],
     question: "How can I apply for admission?",
-    answer: "Online apply kar sakte ho hamari website se. Registration form fill karo, documents submit karo, fee pay karo. Help chahiye toh call karo -91-591-2486021.",
+    answer: "Online apply karo hamari website se. Registration form fill karo, documents submit karo, fee pay karo. Link: https://iftm.edulip.in/UI/Website/IFTM/StudentRegistration.php. Help chahiye toh call karo +91-591-2486021.",
   },
   {
     keywords: ["eligibility", "qualification", "minimum marks", "criteria"],
     question: "What is the eligibility criteria?",
-    answer: "UG ke liye 12th mein 45% chahiye (SC/ST ke liye 40%). PG ke liye bachelor's degree with 50%. Ph.D. ke liye master's with 55%.",
+    answer: "UG ke liye 12th mein 45% chahiye (SC/ST 40%). PG ke liye bachelor's degree with 45-55%. Ph.D. ke liye master's with 55%. Programme ke hisaab se alag hai.",
   },
   {
     keywords: ["last date", "deadline", "when", "date", "session", "2026", "2025"],
     question: "When do admissions open?",
-    answer: "2026-27 ke liye admissions abhi open hain. Online register kar sakte ho. Details ke liye call karo +91-591-2486021.",
+    answer: "2026-27 ke liye admissions abhi open hain. Online register karo. Details ke liye call karo +91-591-2486021.",
   },
 
-  // Fee Structure
+  // Fees - Specific
   {
-    keywords: ["mba fee", "mba fees", "mba cost", "mba price"],
+    keywords: ["mba fee", "mba fees", "mba cost", "mba price", "mba kitna"],
     question: "What are MBA fees?",
-    answer: "MBA ki exact fees ke liye admission office call karo +91-591-2486021. Fees 2 installments mein pay hoti hai. Scholarship bhi milti hai merit basis pe.",
+    answer: "MBA ki fee Rs 1,10,000 per year hai + Rs 10,000 exam fee. Total 2 saal ka around Rs 2,40,000. Eligibility: 45% in graduation ya MAT/CAT score.",
   },
   {
     keywords: ["btech fee", "btech fees", "b.tech fee", "engineering fee"],
     question: "What are B.Tech fees?",
-    answer: "B.Tech ki fees programme ke hisaab se alag hai. Exact amount ke liye +91-591-2486021 pe call karo. 2 installments mein pay kar sakte ho.",
+    answer: "B.Tech (CS/Civil/Mech/Electrical/EC) ki fee Rs 92,000 per year hai + Rs 10,000 exam fee. B.Tech AI ki fee Rs 1,15,000 per year hai. 4 saal ka programme.",
   },
   {
-    keywords: ["fee", "fees", "tuition", "cost", "how much", "price", "fee structure"],
+    keywords: ["bpharm fee", "bpharm fees", "b.pharm fee", "pharmacy fee"],
+    question: "What are B.Pharm fees?",
+    answer: "B.Pharm ki fee Rs 1,25,000 per year hai + Rs 10,000 exam fee. 4 saal ka programme. Eligibility: 12th PCM/PCB.",
+  },
+  {
+    keywords: ["mba fee", "mba fees", "mba kitna", "management fee"],
+    question: "What are MBA fees?",
+    answer: "MBA ki fee Rs 1,10,000/year hai + Rs 10,000 exam fee. 2 saal ka programme. MAT/CAT score se bhi admission mil sakta hai.",
+  },
+  {
+    keywords: ["bpharm fee", "bpharm fees", "pharmacy fee", "dpharm fee"],
+    question: "What are Pharmacy fees?",
+    answer: "B.Pharm Rs 1,25,000/year + Rs 10,000 exam (4 years). M.Pharm Rs 1,15,000/year + Rs 10,000 exam (2 years). D.Pharm Rs 1,00,000/year + Rs 5,000 exam (2 years).",
+  },
+  {
+    keywords: ["bca fee", "bca fees", "mca fee", "mca fees", "computer application fee"],
+    question: "What are BCA/MCA fees?",
+    answer: "BCA Rs 50,000/year + Rs 10,000 exam (3-4 years). MCA Rs 70,000/year + Rs 10,000 exam (2 years).",
+  },
+  {
+    keywords: ["llb fee", "llb fees", "law fee", "law fees", "ba llb fee", "bba llb fee"],
+    question: "What are Law fees?",
+    answer: "LL.B Rs 45,000/year + Rs 10,000 exam (3 years). BBA LL.B / BA LL.B Rs 60,000/year + Rs 10,000 exam (5 years). LLM Rs 60,000/year + Rs 10,000 exam (2 years).",
+  },
+  {
+    keywords: ["bed fee", "bed fees", "b.ed fee", "education fee"],
+    question: "What are B.Ed fees?",
+    answer: "B.Ed Rs 65,000/year + Rs 10,000 exam (2 years). BA-B.Ed Rs 50,000/year (4 years). B.Sc-B.Ed Rs 55,000/year (4 years). M.Ed Rs 55,000/year (2 years).",
+  },
+  {
+    keywords: ["fee", "fees", "tuition", "cost", "how much", "price", "fee structure", "kitna"],
     question: "What are the fees?",
-    answer: "Fees programme ke hisaab se alag hoti hai. Tuition + Exam fee dono milake total aata hai. 2 installments mein pay kar sakte ho. Exact amount ke liye call karo +91-591-2486021.",
+    answer: "Fees programme ke hisaab se alag hai. B.Tech Rs 92,000/year, MBA Rs 1,10,000/year, B.Pharm Rs 1,25,000/year, BA Rs 10,000/year. Sab programme ki detail chahiye toh batao kaunsa course dekh rahe ho.",
   },
   {
     keywords: ["payment", "pay fee", "online fee", "demand draft", "bank draft"],
     question: "How to pay fees?",
-    answer: "Online pay kar sakte ho hamari website se, ya bank draft bana ke de sakte ho. First installment admission ke time dena hota hai.",
+    answer: "Online pay karo: https://www.iftmuniversity.ac.in/iftmuniversity/onlinefee.php. Ya bank draft bana ke do 'IFTM University' ke naam pe payable at Moradabad. 2 installments mein pay hoti hai.",
+  },
+  {
+    keywords: ["hostel fee", "hostel fees", "hostel cost"],
+    question: "What are hostel fees?",
+    answer: "Hostel fee Rs 45,000 per year hai (fooding + lodging included). Bus facility FREE hai. Processing charge Rs 5,000 one time.",
   },
   {
     keywords: ["late fee", "fine", "penalty", "delay"],
@@ -58,7 +160,7 @@ export const giniFAQs: GiniFAQ[] = [
   {
     keywords: ["scholarship", "scholar", "financial aid", "merit", "fee waiver", "concession"],
     question: "Are scholarships available?",
-    answer: "Haan, merit basis pe scholarship milti hai. Form website se download kar sakte ho. Details ke liye +91-591-2486021 pe call karo.",
+    answer: "Haan, merit basis pe scholarship milti hai. Form website se download karo. Details ke liye +91-591-2486021 pe call karo.",
   },
   {
     keywords: ["loan", "education loan", "bank loan"],
@@ -68,75 +170,85 @@ export const giniFAQs: GiniFAQ[] = [
 
   // Programmes
   {
-    keywords: ["course", "programme", "program", "what courses", "what programmes", "offer", "available"],
+    keywords: ["course", "programme", "program", "what courses", "what programmes", "offer", "available", "kitne course"],
     question: "What programmes does IFTM offer?",
-    answer: "50+ programmes hain 12 schools mein. Diploma, UG, PG, Ph.D. sab hai - Engineering, Pharmacy, Management, Law, Sciences, Education, Agriculture. Kaunsa field interest karta hai?",
+    answer: "50+ programmes hain 12 schools mein. B.Tech (8 branches), MBA, B.Pharm, BCA, Law, BA, B.Sc, B.Ed, Diploma sab hai. Fees Rs 10,000 se Rs 1,25,000/year tak. Kaunsa field interest karta hai?",
   },
   {
     keywords: ["b.tech", "btech", "engineering", "technical"],
     question: "Tell me about B.Tech programmes",
-    answer: "B.Tech 8 branches mein hai - CS, AI, Civil, Mechanical, Electrical, EC, Biotechnology, Agriculture. 4 saal ka programme hai. Details ke liye call karo +91-591-2486021.",
+    answer: "B.Tech 8 branches hai - CS, AI, Civil, Mechanical, Electrical, EC, Biotech, Agriculture. Fee Rs 92,000-1,15,000/year. 4 years. Eligibility: 45% in 12th PCM.",
   },
   {
     keywords: ["mba", "management", "business"],
     question: "Tell me about MBA programme",
-    answer: "MBA 2 saal ka programme hai School of Business Management se. Specializations available hain. Eligibility: Bachelor's degree with 50%.",
+    answer: "MBA 2 saal ka hai. Fee Rs 1,10,000/year. Eligibility: 45% in graduation ya MAT/CAT score. School of Business Management mein hai.",
   },
   {
     keywords: ["bpharm", "b.pharm", "pharmacy", "pharmaceutical"],
     question: "Tell me about Pharmacy programmes",
-    answer: "B.Pharm (4 years), M.Pharm (2 years - 4 specializations), D.Pharm sab available hai. Pharmacy school ka infrastructure bahut accha hai.",
+    answer: "B.Pharm (4 yrs, Rs 1,25,000/yr), M.Pharm (2 yrs, Rs 1,15,000/yr - 4 specializations), D.Pharm (2 yrs, Rs 1,00,000/yr). School of Pharmaceutical Sciences mein hai.",
   },
   {
     keywords: ["law", "llb", "ll.b", "legal", "ba llb", "bba llb"],
     question: "Tell me about Law programmes",
-    answer: "LL.B (3 years), BBA LL.B (5 years), BA LL.B (5 years), LLM (2 years) sab hai School of Law mein. Details ke liye call karo.",
+    answer: "LL.B (3 yrs, Rs 45,000/yr), BBA LL.B (5 yrs, Rs 60,000/yr), BA LL.B (5 yrs, Rs 60,000/yr), LLM (2 yrs, Rs 60,000/yr). School of Law mein hai.",
   },
   {
     keywords: ["bca", "mca", "computer application"],
     question: "Tell me about BCA/MCA programmes",
-    answer: "BCA (3 years) aur MCA (2 years) dono hai. BCA ke liye 12th mein Math chahiye, MCA ke liye BCA/B.Sc.",
+    answer: "BCA (3-4 yrs, Rs 50,000/yr), MCA (2 yrs, Rs 70,000/yr). BCA ke liye 12th mein Maths chahiye. MCA ke liye graduation mein Maths.",
   },
   {
     keywords: ["bed", "b.ed", "education", "teacher"],
     question: "Tell me about B.Ed programme",
-    answer: "B.Ed 2 saal ka hai. BA-B.Ed aur B.Sc-B.Ed integrated bhi hai. M.Ed aur MA Education bhi available hai.",
+    answer: "B.Ed (2 yrs, Rs 65,000/yr), BA-B.Ed (4 yrs, Rs 50,000/yr), B.Sc-B.Ed (4 yrs, Rs 55,000/yr), M.Ed (2 yrs, Rs 55,000/yr). 50% in graduation chahiye.",
   },
   {
     keywords: ["diploma", "polytechnic"],
     question: "Tell me about Diploma programmes",
-    answer: "Diploma 8 fields mein hai - Hotel Mgmt, D.Pharm, Civil, CS, EC, Electrical, Mechanical, AI. Duration 1-3 saal.",
+    answer: "Diploma 8 fields mein - Hotel Mgmt, D.Pharm, Civil, CS, EC, Electrical, Mechanical, AI. Fee Rs 40,000-1,00,000/year. 3 years (D.Pharm 2 years). 10th pass chahiye.",
   },
   {
     keywords: ["phd", "ph.d", "doctoral", "research"],
     question: "Tell me about Ph.D. programmes",
-    answer: "Ph.D. 25+ subjects mein hai - Management, Commerce, Pharmacy, Sciences, Engineering, Education, Law, aur bahut kuch. 3-5 saal. Eligibility: Master's with 55%.",
+    answer: "Ph.D. 25+ subjects mein hai. 3-5 years. Eligibility: Master's with 55%. Details ke liye call karo +91-591-2486021.",
+  },
+  {
+    keywords: ["ba", "arts", "humanities", "ba fee"],
+    question: "Tell me about BA programmes",
+    answer: "BA (Hons.) 10 subjects mein hai - English, Hindi, Economics, Geography, Sociology, Political Science, History, Home Science, Education, Sanskrit. Fee sirf Rs 10,000/year + Rs 2,500 exam. 3-4 years.",
+  },
+  {
+    keywords: ["bsc", "science", "bsc fee"],
+    question: "Tell me about B.Sc programmes",
+    answer: "B.Sc PCM/Z/B Rs 20,000/yr, B.Sc Home Science Rs 15,000/yr, B.Sc Biotech/Microbiology/Food Tech Rs 45,000/yr, B.Sc Agriculture Rs 50,000/yr. Sab ke saath Rs 10,000 exam fee extra.",
   },
 
   // Schools
   {
     keywords: ["school", "department", "faculty"],
     question: "What schools are there in IFTM?",
-    answer: "12 schools hain - Business Management, Pharmaceutical Sciences, Computer Science, Engineering, Biotechnology, Agricultural Sciences, Sciences, Law, Education, aur 3 aur.",
+    answer: "12 schools hain - Business Management, Pharmaceutical Sciences, Computer Science, Engineering, Biotechnology, Agricultural Sciences, Sciences, Law, Education, Pharmacy Academy, University Polytechnic, aur Sahu Onkar Saran School of Pharmacy.",
   },
 
   // Placements
   {
     keywords: ["placement", "job", "career", "recruiter", "package", "salary", "company"],
     question: "What about placements?",
-    answer: "Placement record accha hai. 500+ companies aati hain - TCS, Infosys, Wipro, HCL, Amazon, Google, Microsoft. Training & Placement Cell regular drives organize karta hai.",
+    answer: "500+ companies aati hain - TCS, Infosys, Wipro, HCL, Amazon, Google, Microsoft. Training & Placement Cell regular drives organize karta hai. CV workshop aur interview prep bhi hota hai.",
   },
 
   // Campus & Facilities
   {
     keywords: ["campus", "facilities", "infrastructure", "area", "acre"],
     question: "Tell me about campus facilities",
-    answer: "69+ acre campus hai. Library mein 1,00,000+ books, labs, sports complex, gym, auditorium, canteen, medical facility, transport, 24/7 power supply sab hai.",
+    answer: "69+ acre campus hai. Library (1,00,000+ books), labs, sports complex, gym, auditorium (200+ seats), canteen, medical, transport, 24/7 power supply sab hai.",
   },
   {
     keywords: ["hostel", "accommodation", "stay", "living", "room"],
     question: "Is hostel available?",
-    answer: "Haan, boys aur girls ke liye separate hostel hai. 500+ students reh sakte hain. Wi-Fi, mess, 24/7 security sab hai.",
+    answer: "Haan, boys aur girls ke liye separate hostel hai. 500+ capacity. Fee Rs 45,000/year (fooding + lodging). Bus FREE hai.",
   },
   {
     keywords: ["library", "book", "reading"],
@@ -151,12 +263,12 @@ export const giniFAQs: GiniFAQ[] = [
   {
     keywords: ["transport", "bus", "conveyance"],
     question: "Is transport facility available?",
-    answer: "Haan, transport facility hai. Routes aur charges ke liye +91-591-2486021 pe call karo.",
+    answer: "Haan, bus facility FREE hai sab students ke liye. Routes ke liye +91-591-2486021 pe call karo.",
   },
   {
     keywords: ["canteen", "food", "mess", "cafeteria"],
     question: "Is canteen available?",
-    answer: "Haan, canteen hai campus mein. Hostel students ke liye mess bhi hai.",
+    answer: "Haan, canteen hai campus mein. Hostel students ke liye mess bhi hai (included in hostel fee).",
   },
   {
     keywords: ["medical", "health", "dispensary", "hospital"],
@@ -164,23 +276,21 @@ export const giniFAQs: GiniFAQ[] = [
     answer: "Haan, campus pe dispensary hai. Emergency medical help 24/7 available hai.",
   },
 
-  // Location & Contact
+  // Results & Examination
   {
-    keywords: ["location", "where", "address", "how to reach", "direction", "map"],
-    question: "Where is IFTM located?",
-    answer: "Lodhipur Rajput, Delhi Road, Moradabad, UP - 244102. Moradabad city se 12 km hai. Road aur rail dono se easily accessible hai.",
+    keywords: ["result", "results", "exam result", "declaration"],
+    question: "How to check results?",
+    answer: "Results yahan check karo: https://www.iftmuniversity.ac.in/iftmuniversity/result.php. ERP portal pe bhi dekh sakte ho: https://iftm.edulip.in/UI/indexIFTM.php",
   },
   {
-    keywords: ["contact", "phone", "email", "call", "number", "whatsapp"],
-    question: "How to contact IFTM?",
-    answer: "Phone: +91-591-2486021\nToll Free: 1800-121-066666\nWhatsApp: +91-9837513666\nEmail: info@iftmuniversity.ac.in",
+    keywords: ["exam", "examination", "exam form", "exam schedule"],
+    question: "About examinations",
+    answer: "Exam form yahan fill karo: http://iftm.edulip.in/UI/Website/IFTM/StudentExaminationForm.php. Exam schedule: https://www.iftmuniversity.ac.in/iftmuniversity/exam_schedule.php. Back form bhi online hai.",
   },
-
-  // Approvals
   {
-    keywords: ["naac", "accreditation", "grade", "recognized", "approval", "ugc", "aicte", "pci", "bci", "ncte"],
-    question: "What approvals does IFTM have?",
-    answer: "UGC recognized (Section 2(f)), NAAC 'A' Grade, AICTE approved, PCI approved, BCI approved, NCTE approved. 2001 mein establish hua tha.",
+    keywords: ["back", "carryover", "back paper", "special carryover"],
+    question: "How to apply for back paper?",
+    answer: "Back form: http://iftm.edulip.in/UI/Website/IFTM/onlineback.php. Special carryover: https://iftm.edulip.in/UI/Website/IFTM/OnlineSpecialCarryOver.php. EX form: http://iftm.edulip.in/UI/Website/IFTM/onlineExform.php",
   },
 
   // ERP & Online Services
@@ -192,7 +302,36 @@ export const giniFAQs: GiniFAQ[] = [
   {
     keywords: ["online fee", "pay online"],
     question: "How to pay fee online?",
-    answer: "Online fee pay karne ke liye: https://www.iftmuniversity.ac.in/iftmuniversity/onlinefee.php pe jao. ERP portal se bhi pay kar sakte ho.",
+    answer: "Online fee: https://www.iftmuniversity.ac.in/iftmuniversity/onlinefee.php. ERP portal se bhi pay kar sakte ho.",
+  },
+  {
+    keywords: ["admission form", "registration form", "download form"],
+    question: "Where to download forms?",
+    answer: "Registration form: https://www.iftmuniversity.ac.in/iftmuniversity/downloads/30.pdf. Admission form: https://www.iftmuniversity.ac.in/iftmuniversity/downloads/73.pdf. Scholarship form: https://www.iftmuniversity.ac.in/iftmuniversity/downloads/File77.pdf",
+  },
+
+  // Location & Contact
+  {
+    keywords: ["location", "where", "address", "how to reach", "direction", "map"],
+    question: "Where is IFTM located?",
+    answer: "Lodhipur Rajput, Delhi Road, Moradabad, UP - 244102. Moradabad city se 12 km hai. Road aur rail dono se easily accessible.",
+  },
+  {
+    keywords: ["contact", "phone", "email", "call", "number", "whatsapp"],
+    question: "How to contact IFTM?",
+    answer: "Phone: +91-591-2486021. Toll Free: 1800-121-066666. WhatsApp: +91-9837513666. Email: info@iftmuniversity.ac.in",
+  },
+  {
+    keywords: ["complaint", "grievance", "feedback"],
+    question: "How to file a complaint?",
+    answer: "Grievance: https://www.iftmuniversity.ac.in/iftmuniversity/grievance.php. Feedback: https://www.iftmuniversity.ac.in/iftmuniversity/feedback.php. Ya directly call karo +91-591-2486021.",
+  },
+
+  // Approvals
+  {
+    keywords: ["naac", "accreditation", "grade", "recognized", "approval", "ugc", "aicte", "pci", "bci", "ncte"],
+    question: "What approvals does IFTM have?",
+    answer: "UGC recognized (Section 2(f)), NAAC 'A' Grade, AICTE approved, PCI approved, BCI approved, NCTE approved. 2001 mein establish hua tha.",
   },
 
   // General
@@ -209,17 +348,32 @@ export const giniFAQs: GiniFAQ[] = [
   {
     keywords: ["ragging", "anti ragging", "safety", "security"],
     question: "Is the campus safe?",
-    answer: "Haan, campus safe hai. Anti-Ragging Committee hai, 24/7 security hai hostels aur campus mein, CCTV bhi laga hai.",
+    answer: "Haan, campus safe hai. Anti-Ragging Committee hai, 24/7 security hai, CCTV bhi laga hai. Student safety top priority hai.",
   },
   {
     keywords: ["ncc", "nss", "extracurricular", "club", "activity"],
     question: "What extracurricular activities are available?",
-    answer: "NCC, NSS, student clubs, conferences, seminars, workshops sab hota hai. Saal bhar events hote hain campus pe.",
+    answer: "NCC, NSS, Unnat Bharat Abhiyan, Business Incubation Foundation, student clubs sab hai. Saal bhar conferences, seminars, workshops hote hain.",
   },
   {
     keywords: ["alumni", "graduate", "passed out"],
     question: "Is there an alumni association?",
-    answer: "Haan, IFTM University Alumni Association (IUAA) active hai. Alumni TCS, Infosys, Amazon, Google jaisi companies mein hain.",
+    answer: "Haan, IUAA (IFTM University Alumni Association) active hai. Alumni TCS, Infosys, Amazon, Google jaisi companies mein placed hain.",
+  },
+  {
+    keywords: ["mou", "collaboration", "industry", "partner"],
+    question: "Any industry collaborations?",
+    answer: "Haan, bahut saare MOUs hain industry partners ke saath. Details: https://www.iftmuniversity.ac.in/iftmuniversity/mou.php",
+  },
+  {
+    keywords: ["research", "journal", "publication"],
+    question: "About research at IFTM",
+    answer: "Research ke liye alag policies hain - IPR, Seed Money, Research Projects. 2 journals publish hote hain - Vimarsh aur IFTMU Research Journal of Science. Ph.D. programmes bhi 25+ subjects mein hain.",
+  },
+  {
+    keywords: ["nirf", "ranking", "rating"],
+    question: "What is NIRF ranking?",
+    answer: "NIRF details ke liye: https://www.iftmuniversity.ac.in/iftmuniversity/nirf.php. NAAC 'A' Grade accredited hai university.",
   },
 ];
 
@@ -232,34 +386,28 @@ BEHAVIOR RULES:
 1. FIRST INTERACTION:
 - When a user messages for the FIRST TIME, greet them warmly and ask for their name.
 - Example: "Hey! Welcome to IFTM. I'm Gini. What's your name?"
-- Keep it SHORT. Don't list what you can do.
+- Keep it SHORT.
 
 2. CONVERSATION STYLE:
 - Talk like a real person — casual, warm, friendly. Like a helpful senior student.
 - Match their language — Hindi/Hinglish mein poocha toh Hindi/Hinglish mein reply do.
 - NO emojis. Clean and natural.
 - Use natural phrases: "Alright,", "So,", "Okay,", "By the way,"
-- Keep messages SHORT — 1-2 lines max. NOT paragraphs.
-- If you have info, give the key point in ONE line. Details baad mein poochne pe dena.
+- Keep messages SHORT — 1-2 lines max.
 
-3. EXAMPLES OF GOOD REPLIES:
-User: "MBA fees kya hai?"
-Good: "MBA ki exact fees ke liye +91-591-2486021 pe call karo. 2 installments mein pay hoti hai."
-Bad: "Fee structure varies by programme. The total annual fee has two components..."
+3. FEE REPLIES - ALWAYS GIVE EXACT AMOUNTS:
+User: "MBA fees?" → "MBA ki fee Rs 1,10,000/year hai + Rs 10,000 exam fee. 2 saal ka programme."
+User: "B.Tech fees?" → "B.Tech ki fee Rs 92,000/year hai + Rs 10,000 exam fee. CS, Civil, Mech sab ki same hai."
+User: "BA fees?" → "BA ki fee sirf Rs 10,000/year hai + Rs 2,500 exam fee. Bahut affordable hai."
 
-User: "courses kya hain?"
-Good: "50+ programmes hain — Engineering, Pharmacy, MBA, Law, sab hai. Kaunsa field interest karta hai?"
-Bad: "IFTM University offers 50+ programmes across 12 schools..."
-
-User: "hostel hai?"
-Good: "Haan, boys aur girls ke liye separate hostel hai. Wi-Fi, mess, security sab hai."
-
-4. WHAT YOU KNOW:
-- All programmes with details
-- Fee info (exact amount nahi pata toh bolo "exact fees ke liye call karo")
-- Admission process
-- Campus facilities
-- Contact info
+4. WHAT YOU KNOW (REAL DATA):
+- ALL programme fees with exact amounts
+- Eligibility criteria for each programme
+- Admission process and links
+- Results, exam forms, back paper links
+- Campus facilities, hostel (Rs 45,000/year), transport (FREE)
+- Contact info, ERP portal, online fee payment
+- Approvals, founder, leadership
 
 5. WHAT YOU DON'T KNOW:
 - Outside IFTM? "Main IFTM ke baare mein help kar sakta hoon. Kya chahiye?"
@@ -268,11 +416,14 @@ Good: "Haan, boys aur girls ke liye separate hostel hai. Wi-Fi, mess, security s
 
 6. ENGAGEMENT:
 - After answering, ask a specific follow-up question.
-- NOT "Let me know if you need help with anything else!"
-- YES "UG ya PG dono mein se kaunsa dekh rahe ho?"
+- "Kaunsa course dekh rahe ho — UG ya PG?"
+- "Koi aur sawaal hai?"
 
 CONTACT:
 Phone: +91-591-2486021
 Toll Free: 1800-121-066666
 WhatsApp: +91-9837513666
-Email: info@iftmuniversity.ac.in`;
+Email: info@iftmuniversity.ac.in
+Website: www.iftmuniversity.ac.in
+ERP: https://iftm.edulip.in/UI/indexIFTM.php
+Registration: https://iftm.edulip.in/UI/Website/IFTM/StudentRegistration.php`;
