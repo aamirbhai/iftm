@@ -55,13 +55,6 @@ export default function AdmissionsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [showFloatingCta, setShowFloatingCta] = useState(false);
-
-  useEffect(() => {
-    const h = () => setShowFloatingCta(window.scrollY > 600);
-    window.addEventListener("scroll", h, { passive: true });
-    return () => window.removeEventListener("scroll", h);
-  }, []);
 
   function validate(): boolean {
     const e: FormErrors = {};
@@ -101,15 +94,7 @@ export default function AdmissionsPage() {
         <div className="absolute bottom-[-80px] right-[-80px] w-[350px] h-[350px] rounded-full bg-iftm-gold/15 blur-[80px] animate-pulse" style={{ animationDelay: "1s" }} />
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
 
-        {/* ─── Vertical Side Badge (mobile only) ─── */}
-        <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 md:hidden">
-          <div className="bg-iftm-primary/95 backdrop-blur-sm px-2 py-4 rounded-l-xl shadow-lg flex flex-col items-center gap-2 writing-mode-vertical">
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-            <span className="text-white font-bold text-[10px] uppercase tracking-[0.2em] whitespace-nowrap" style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}>Admissions Open 2026-27</span>
-          </div>
-        </div>
-
-        <div className="relative z-10 pt-[120px] md:pt-[130px] pb-12 md:pb-16 max-w-[1200px] mx-auto px-4 md:px-6 pr-14 md:pr-6">
+        <div className="relative z-10 pt-[120px] md:pt-[130px] pb-12 md:pb-16 max-w-[1200px] mx-auto px-4 md:px-6">
           {/* Breadcrumb */}
           <nav className="mb-6">
             <ol className="flex items-center gap-2 text-white/50 text-sm">
@@ -122,8 +107,7 @@ export default function AdmissionsPage() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* ─── Left: Content ─── */}
             <div>
-              {/* Desktop badge - hidden on mobile */}
-              <div className="hidden md:inline-flex items-center gap-2 bg-iftm-primary/90 backdrop-blur-sm px-4 py-1.5 rounded-full mb-5">
+              <div className="inline-flex items-center gap-2 bg-iftm-primary/90 backdrop-blur-sm px-4 py-1.5 rounded-full mb-5">
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 <span className="text-white font-bold text-xs uppercase tracking-widest">Admissions Open 2026-27</span>
               </div>
@@ -396,18 +380,6 @@ export default function AdmissionsPage() {
           </div>
         </div>
       </section>
-
-      {/* ═══ FLOATING CTA (Mobile) ═══ */}
-      {showFloatingCta && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] p-3 flex gap-2">
-          <a href="tel:18002701490" className="flex-1 py-3 bg-white border border-iftm-primary text-iftm-primary font-bold text-sm rounded-xl text-center">
-            <i className="fas fa-phone-alt mr-1.5" /> Call
-          </a>
-          <a href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php" target="_blank" rel="noopener noreferrer" className="flex-[2] py-3 bg-gradient-to-r from-iftm-primary to-iftm-primary-dark text-white font-bold text-sm rounded-xl text-center shadow-lg shadow-iftm-primary/30">
-            Apply Now <i className="fas fa-arrow-right ml-1.5" />
-          </a>
-        </div>
-      )}
 
       {/* Schema */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
