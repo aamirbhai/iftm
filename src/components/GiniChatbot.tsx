@@ -1,11 +1,24 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { giniFAQs } from "@/components/gini-knowledge";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
   isTyping?: boolean;
+}
+
+function findFAQMatch(query: string): string | null {
+  const lowerQuery = query.toLowerCase();
+  for (const faq of giniFAQs) {
+    for (const keyword of faq.keywords) {
+      if (lowerQuery.includes(keyword.toLowerCase())) {
+        return faq.answer;
+      }
+    }
+  }
+  return null;
 }
 
 export default function GiniChatbot() {
@@ -20,7 +33,6 @@ export default function GiniChatbot() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Greet when chat opens for the first time
   useEffect(() => {
     if (isOpen && !hasGreeted) {
       setHasGreeted(true);
@@ -31,10 +43,7 @@ export default function GiniChatbot() {
   function simulateTyping(text: string) {
     const typingMsg: Message = { role: "assistant", content: "", isTyping: true };
     setMessages((prev) => [...prev, typingMsg]);
-
-    // Simulate typing delay based on message length
     const delay = Math.min(800 + text.length * 15, 2500);
-
     setTimeout(() => {
       setMessages((prev) => {
         const updated = [...prev];
@@ -53,8 +62,16 @@ export default function GiniChatbot() {
     const newMessages = [...messages.filter((m) => !m.isTyping), userMessage];
     setMessages(newMessages);
     setInput("");
-    setIsLoading(true);
 
+    // Try client-side FAQ first
+    const faqAnswer = findFAQMatch(trimmed);
+    if (faqAnswer) {
+      simulateTyping(faqAnswer);
+      return;
+    }
+
+    // Call API for AI response
+    setIsLoading(true);
     try {
       const response = await fetch("/api/gini", {
         method: "POST",
@@ -62,18 +79,41 @@ export default function GiniChatbot() {
         body: JSON.stringify({ messages: newMessages }),
       });
 
-      const data = await response.json();
-      setIsLoading(false);
-      simulateTyping(data.reply);
+      if (response.ok) {
+        const data = await response.json();
+        setIsLoading(false);
+        simulateTyping(data.reply);
+      } else {
+        throw new Error("API failed");
+      }
     } catch {
       setIsLoading(false);
-      simulateTyping("Something went wrong. Try again or call us at +91-591-2486021.");
+      // Fallback: give helpful response based on context
+      const lowerInput = trimmed.toLowerCase();
+      let fallback = "I'm having trouble connecting right now. ";
+
+      if (lowerInput.includes("fee") || lowerInput.includes("cost") || lowerInput.includes("price")) {
+        fallback = "For fee details, please contact our admission office at +91-591-2486021 or visit the specific programme page on our website. Scholarships are available for meritorious students.";
+      } else if (lowerInput.includes("admission") || lowerInput.includes("apply")) {
+        fallback = "You can apply online at our admissions portal. For help, call +91-591-2486021. Admissions are open for 2026-27 session.";
+      } else if (lowerInput.includes("placement") || lowerInput.includes("job")) {
+        fallback = "IFTM has 90%+ placement rate with 500+ recruiters including TCS, Infosys, Amazon, Google. Highest package: 12 LPA.";
+      } else if (lowerInput.includes("course") || lowerInput.includes("programme")) {
+        fallback = "We offer 130+ programmes across 12 schools — Engineering, Pharmacy, Management, Law, Sciences, and more. Which field interests you?";
+      } else if (lowerInput.includes("hostel") || lowerInput.includes("campus")) {
+        fallback = "Our 69+ acre campus has modern hostels (separate for boys/girls), Wi-Fi, library, labs, sports facilities, and 24/7 security.";
+      } else if (lowerInput.includes("contact") || lowerInput.includes("phone")) {
+        fallback = "Phone: +91-591-2486021\nToll Free: 1800-121-066666\nEmail: info@iftmuniversity.ac.in\nAddress: Lodhipur Rajput, Delhi Road, Moradabad, UP";
+      } else {
+        fallback += "For immediate help, call us at +91-591-2486021 or email info@iftmuniversity.ac.in. Our team will assist you.";
+      }
+
+      simulateTyping(fallback);
     }
   }
 
   return (
     <>
-      {/* Floating Bubble */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-iftm-navy text-white shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
@@ -90,10 +130,8 @@ export default function GiniChatbot() {
         )}
       </button>
 
-      {/* Chat Window */}
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50 w-[350px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden" style={{ height: "480px" }}>
-          {/* Header */}
           <div className="bg-iftm-navy text-white px-4 py-3 flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-iftm-gold flex items-center justify-center text-iftm-navy font-bold text-sm">
               G
@@ -104,7 +142,6 @@ export default function GiniChatbot() {
             </div>
           </div>
 
-          {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             {messages.map((msg, i) => (
               <div
@@ -146,7 +183,6 @@ export default function GiniChatbot() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
           <div className="border-t border-gray-200 p-3">
             <form
               onSubmit={(e) => {
