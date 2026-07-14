@@ -51,7 +51,7 @@ function LazyHeroVideo() {
 
     const hlsDesktopUrl = process.env.NEXT_PUBLIC_HLS_URL || "https://4.lfabhawalpur.com/hls/playlist.m3u8";
     const hlsMobileUrl = process.env.NEXT_PUBLIC_HLS_MOBILE_URL || "https://4.lfabhawalpur.com/hls_mobile/playlist.m3u8";
-    const fallbackUrl = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "https://4.lfabhawalpur.com/hero.mp4";
+    const fallbackUrl = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "https://4.lfabhawalpur.com/iftm.mp4";
 
     function loadHls(Hls: any, url: string) {
       const hls = new Hls({
