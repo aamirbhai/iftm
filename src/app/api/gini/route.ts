@@ -20,6 +20,7 @@ function findFAQMatch(query: string): string | null {
 
 async function callMiMoAPI(messages: ChatMessage[]): Promise<string> {
   const apiKey = process.env.MIMO_API_KEY;
+  console.log("MiMo API Key exists:", !!apiKey);
   if (!apiKey) {
     return "I'm having trouble connecting right now. Please contact our admission office at +91-591-2486021 for assistance.";
   }
@@ -36,11 +37,13 @@ async function callMiMoAPI(messages: ChatMessage[]): Promise<string> {
           { role: "system", content: giniSystemPrompt },
           ...messages,
         ],
-        max_tokens: 300,
+        max_completion_tokens: 300,
         temperature: 0.7,
       }),
     });
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error("MiMo API error:", response.status, errorText);
       throw new Error(`API error: ${response.status}`);
     }
     const data = await response.json();
