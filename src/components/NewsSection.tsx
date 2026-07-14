@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { getNews } from "@/lib/wordpress";
 
 export default async function NewsSection() {
@@ -11,35 +11,35 @@ export default async function NewsSection() {
     title: item.title,
     description: item.excerpt?.replace(/<[^>]*>/g, "").substring(0, 120) + "..." || "",
     href: `/news/${item.slug}`,
-    img: item.featuredImage?.node?.sourceUrl || "/images/gallery/campus1.jpg",
+    img: item.featuredImage?.node?.sourceUrl || "/images/gallery/campus1.webp",
   })) : [
     {
       date: "15 Mar 2026",
       title: "Admissions Open 2026-27 | Apply Now",
       description: "IFTM University invites applications for all UG, PG, Diploma and Ph.D. programmes. Scholarships available for meritorious students.",
       href: "https://admissions.iftm.ac.in",
-      img: "/images/gallery/campus1.jpg",
+      img: "/images/gallery/campus1.webp",
     },
     {
       date: "2024",
       title: "NAAC 'A' Grade Accreditation Achieved",
       description: "IFTM University has been accredited with NAAC 'A' Grade by the National Assessment and Accreditation Council for academic excellence.",
       href: "/naac",
-      img: "/images/gallery/campus2.jpg",
+      img: "/images/gallery/campus2.webp",
     },
     {
       date: "2025-26",
       title: "MoU with Leading Industry Partners",
       description: "New collaborations with TCS, Infosys, Wipro, HCL for student training, internships and placement opportunities.",
       href: "/mou",
-      img: "/images/gallery/campus3.jpg",
+      img: "/images/gallery/campus3.webp",
     },
     {
       date: "2025",
       title: "Campus Infrastructure Upgraded",
       description: "New smart classrooms, advanced laboratories and modern library facilities added to enhance student learning experience.",
       href: "/news",
-      img: "/images/gallery/campus4.jpg",
+      img: "/images/gallery/campus4.webp",
     },
   ];
 

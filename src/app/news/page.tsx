@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+﻿export const dynamic = 'force-dynamic';
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -55,7 +55,7 @@ export default async function NewsPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-white rounded-2xl overflow-hidden border border-iftm-border hover:shadow-xl transition-all duration-300">
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <img
-                        src={featured.featuredImage?.node?.sourceUrl || "/images/gallery/campus1.jpg"}
+                        src={featured.featuredImage?.node?.sourceUrl || "/images/gallery/campus1.webp"}
                         alt={featured.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="eager"
@@ -96,7 +96,7 @@ export default async function NewsPage() {
                     <article className="bg-white rounded-xl overflow-hidden border border-iftm-border hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                       <div className="relative aspect-[16/10] overflow-hidden">
                         <img
-                          src={item.featuredImage?.node?.sourceUrl || "/images/gallery/campus1.jpg"}
+                          src={item.featuredImage?.node?.sourceUrl || "/images/gallery/campus1.webp"}
                           alt={item.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           loading="lazy"

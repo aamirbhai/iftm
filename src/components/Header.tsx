@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -155,7 +155,7 @@ export default function Header({ solid = false }: { solid?: boolean }) {
           {/* Logo - spans full height from top to bottom */}
           <Link href="/" className="absolute left-4 md:left-6 top-0 bottom-0 flex items-center gap-2 md:gap-3 z-10">
             <Image
-              src="/images/newlogo.png"
+              src="/images/newlogo.webp"
               alt="IFTM University Logo"
               width={180}
               height={55}

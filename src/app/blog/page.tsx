@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+﻿export const dynamic = 'force-dynamic';
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -47,7 +47,7 @@ export default async function BlogPage() {
                       <img
                         src={
                           post.featuredImage?.node?.sourceUrl ||
-                          "/images/buildings/7.jpg"
+                          "/images/buildings/7.webp"
                         }
                         alt={
                           post.featuredImage?.node?.altText || post.title

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
@@ -7,14 +7,14 @@ const founder = {
   name: "Shri Onkar Saran Kothiwal",
   quote: "Keep pace with the time for Strong and Dynamic nation...",
   description: "Philosopher, philanthropist, legislature and believer of guiding principles of \"Trust Based Management\"",
-  image: "/images/leadership/founder.png",
+  image: "/images/leadership/founder.webp",
 };
 
 const leaders = [
-  { name: "Rajiv Kothiwal", role: "Chancellor", message: "The fast-changing world of tomorrow will be an exciting place where only people who adopt themselves will succeed.", image: "/images/leadership/chancellor.png" },
-  { name: "Abhinav Kothiwal", role: "Pro Chancellor", message: "We believe in providing truly value based education to develop good professionals ready to excel.", image: "/images/leadership/prochancellor.png" },
-  { name: "Prof. M. P. Pandey", role: "Vice Chancellor", message: "Education is the driving force that brings change in a person, community, society, and nation.", image: "/images/leadership/vicechancellor.png" },
-  { name: "Prof. Sanjeev Agarwal", role: "Registrar", message: "Global education scenario is in transition to transform it to job-oriented education.", image: "/images/leadership/registrar.png" },
+  { name: "Rajiv Kothiwal", role: "Chancellor", message: "The fast-changing world of tomorrow will be an exciting place where only people who adopt themselves will succeed.", image: "/images/leadership/chancellor.webp" },
+  { name: "Abhinav Kothiwal", role: "Pro Chancellor", message: "We believe in providing truly value based education to develop good professionals ready to excel.", image: "/images/leadership/prochancellor.webp" },
+  { name: "Prof. M. P. Pandey", role: "Vice Chancellor", message: "Education is the driving force that brings change in a person, community, society, and nation.", image: "/images/leadership/vicechancellor.webp" },
+  { name: "Prof. Sanjeev Agarwal", role: "Registrar", message: "Global education scenario is in transition to transform it to job-oriented education.", image: "/images/leadership/registrar.webp" },
 ];
 
 export default function FounderLeadershipSection() {

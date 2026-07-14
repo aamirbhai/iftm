@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { getPosts } from "@/lib/wordpress";
 
 export default async function BlogSection() {
@@ -11,7 +11,7 @@ export default async function BlogSection() {
     excerpt: post.excerpt?.replace(/<[^>]*>/g, "").substring(0, 120) + "..." || "",
     date: new Date(post.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
     category: post.categories?.nodes?.[0]?.name || "General",
-    img: post.featuredImage?.node?.sourceUrl || "/images/buildings/7.jpg",
+    img: post.featuredImage?.node?.sourceUrl || "/images/buildings/7.webp",
     href: `/blog/${post.slug}`,
   })) : [
     {
@@ -19,7 +19,7 @@ export default async function BlogSection() {
       excerpt: "Discover the best career opportunities available after completing B.Pharm including pharma industry, research, government jobs, and higher studies.",
       date: "10 Jul 2026",
       category: "Pharmacy",
-      img: "/images/buildings/7.jpg",
+      img: "/images/buildings/7.webp",
       href: "/blog/career-after-bpharm",
     },
     {
@@ -27,7 +27,7 @@ export default async function BlogSection() {
       excerpt: "Learn why IFTM University is the best choice for engineering aspirants with NAAC A Grade, industry partnerships, and excellent placements.",
       date: "05 Jul 2026",
       category: "Engineering",
-      img: "/images/buildings/4.jpg",
+      img: "/images/buildings/4.webp",
       href: "/blog/why-iftm-engineering",
     },
     {
@@ -35,7 +35,7 @@ export default async function BlogSection() {
       excerpt: "IFTM University is at the forefront of implementing the National Education Policy 2020 with multidisciplinary approach and outcome-based education.",
       date: "28 Jun 2026",
       category: "Education",
-      img: "/images/buildings/campus2.jpg",
+      img: "/images/buildings/campus2.webp",
       href: "/blog/nep-2020-iftm",
     },
     {
@@ -43,7 +43,7 @@ export default async function BlogSection() {
       excerpt: "Explore the vibrant campus life at IFTM with sports, cultural events, student clubs, and holistic development opportunities.",
       date: "20 Jun 2026",
       category: "Campus Life",
-      img: "/images/buildings/14.jpg",
+      img: "/images/buildings/14.webp",
       href: "/blog/campus-life-iftm",
     },
     {
@@ -51,7 +51,7 @@ export default async function BlogSection() {
       excerpt: "A detailed look at IFTM's placement statistics, top recruiting companies, and the highest packages offered to students.",
       date: "15 Jun 2026",
       category: "Placements",
-      img: "/images/buildings/campus1.jpg",
+      img: "/images/buildings/campus1.webp",
       href: "/blog/placement-records",
     },
     {
@@ -59,7 +59,7 @@ export default async function BlogSection() {
       excerpt: "Complete guide to merit-based, need-based, and government scholarships available for IFTM students in the upcoming academic session.",
       date: "10 Jun 2026",
       category: "Admissions",
-      img: "/images/buildings/campus5.jpg",
+      img: "/images/buildings/campus5.webp",
       href: "/blog/scholarships-2026",
     },
   ];

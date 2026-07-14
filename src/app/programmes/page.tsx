@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+﻿export const dynamic = 'force-dynamic';
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -120,7 +120,7 @@ export default async function ProgrammesPage() {
               <div className="hidden lg:block relative">
                 <div className="relative w-full h-[450px] rounded-2xl overflow-hidden">
                   <img
-                    src="/images/student-hero.jpg"
+                    src="/images/student-hero.webp"
                     alt="IFTM University Student"
                     className="w-full h-full object-cover object-top"
                     loading="eager"

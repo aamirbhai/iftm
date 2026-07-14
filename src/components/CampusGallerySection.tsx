@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -16,70 +16,70 @@ const buildings: Building[] = [
     name: "Administrative Block",
     icon: "fa-building",
     description: "The main administrative building housing the Vice Chancellor's office, Registrar, and other administrative departments.",
-    images: ["/images/buildings/campus1.jpg", "/images/buildings/1.jpg", "/images/buildings/2.jpg", "/images/buildings/3.jpg"],
+    images: ["/images/buildings/campus1.webp", "/images/buildings/1.webp", "/images/buildings/2.webp", "/images/buildings/3.webp"],
   },
   {
     id: "academic",
     name: "Academic Blocks",
     icon: "fa-graduation-cap",
     description: "State-of-the-art academic buildings with smart classrooms, lecture theatres, and seminar halls for all schools.",
-    images: ["/images/buildings/campus2.jpg", "/images/buildings/4.jpg", "/images/buildings/5.jpg", "/images/buildings/6.jpg"],
+    images: ["/images/buildings/campus2.webp", "/images/buildings/4.webp", "/images/buildings/5.webp", "/images/buildings/6.webp"],
   },
   {
     id: "library",
     name: "Central Library",
     icon: "fa-book",
     description: "A vast library with thousands of books, digital resources, reading halls, and e-learning facilities.",
-    images: ["/images/buildings/7.jpg", "/images/buildings/8.jpg", "/images/buildings/9.jpg"],
+    images: ["/images/buildings/7.webp", "/images/buildings/8.webp", "/images/buildings/9.webp"],
   },
   {
     id: "labs",
     name: "Laboratories",
     icon: "fa-flask",
     description: "Well-equipped laboratories for Engineering, Pharmacy, Sciences, and Computer Science departments.",
-    images: ["/images/buildings/10.jpg", "/images/buildings/11.jpg", "/images/buildings/12.jpg", "/images/buildings/13.jpg"],
+    images: ["/images/buildings/10.webp", "/images/buildings/11.webp", "/images/buildings/12.webp", "/images/buildings/13.webp"],
   },
   {
     id: "sports",
     name: "Sports Complex",
     icon: "fa-futbol",
     description: "Indoor and outdoor sports facilities including cricket ground, basketball court, gymnasium, and swimming pool.",
-    images: ["/images/buildings/14.jpg", "/images/buildings/15.jpg", "/images/buildings/16.jpg"],
+    images: ["/images/buildings/14.webp", "/images/buildings/15.webp", "/images/buildings/16.webp"],
   },
   {
     id: "hostel",
     name: "Hostels",
     icon: "fa-hotel",
     description: "Separate hostels for boys and girls with modern amenities, Wi-Fi, mess, and 24/7 security.",
-    images: ["/images/buildings/17.jpg", "/images/buildings/18.jpg", "/images/buildings/19.jpg"],
+    images: ["/images/buildings/17.webp", "/images/buildings/18.webp", "/images/buildings/19.webp"],
   },
   {
     id: "auditorium",
     name: "Auditorium & Seminar Halls",
     icon: "fa-theater-masks",
     description: "Air-conditioned auditorium with modern AV equipment for conferences, convocations, and cultural events.",
-    images: ["/images/buildings/20.jpg", "/images/buildings/21.jpg", "/images/buildings/22.jpg"],
+    images: ["/images/buildings/20.webp", "/images/buildings/21.webp", "/images/buildings/22.webp"],
   },
   {
     id: "cafeteria",
     name: "Cafeteria & Mess",
     icon: "fa-utensils",
     description: "Hygienic cafeteria and mess facilities serving nutritious meals and snacks to students and staff.",
-    images: ["/images/buildings/23.jpg", "/images/buildings/24.jpg", "/images/buildings/25.jpg"],
+    images: ["/images/buildings/23.webp", "/images/buildings/24.webp", "/images/buildings/25.webp"],
   },
   {
     id: "medical",
     name: "Medical Facility",
     icon: "fa-hospital",
     description: "On-campus medical center with qualified doctors, ambulance service, and emergency care facilities.",
-    images: ["/images/buildings/26.jpg", "/images/buildings/campus3.jpg"],
+    images: ["/images/buildings/26.webp", "/images/buildings/campus3.webp"],
   },
   {
     id: "campus",
     name: "Campus Overview",
     icon: "fa-university",
     description: "69+ acres of lush green campus with beautiful gardens, pathways, and modern infrastructure.",
-    images: ["/images/buildings/campus4.jpg", "/images/buildings/campus5.jpg", "/images/buildings/campus1.jpg"],
+    images: ["/images/buildings/campus4.webp", "/images/buildings/campus5.webp", "/images/buildings/campus1.webp"],
   },
 ];
 

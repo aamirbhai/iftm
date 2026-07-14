@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 
 const footerLinks = [
@@ -105,7 +105,7 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <Link href="/" className="inline-flex items-center gap-3 mb-5">
               <Image
-                src="/images/newlogo.png"
+                src="/images/newlogo.webp"
                 alt="IFTM University"
                 width={240}
                 height={72}

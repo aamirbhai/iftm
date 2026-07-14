@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Teko } from "next/font/google";
 import "./globals.css";
 import StickySidebar from "@/components/StickySidebar";
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://iftmuniversity.ac.in/images/og-image.jpg",
+        url: "https://iftmuniversity.ac.in/images/og-image.webp",
         width: 1200,
         height: 630,
         alt: "IFTM University Moradabad - Top Private University in UP",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IFTM University - Top Private University in Moradabad, UP",
     description: "NAAC 'A' Grade university with 130+ programmes and 90%+ placement rate.",
-    images: ["https://iftmuniversity.ac.in/images/og-image.jpg"],
+    images: ["https://iftmuniversity.ac.in/images/og-image.webp"],
     site: "@IFTMUni",
   },
   verification: {
@@ -73,7 +73,7 @@ export default function RootLayout({
     name: "IFTM University",
     alternateName: "IFTM University Moradabad",
     url: "https://iftmuniversity.ac.in",
-    logo: "https://iftmuniversity.ac.in/images/newlogo.png",
+    logo: "https://iftmuniversity.ac.in/images/newlogo.webp",
     description:
       "IFTM University is a NAAC 'A' Grade accredited private university in Moradabad, UP offering 130+ programmes across Engineering, Pharmacy, Management, Law, Sciences, and more.",
     address: {

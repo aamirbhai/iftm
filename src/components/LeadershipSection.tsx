@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
@@ -9,7 +9,7 @@ const leaders = [
     role: "Chancellor",
     message:
       "The fast-changing world of tomorrow will be an exciting and a challenging place to live, where only the people who adopt themselves to the situation, keep pace with upcoming technologies and have the ability to align their ideas will succeed. At IFTM University, we are committed to preparing our students for this dynamic future.",
-    image: "/images/leadership/chancellor.png",
+    image: "/images/leadership/chancellor.webp",
     gradient: "linear-gradient(135deg, #950000, #7a0000)",
   },
   {
@@ -17,7 +17,7 @@ const leaders = [
     role: "Pro Chancellor",
     message:
       "At IFTM University, Moradabad, we believe in providing a truly value based education to develop good professionals, ready to excel in any career, they wish to pursue. We know that the world has become more complex and in order to be successful, one needs to be multi-skilled and versatile.",
-    image: "/images/leadership/prochancellor.png",
+    image: "/images/leadership/prochancellor.webp",
     gradient: "linear-gradient(135deg, #1b1f52, #2d337b)",
   },
   {
@@ -25,7 +25,7 @@ const leaders = [
     role: "Vice Chancellor",
     message:
       "Education is the driving force that brings change in a person, community, society, and nation. It breaks the barriers of caste, creed, ethnicity and religion by training the minds to think logically; envision, innovate, invent and discover methods for creating a harmonious and sustainable society with skills.",
-    image: "/images/leadership/vicechancellor.png",
+    image: "/images/leadership/vicechancellor.webp",
     gradient: "linear-gradient(135deg, #7a0000, #950000)",
   },
   {
@@ -33,7 +33,7 @@ const leaders = [
     role: "Registrar",
     message:
       "Global education scenario is in transition state to transform it to job-oriented education, which is the need of the hour. The employability depends upon the education and training imparted to the future workforce. Education need to be fully balanced between theoretical knowledge and practical skills.",
-    image: "/images/leadership/registrar.png",
+    image: "/images/leadership/registrar.webp",
     gradient: "linear-gradient(135deg, #2d337b, #950000)",
   },
 ];
