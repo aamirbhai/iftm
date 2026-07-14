@@ -49,9 +49,10 @@ function LazyHeroVideo() {
     video.loop = true;
     video.muted = true;
 
-    const hlsDesktopUrl = process.env.NEXT_PUBLIC_HLS_URL || "/videos/hls/playlist.m3u8";
-    const hlsMobileUrl = process.env.NEXT_PUBLIC_HLS_MOBILE_URL || "/videos/hls_mobile/playlist.m3u8";
-    const fallbackUrl = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/videos/iftm.mp4";
+    const isProd = typeof window !== "undefined" && (window.location.hostname === "iftm.lexx.in" || window.location.hostname === "iftmuniversity.ac.in");
+    const hlsDesktopUrl = isProd ? "https://4.lfabhawalpur.com/hls/playlist.m3u8" : "/videos/hls/playlist.m3u8";
+    const hlsMobileUrl = isProd ? "https://4.lfabhawalpur.com/hls_mobile/playlist.m3u8" : "/videos/hls_mobile/playlist.m3u8";
+    const fallbackUrl = isProd ? "https://4.lfabhawalpur.com/iftm.mp4" : "/videos/iftm.mp4";
 
     function loadHls(Hls: any, url: string) {
       const hls = new Hls({
