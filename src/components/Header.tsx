@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -163,12 +163,12 @@ export default function Header({ solid = false }: { solid?: boolean }) {
               style={{ width: "auto", height: isScrolled ? "40px" : "65px" }}
               priority
             />
-            <div className={`flex items-center gap-1 transition-all duration-300 ${isScrolled ? "scale-75" : "scale-100"}`}>
-              <div className="flex flex-col items-center leading-tight">
-                <span className="text-white font-bold text-[10px] md:text-base">NAAC</span>
-                <span className="text-white font-medium text-[8px] md:text-[10px]">GRADE</span>
+            <div className={`flex items-center gap-1.5 transition-all duration-300 ${isScrolled ? "scale-75" : "scale-100"}`}>
+              <div className="flex flex-col items-center leading-none">
+                <span className="text-iftm-gold font-extrabold text-[8px] md:text-[10px] uppercase tracking-[0.15em]">NAAC</span>
+                <span className="text-white/60 font-medium text-[6px] md:text-[8px] uppercase tracking-[0.2em]">Accredited</span>
               </div>
-              <span className="bg-iftm-gold text-iftm-navy font-black text-2xl md:text-4xl leading-none w-8 h-8 md:w-11 md:h-11 flex items-center justify-center rounded-sm">A</span>
+              <span className="bg-gradient-to-br from-iftm-gold to-amber-600 text-iftm-navy font-black text-sm md:text-lg leading-none w-6 h-6 md:w-8 md:h-8 flex items-center justify-center rounded-md shadow-lg shadow-iftm-gold/20">A</span>
             </div>
           </Link>
 

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 
 const footerLinks = [
@@ -111,12 +111,12 @@ export default function Footer() {
                 height={72}
                 style={{ width: "auto", height: "72px" }}
               />
-              <div className="flex items-center gap-1">
-                <div className="flex flex-col items-center leading-tight">
-                  <span className="text-white font-bold text-sm">NAAC</span>
-                  <span className="text-white font-medium text-[10px]">GRADE</span>
+              <div className="flex items-center gap-1.5">
+                <div className="flex flex-col items-center leading-none">
+                  <span className="text-iftm-gold font-extrabold text-[10px] uppercase tracking-[0.15em]">NAAC</span>
+                  <span className="text-white/50 font-medium text-[8px] uppercase tracking-[0.2em]">Accredited</span>
                 </div>
-                <span className="text-iftm-gold font-black text-4xl leading-none">A</span>
+                <span className="bg-gradient-to-br from-iftm-gold to-amber-600 text-iftm-navy font-black text-xl leading-none w-7 h-7 flex items-center justify-center rounded-md shadow-lg shadow-iftm-gold/20">A</span>
               </div>
             </Link>
             <p className="text-white/70 text-sm leading-relaxed mb-6 max-w-[300px]">
