@@ -22,6 +22,55 @@ function findFAQMatch(query: string): string | null {
   return null;
 }
 
+/* ─── Female Assistant Avatar ─── */
+function GiniAvatar({ size = 36 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Background circle */}
+      <circle cx="24" cy="24" r="24" fill="url(#giniGrad)" />
+      {/* Hair */}
+      <ellipse cx="24" cy="18" rx="13" ry="12" fill="#2D1B4E" />
+      <path d="M11 18c0-7 5.8-12 13-12s13 5 13 12c0 2-1 3-2 3H13c-1 0-2-1-2-3z" fill="#2D1B4E" />
+      {/* Face */}
+      <ellipse cx="24" cy="22" rx="9" ry="10" fill="#FDDCB5" />
+      {/* Eyes */}
+      <ellipse cx="20.5" cy="21" rx="1.5" ry="1.8" fill="#1a1a2e" />
+      <ellipse cx="27.5" cy="21" rx="1.5" ry="1.8" fill="#1a1a2e" />
+      <circle cx="21" cy="20.3" r="0.5" fill="white" />
+      <circle cx="28" cy="20.3" r="0.5" fill="white" />
+      {/* Eyebrows */}
+      <path d="M18.5 18.5c0.5-1 1.5-1.5 2.5-1" stroke="#2D1B4E" strokeWidth="0.8" strokeLinecap="round" />
+      <path d="M29.5 18.5c-0.5-1-1.5-1.5-2.5-1" stroke="#2D1B4E" strokeWidth="0.8" strokeLinecap="round" />
+      {/* Nose */}
+      <path d="M24 23c-0.5 0.5-0.3 1.2 0 1.5" stroke="#E8C9A0" strokeWidth="0.6" strokeLinecap="round" />
+      {/* Smile */}
+      <path d="M21 26c1.5 1.5 4.5 1.5 6 0" stroke="#C4756E" strokeWidth="1" strokeLinecap="round" fill="none" />
+      {/* Blush */}
+      <ellipse cx="18" cy="24.5" rx="1.5" ry="0.8" fill="#F5B0A5" opacity="0.4" />
+      <ellipse cx="30" cy="24.5" rx="1.5" ry="0.8" fill="#F5B0A5" opacity="0.4" />
+      {/* Hair strands */}
+      <path d="M12 14c2-4 6-6 12-6s10 2 12 6" stroke="#3D2B5E" strokeWidth="1.5" fill="none" />
+      {/* Headset */}
+      <path d="M10 20c0-8 6-14 14-14s14 6 14 14" stroke="#C8A96E" strokeWidth="2" fill="none" />
+      <rect x="8" y="18" width="4" height="7" rx="2" fill="#C8A96E" />
+      <rect x="36" y="18" width="4" height="7" rx="2" fill="#C8A96E" />
+      {/* Microphone */}
+      <path d="M36 25c0 0 1 3 1 4s-0.5 2-1 2" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      {/* Shirt collar */}
+      <path d="M16 34c2-3 5-4 8-4s6 1 8 4" fill="#C8A96E" />
+      <path d="M18 34l6-3 6 3" fill="#E8D5A8" />
+      {/* Body hint */}
+      <path d="M10 48c2-6 8-10 14-10s12 4 14 10" fill="#C8A96E" />
+      <defs>
+        <linearGradient id="giniGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#1a1040" />
+          <stop offset="1" stopColor="#0a0e2a" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export default function GiniChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -30,11 +79,27 @@ export default function GiniChatbot() {
   const [step, setStep] = useState<"greet" | "name" | "language" | "chat">("greet");
   const [userName, setUserName] = useState("");
   const [language, setLanguage] = useState<"en" | "hi" | "">("");
+  const [showTeaser, setShowTeaser] = useState(false);
+  const [teaserDismissed, setTeaserDismissed] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Auto-show teaser pop-up after 3 seconds
+  useEffect(() => {
+    if (teaserDismissed || isOpen) return;
+    const timer = setTimeout(() => setShowTeaser(true), 3000);
+    return () => clearTimeout(timer);
+  }, [teaserDismissed, isOpen]);
+
+  // Auto-dismiss teaser after 8 seconds
+  useEffect(() => {
+    if (!showTeaser) return;
+    const timer = setTimeout(() => setShowTeaser(false), 8000);
+    return () => clearTimeout(timer);
+  }, [showTeaser]);
 
   useEffect(() => {
     if (isOpen && step === "greet") {
@@ -71,12 +136,8 @@ export default function GiniChatbot() {
   function handleLanguageSelect(lang: "en" | "hi") {
     setLanguage(lang);
     setStep("chat");
-
-    // Add user's language choice as a message
     const userMsg: Message = { role: "user", content: lang === "hi" ? "Hindi" : "English" };
     setMessages((prev) => [...prev, userMsg]);
-
-    // Respond in selected language
     if (lang === "hi") {
       simulateTyping(`Bahut accha ${userName}! Ab aap Hindi mein pooch sakte ho. Main aapki kya madad kar sakta hoon?`);
     } else {
@@ -92,7 +153,6 @@ export default function GiniChatbot() {
     setMessages((prev) => [...prev.filter((m) => !m.isTyping && !m.showLanguageOptions), userMessage]);
     setInput("");
 
-    // Handle name step
     if (step === "name") {
       setUserName(trimmed);
       setStep("language");
@@ -100,7 +160,6 @@ export default function GiniChatbot() {
       return;
     }
 
-    // Handle chat step
     const faqAnswer = findFAQMatch(trimmed);
     if (faqAnswer) {
       simulateTyping(faqAnswer);
@@ -117,11 +176,7 @@ export default function GiniChatbot() {
       const response = await fetch("/api/gini", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: chatMessages,
-          userName,
-          language,
-        }),
+        body: JSON.stringify({ messages: chatMessages, userName, language }),
       });
 
       if (response.ok) {
@@ -137,7 +192,7 @@ export default function GiniChatbot() {
       let fallback = "";
 
       if (language === "hi") {
-        if (lowerInput.includes("fee") || lowerInput.includes("cost") || lowerInput.includes("price")) {
+        if (lowerInput.includes("fee") || lowerInput.includes("cost")) {
           fallback = "Fee details ke liye admission office call karo +91-591-2486021. Scholarship bhi milti hai merit basis pe.";
         } else if (lowerInput.includes("admission") || lowerInput.includes("apply")) {
           fallback = "Online apply karo hamari website se. Help chahiye toh call karo +91-591-2486021.";
@@ -149,7 +204,7 @@ export default function GiniChatbot() {
           fallback = "Mujhe abhi connect hone mein problem ho rahi hai. Call karo +91-591-2486021.";
         }
       } else {
-        if (lowerInput.includes("fee") || lowerInput.includes("cost") || lowerInput.includes("price")) {
+        if (lowerInput.includes("fee") || lowerInput.includes("cost")) {
           fallback = "For fee details, please contact our admission office at +91-591-2486021. Scholarships are available for meritorious students.";
         } else if (lowerInput.includes("admission") || lowerInput.includes("apply")) {
           fallback = "You can apply online at our admissions portal. For help, call +91-591-2486021.";
@@ -166,48 +221,84 @@ export default function GiniChatbot() {
     }
   }
 
+  function handleOpen() {
+    setIsOpen(true);
+    setShowTeaser(false);
+    setTeaserDismissed(true);
+  }
+
   return (
     <>
+      {/* ─── Teaser Pop-up (shows after 3s) ─── */}
+      {showTeaser && !isOpen && (
+        <div className="fixed bottom-24 right-6 z-50 animate-bounce-slow">
+          <div className="relative bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 max-w-[260px] cursor-pointer" onClick={handleOpen}>
+            {/* Arrow */}
+            <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-r border-b border-gray-100 transform rotate-45" />
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0">
+                <GiniAvatar size={40} />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-iftm-navy mb-0.5">Need Help?</p>
+                <p className="text-xs text-gray-500 leading-relaxed">Hi! I&apos;m Gini, your admission assistant. Ask me anything about IFTM!</p>
+              </div>
+            </div>
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowTeaser(false); setTeaserDismissed(true); }}
+              className="absolute -top-2 -right-2 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Dismiss"
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ─── Chat Button ─── */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-iftm-navy text-white shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
+        onClick={() => isOpen ? setIsOpen(false) : handleOpen()}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-110 flex items-center justify-center overflow-hidden"
         aria-label="Chat with Gini"
+        style={{ background: "linear-gradient(135deg, #1a1040, #0a0e2a)" }}
       >
         {isOpen ? (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         ) : (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-          </svg>
+          <GiniAvatar size={56} />
         )}
       </button>
 
+      {/* ─── Chat Window ─── */}
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50 w-[350px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden" style={{ height: "480px" }}>
-          <div className="bg-iftm-navy text-white px-4 py-3 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-iftm-gold flex items-center justify-center text-iftm-navy font-bold text-sm">
-              G
-            </div>
-            <div>
+          {/* Header */}
+          <div className="bg-gradient-to-r from-iftm-navy to-[#1a1040] text-white px-4 py-3 flex items-center gap-3">
+            <GiniAvatar size={36} />
+            <div className="flex-1">
               <h3 className="font-bold text-sm">Gini</h3>
-              <p className="text-xs text-white/70">IFTM Admission Guide</p>
+              <p className="text-[11px] text-white/60 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> Online • IFTM Admission Guide
+              </p>
             </div>
           </div>
 
+          {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-              >
+              <div key={i} className={"flex " + (msg.role === "user" ? "justify-end" : "justify-start")}>
+                {msg.role === "assistant" && (
+                  <div className="flex-shrink-0 mr-2 mt-1">
+                    <GiniAvatar size={24} />
+                  </div>
+                )}
                 <div
-                  className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
-                    msg.role === "user"
+                  className={"max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed " +
+                    (msg.role === "user"
                       ? "bg-iftm-primary text-white rounded-br-none"
-                      : "bg-gray-100 text-gray-800 rounded-bl-none"
-                  }`}
+                      : "bg-gray-100 text-gray-800 rounded-bl-none")}
                 >
                   {msg.isTyping ? (
                     <span className="flex items-center gap-1">
@@ -219,18 +310,8 @@ export default function GiniChatbot() {
                     <div>
                       <p className="mb-3">{msg.content}</p>
                       <div className="flex gap-2">
-                        <button
-                          onClick={() => handleLanguageSelect("en")}
-                          className="px-4 py-2 bg-iftm-navy text-white rounded-lg text-sm font-medium hover:bg-iftm-navy-light transition-colors"
-                        >
-                          English
-                        </button>
-                        <button
-                          onClick={() => handleLanguageSelect("hi")}
-                          className="px-4 py-2 bg-iftm-primary text-white rounded-lg text-sm font-medium hover:bg-red-800 transition-colors"
-                        >
-                          Hindi
-                        </button>
+                        <button onClick={() => handleLanguageSelect("en")} className="px-4 py-2 bg-iftm-navy text-white rounded-lg text-sm font-medium hover:bg-iftm-navy-light transition-colors">English</button>
+                        <button onClick={() => handleLanguageSelect("hi")} className="px-4 py-2 bg-iftm-primary text-white rounded-lg text-sm font-medium hover:bg-red-800 transition-colors">Hindi</button>
                       </div>
                     </div>
                   ) : (
@@ -242,6 +323,7 @@ export default function GiniChatbot() {
 
             {isLoading && !messages.some((m) => m.isTyping) && (
               <div className="flex justify-start">
+                <div className="flex-shrink-0 mr-2 mt-1"><GiniAvatar size={24} /></div>
                 <div className="bg-gray-100 px-3 py-2 rounded-xl rounded-bl-none text-sm">
                   <span className="flex items-center gap-1">
                     <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
@@ -255,14 +337,9 @@ export default function GiniChatbot() {
             <div ref={messagesEndRef} />
           </div>
 
+          {/* Input */}
           <div className="border-t border-gray-200 p-3">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSend();
-              }}
-              className="flex gap-2"
-            >
+            <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2">
               <input
                 type="text"
                 value={input}
@@ -282,6 +359,14 @@ export default function GiniChatbot() {
           </div>
         </div>
       )}
+
+      <style>{`
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+        .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
+      `}</style>
     </>
   );
 }
