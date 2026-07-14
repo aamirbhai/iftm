@@ -49,10 +49,9 @@ function LazyHeroVideo() {
     video.loop = true;
     video.muted = true;
 
-    const isProd = typeof window !== "undefined" && (window.location.hostname === "iftm.lexx.in" || window.location.hostname === "iftmuniversity.ac.in");
-    const hlsDesktopUrl = "/api/hls/playlist.m3u8";
-    const hlsMobileUrl = "/api/hls_mobile/playlist.m3u8";
-    const fallbackUrl = isProd ? "https://4.lfabhawalpur.com/iftm.mp4" : "/videos/iftm.mp4";
+    const hlsDesktopUrl = "https://4.lfabhawalpur.com/hls/playlist.m3u8";
+    const hlsMobileUrl = "https://4.lfabhawalpur.com/hls_mobile/playlist.m3u8";
+    const fallbackUrl = "https://4.lfabhawalpur.com/iftm.mp4";
 
     function loadHls(Hls: any, url: string) {
       const hls = new Hls({
@@ -145,6 +144,7 @@ function LazyHeroVideo() {
           loop
           playsInline
           preload="none"
+          crossOrigin="anonymous"
         />
       )}
     </div>
