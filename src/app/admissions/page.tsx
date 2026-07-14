@@ -101,7 +101,15 @@ export default function AdmissionsPage() {
         <div className="absolute bottom-[-80px] right-[-80px] w-[350px] h-[350px] rounded-full bg-iftm-gold/15 blur-[80px] animate-pulse" style={{ animationDelay: "1s" }} />
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
 
-        <div className="relative z-10 pt-[120px] md:pt-[130px] pb-12 md:pb-16 max-w-[1200px] mx-auto px-4 md:px-6">
+        {/* ─── Vertical Side Badge (mobile only) ─── */}
+        <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 md:hidden">
+          <div className="bg-iftm-primary/95 backdrop-blur-sm px-2 py-4 rounded-l-xl shadow-lg flex flex-col items-center gap-2 writing-mode-vertical">
+            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            <span className="text-white font-bold text-[10px] uppercase tracking-[0.2em] whitespace-nowrap" style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}>Admissions Open 2026-27</span>
+          </div>
+        </div>
+
+        <div className="relative z-10 pt-[120px] md:pt-[130px] pb-12 md:pb-16 max-w-[1200px] mx-auto px-4 md:px-6 pr-14 md:pr-6">
           {/* Breadcrumb */}
           <nav className="mb-6">
             <ol className="flex items-center gap-2 text-white/50 text-sm">
@@ -114,7 +122,8 @@ export default function AdmissionsPage() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* ─── Left: Content ─── */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-iftm-primary/90 backdrop-blur-sm px-4 py-1.5 rounded-full mb-5">
+              {/* Desktop badge - hidden on mobile */}
+              <div className="hidden md:inline-flex items-center gap-2 bg-iftm-primary/90 backdrop-blur-sm px-4 py-1.5 rounded-full mb-5">
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 <span className="text-white font-bold text-xs uppercase tracking-widest">Admissions Open 2026-27</span>
               </div>
