@@ -203,24 +203,35 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+        </div>
 
-          {/* Map - Desktop Only */}
-          <div className="lg:col-span-2 hidden lg:block">
-            <h4 className="text-[13px] font-bold uppercase tracking-wider text-white mb-5 pb-2 border-b border-iftm-gold/30">
+        {/* ═══ Map Section - Full Width Bigger ═══ */}
+        <div className="mt-10 pt-8 border-t border-white/[0.06]">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="w-1 h-5 bg-iftm-gold rounded-full" />
+            <h4 className="text-[14px] font-bold uppercase tracking-wider text-white">
               Locate Us
             </h4>
-            <div className="rounded-xl overflow-hidden border border-white/[0.08]">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3495.680396586971!2d78.64035531468515!3d28.81859668234481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390b026d013bc5c1%3A0xdbc7709cdc14726e!2sIFTM+UNIVERSITY+MORADABAD!5e0!3m2!1sen!2sin!4v1514543834790"
-                width="100%"
-                height="180"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="IFTM University Location"
-              />
-            </div>
+            <a
+              href="https://maps.google.com/?q=IFTM+University+Moradabad"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-iftm-gold text-[12px] hover:underline ml-auto"
+            >
+              Open in Google Maps &rarr;
+            </a>
+          </div>
+          <div className="rounded-2xl overflow-hidden border border-white/[0.08] shadow-xl shadow-black/20">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3495.680396586971!2d78.64035531468515!3d28.81859668234481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390b026d013bc5c1%3A0xdbc7709cdc14726e!2sIFTM+UNIVERSITY+MORADABAD!5e0!3m2!1sen!2sin!4v1514543834790"
+              width="100%"
+              height="280"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="IFTM University Location"
+            />
           </div>
         </div>
 
