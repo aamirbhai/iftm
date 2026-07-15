@@ -109,8 +109,8 @@ export default function GiniChatbot() {
     };
   }, []);
 
-  function speak(text: string) {
-    if (!synthRef.current || !voiceEnabled) return;
+  function speak(text: string, force?: boolean) {
+    if (!synthRef.current || (!voiceEnabled && !force)) return;
     synthRef.current.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = language === "hi" ? "hi-IN" : "en-IN";
@@ -194,11 +194,11 @@ export default function GiniChatbot() {
   useEffect(() => {
     if (isOpen && step === "greet") {
       setStep("name");
-      simulateTyping("Hey! Welcome to IFTM University. I'm Gini, your admission guide. What's your name?");
+      simulateTyping("Hey! Welcome to IFTM University. I'm Gini, your admission guide. What's your name?", true);
     }
   }, [isOpen, step]);
 
-  function simulateTyping(text: string) {
+  function simulateTyping(text: string, forceSpeak?: boolean) {
     const typingMsg: Message = { role: "assistant", content: "", isTyping: true };
     setMessages((prev) => [...prev, typingMsg]);
     const delay = Math.min(800 + text.length * 15, 2500);
@@ -209,8 +209,8 @@ export default function GiniChatbot() {
         updated[lastIdx] = { role: "assistant", content: text, isTyping: false };
         return updated;
       });
-      // Speak the response if voice is enabled
-      if (voiceEnabled) speak(text);
+      // Speak the response if voice is enabled or forced (welcome message)
+      if (forceSpeak || voiceEnabled) speak(text, forceSpeak);
     }, delay);
   }
 
@@ -364,6 +364,8 @@ export default function GiniChatbot() {
     setIsOpen(true);
     setShowTeaser(false);
     setTeaserDismissed(true);
+    // Auto-enable voice so welcome message is spoken
+    setVoiceEnabled(true);
   }
 
   return (
