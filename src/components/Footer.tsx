@@ -81,16 +81,14 @@ export default function Footer() {
               </p>
             </div>
             <div className="flex gap-3">
-              <a
-                href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/admissions"
                 className="px-7 py-3 bg-white text-iftm-dark font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-iftm-gold transition-all shadow-lg"
               >
                 Apply Now
-              </a>
+              </Link>
               <Link
-                href="/contact"
+                href="/admissions"
                 className="px-7 py-3 bg-white/10 border border-white/20 text-white font-semibold text-sm uppercase tracking-wider rounded-lg hover:bg-white/20 transition-all"
               >
                 Contact Us

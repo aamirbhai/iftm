@@ -17,16 +17,14 @@ export default function CTASection() {
           experienced faculty, and excellent placement opportunities.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <a
-            href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/admissions"
             className="px-8 py-3 bg-iftm-gold text-iftm-dark font-semibold text-sm uppercase tracking-wider rounded-md hover:bg-yellow-400 transition-all hover:-translate-y-0.5"
           >
             Apply Now
-          </a>
+          </Link>
           <Link
-            href="/contact"
+            href="/admissions"
             className="px-8 py-3 bg-white/10 text-white border-2 border-white font-semibold text-sm uppercase tracking-wider rounded-md hover:bg-white hover:text-iftm-primary transition-all"
           >
             Contact Us

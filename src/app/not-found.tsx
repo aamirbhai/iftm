@@ -165,7 +165,7 @@ export default function NotFound() {
               Back to Home
             </Link>
             <Link
-              href="/contact"
+              href="/admissions"
               className="px-8 py-3.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold text-sm uppercase tracking-wider rounded-xl hover:bg-white/20 transition-all"
             >
               Contact Us

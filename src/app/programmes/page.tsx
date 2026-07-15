@@ -1,4 +1,4 @@
-﻿export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic';
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -100,14 +100,12 @@ export default async function ProgrammesPage() {
                 </div>
 
                 <div className="flex flex-wrap gap-4">
-                  <a
-                    href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/admissions"
                     className="px-8 py-3.5 bg-iftm-primary text-white font-bold rounded-xl hover:bg-iftm-primary-dark transition-all shadow-lg shadow-iftm-primary/30"
                   >
                     Apply Now
-                  </a>
+                  </Link>
                   <a
                     href="#programmes-list"
                     className="px-8 py-3.5 bg-white/10 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/20 transition-all"
@@ -170,16 +168,14 @@ export default async function ProgrammesPage() {
               Join IFTM University and unlock your potential with world-class education.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/admissions"
                 className="px-8 py-3.5 bg-iftm-primary text-white font-bold rounded-xl hover:bg-iftm-primary-dark transition-all shadow-lg shadow-iftm-primary/30"
               >
                 Apply Now
-              </a>
+              </Link>
               <Link
-                href="/contact"
+                href="/admissions"
                 className="px-8 py-3.5 bg-white/10 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/20 transition-all"
               >
                 Contact Us

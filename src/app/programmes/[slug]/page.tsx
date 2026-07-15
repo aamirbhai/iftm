@@ -133,14 +133,12 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4">
-              <a
-                href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/admissions"
                 className="px-8 py-3.5 bg-iftm-primary text-white font-bold rounded-xl hover:bg-iftm-primary-dark transition-all hover:-translate-y-0.5 shadow-lg shadow-iftm-primary/30"
               >
                 Apply Now
-              </a>
+              </Link>
               <a
                 href="#overview"
                 className="px-8 py-3.5 bg-white/10 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/20 transition-all"
@@ -349,14 +347,12 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
                   <div className="bg-gradient-to-br from-iftm-primary to-iftm-primary-dark rounded-2xl p-6 text-white">
                     <h3 className="font-bold text-lg mb-2">Ready to Apply?</h3>
                     <p className="text-white/80 text-sm mb-4">Start your application for {programme.title}</p>
-                    <a
-                      href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href="/admissions"
                       className="block w-full py-3 bg-white text-iftm-primary font-bold text-center rounded-lg hover:bg-iftm-gold transition-colors"
                     >
                       Apply Now
-                    </a>
+                    </Link>
                   </div>
 
                   {/* Quick Info */}
@@ -425,14 +421,12 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
               <p className="text-iftm-dark font-semibold text-sm truncate max-w-[200px]">{programme.title}</p>
               {fee && <p className="text-iftm-primary font-bold text-sm">{fee}</p>}
             </div>
-            <a
-              href="https://uni.edulip.com/UI/Website/IFTM/StudentRegistration.php"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/admissions"
               className="px-6 py-3 bg-iftm-primary text-white font-bold text-sm rounded-lg flex-shrink-0"
             >
               Apply Now
-            </a>
+            </Link>
           </div>
         </div>
       </main>
