@@ -87,8 +87,10 @@ export default function GiniChatbot() {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const [voiceCallMode, setVoiceCallMode] = useState(false);
   const recognitionRef = useRef<any>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
+  const voiceCallRef = useRef(false);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -123,7 +125,13 @@ export default function GiniChatbot() {
     ) || voices.find((v) => v.lang === "en-IN") || voices.find((v) => v.lang.startsWith("en"));
     if (preferred) utterance.voice = preferred;
     utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      // In voice call mode, auto-restart listening after Gini finishes speaking
+      if (voiceCallRef.current) {
+        setTimeout(() => startListening(), 500);
+      }
+    };
     utterance.onerror = () => setIsSpeaking(false);
     synthRef.current.speak(utterance);
   }
@@ -175,6 +183,27 @@ export default function GiniChatbot() {
       if (prev) synthRef.current?.cancel();
       return !prev;
     });
+  }
+
+  function startVoiceCall() {
+    voiceCallRef.current = true;
+    setVoiceCallMode(true);
+    setVoiceEnabled(true);
+    // Start listening immediately
+    setTimeout(() => startListening(), 300);
+  }
+
+  function stopVoiceCall() {
+    voiceCallRef.current = false;
+    setVoiceCallMode(false);
+    if (recognitionRef.current) {
+      recognitionRef.current.abort();
+      setIsListening(false);
+    }
+    if (synthRef.current) {
+      synthRef.current.cancel();
+      setIsSpeaking(false);
+    }
   }
 
   // Auto-show teaser pop-up after 3 seconds
@@ -478,6 +507,25 @@ export default function GiniChatbot() {
             <div ref={messagesEndRef} />
           </div>
 
+          {/* Voice Call Mode Banner */}
+          {voiceCallMode && (
+            <div className="bg-green-500 text-white px-4 py-2 flex items-center justify-between text-sm">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
+                <span className="font-medium">{language === "hi" ? "Voice Call chal raha hai..." : "Voice Call in progress..."}</span>
+              </div>
+              <button
+                onClick={stopVoiceCall}
+                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1 transition-colors"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08a.956.956 0 0 1-.01-1.36C3.1 8.78 7.32 7 12 7s8.9 1.78 11.71 4.72c.37.36.39.94.01 1.36l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.1-.7-.28-.79-.73-1.68-1.36-2.66-1.85a.994.994 0 0 1-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z" />
+                </svg>
+                {language === "hi" ? "Call Band Karo" : "End Call"}
+              </button>
+            </div>
+          )}
+
           {/* Input */}
           <div className="border-t border-gray-200 p-3">
             <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2 items-center">
@@ -510,39 +558,58 @@ export default function GiniChatbot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={
-                  isListening
+                  voiceCallMode
+                    ? (language === "hi" ? "Bolo... main sun raha hoon" : "Speak... I'm listening")
+                    : isListening
                     ? (language === "hi" ? "Sun raha hoon..." : "Listening...")
                     : step === "name" ? "Enter your name..."
                     : language === "hi" ? "Apna sawaal likhein..."
                     : "Type your message..."
                 }
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-iftm-navy"
-                disabled={isLoading || step === "language"}
+                disabled={isLoading || step === "language" || voiceCallMode}
               />
 
               {/* Mic button */}
-              <button
-                type="button"
-                onClick={isListening ? stopListening : startListening}
-                disabled={isLoading || step === "language"}
-                className={`p-2 rounded-lg transition-all ${isListening ? "bg-red-500 text-white animate-pulse" : "bg-iftm-navy text-white hover:bg-iftm-navy-light"} disabled:opacity-50 disabled:cursor-not-allowed`}
-                title={isListening ? "Stop listening" : "Speak"}
-              >
-                {isListening ? (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2" /></svg>
-                ) : (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                    <line x1="12" y1="19" x2="12" y2="23" />
-                    <line x1="8" y1="23" x2="16" y2="23" />
+              {!voiceCallMode && (
+                <button
+                  type="button"
+                  onClick={isListening ? stopListening : startListening}
+                  disabled={isLoading || step === "language"}
+                  className={`p-2 rounded-lg transition-all ${isListening ? "bg-red-500 text-white animate-pulse" : "bg-iftm-navy text-white hover:bg-iftm-navy-light"} disabled:opacity-50 disabled:cursor-not-allowed`}
+                  title={isListening ? "Stop listening" : "Speak"}
+                >
+                  {isListening ? (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2" /></svg>
+                  ) : (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                      <line x1="12" y1="19" x2="12" y2="23" />
+                      <line x1="8" y1="23" x2="16" y2="23" />
+                    </svg>
+                  )}
+                </button>
+              )}
+
+              {/* Voice Call button */}
+              {!voiceCallMode ? (
+                <button
+                  type="button"
+                  onClick={startVoiceCall}
+                  disabled={isLoading || step === "language"}
+                  className="p-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  title={language === "hi" ? "Voice Call shuru karo" : "Start Voice Call"}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
                   </svg>
-                )}
-              </button>
+                </button>
+              ) : null}
 
               <button
                 type="submit"
-                disabled={isLoading || !input.trim() || step === "language"}
+                disabled={isLoading || !input.trim() || step === "language" || voiceCallMode}
                 className="px-4 py-2 bg-iftm-navy text-white rounded-lg text-sm font-medium hover:bg-iftm-navy-light disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Send
