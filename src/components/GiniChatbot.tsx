@@ -8,6 +8,7 @@ interface Message {
   content: string;
   isTyping?: boolean;
   showLanguageOptions?: boolean;
+  timestamp?: string;
 }
 
 function findFAQMatch(query: string): string | null {
@@ -282,6 +283,8 @@ export default function GiniChatbot() {
       synthRef.current.cancel();
       setIsSpeaking(false);
     }
+    // Send transcript when voice call ends
+    sendTranscript();
   }
 
   // Auto-show teaser pop-up after 3 seconds
@@ -528,6 +531,33 @@ export default function GiniChatbot() {
     setVoiceEnabled(true);
   }
 
+  function sendTranscript() {
+    const realMessages = messagesRef.current.filter((m) => !m.isTyping && !m.showLanguageOptions && m.content);
+    if (realMessages.length === 0) return;
+
+    const payload = {
+      messages: realMessages.map((m) => ({
+        role: m.role,
+        content: m.content,
+        timestamp: new Date().toISOString(),
+      })),
+      userName: userNameRef.current,
+      language: languageRef.current,
+    };
+
+    // Use sendBeacon for reliable delivery even on page close
+    const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+    navigator.sendBeacon("/api/gini/transcript", blob);
+  }
+
+  function handleClose() {
+    // Send transcript before closing
+    sendTranscript();
+    // Stop voice call if active
+    if (voiceCallRef.current) stopVoiceCall();
+    setIsOpen(false);
+  }
+
   return (
     <>
       {/* ─── Teaser Pop-up (shows after 3s) ─── */}
@@ -558,7 +588,7 @@ export default function GiniChatbot() {
 
       {/* ─── Chat Button ─── */}
       <button
-        onClick={() => isOpen ? setIsOpen(false) : handleOpen()}
+        onClick={() => isOpen ? handleClose() : handleOpen()}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-110 flex items-center justify-center overflow-hidden"
         aria-label="Chat with Gini"
         style={{ background: "linear-gradient(135deg, #1a1040, #0a0e2a)" }}
