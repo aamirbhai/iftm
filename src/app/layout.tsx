@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Teko } from "next/font/google";
 import "./globals.css";
 import StickySidebar from "@/components/StickySidebar";
-import GiniChatbot from "@/components/GiniChatbot";
+import GiniChatbotWrapper from "@/components/GiniChatbotWrapper";
 import SkipNav from "@/components/SkipNav";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -128,21 +128,30 @@ export default function RootLayout({
     >
       <head>
         <link
+          rel="preload"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          as="style"
+          crossOrigin="anonymous"
+        />
+        {/* eslint-disable-next-line @next/next/no-css-tags */}
+        <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
+          {...{ media: "print", onload: "this.media='all'" } as any}
         />
-        {/* HLS.js preload for hero video streaming */}
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            crossOrigin="anonymous"
+          />
+        </noscript>
+        {/* Preconnect for video streaming (HLS.js loads lazily in HeroSlider) */}
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://4.lfabhawalpur.com" />
-        <link
-          rel="preload"
-          href="https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js"
-          as="script"
-          crossOrigin="anonymous"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -156,7 +165,7 @@ export default function RootLayout({
         <SkipNav />
         {children}
         <StickySidebar />
-        <GiniChatbot />
+        <GiniChatbotWrapper />
       </body>
     </html>
   );
