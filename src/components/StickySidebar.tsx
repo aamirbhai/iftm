@@ -28,31 +28,19 @@ export default function StickySidebar() {
         </a>
       </div>
 
-      {/* ─── Right Sidebar: Admissions Open (vertical - Desktop only) ─── */}
-      <div className="hidden md:block fixed right-0 top-1/2 -translate-y-1/2 z-[999]">
+      {/* ─── Right Sidebar: Admissions Open (vertical - ALL screens) ─── */}
+      <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[999]">
         <Link
           href="/admissions"
           className="group flex items-center bg-iftm-primary hover:bg-iftm-primary-dark transition-colors duration-300 shadow-lg shadow-iftm-primary/30"
           style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
         >
-          <span className="text-white font-bold text-xs uppercase tracking-[0.2em] px-3 py-5">
+          <span className="text-white font-bold text-[10px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em] px-1.5 md:px-3 py-3 md:py-5">
             Admissions Open
           </span>
-          <div className="bg-iftm-gold text-iftm-dark px-2 py-2">
-            <i className="fas fa-arrow-right text-xs rotate-90" />
+          <div className="bg-iftm-gold text-iftm-dark px-1.5 md:px-2 py-1.5 md:py-2">
+            <i className="fas fa-arrow-right text-[10px] md:text-xs rotate-90" />
           </div>
-        </Link>
-      </div>
-
-      {/* ─── Mobile Bottom Bar: Admissions Open ─── */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[999]">
-        <Link
-          href="/admissions"
-          className="flex items-center justify-center gap-2 bg-gradient-to-r from-iftm-primary to-red-700 text-white py-3 px-4 shadow-lg shadow-iftm-primary/40 font-bold text-sm uppercase tracking-wider"
-        >
-          <i className="fas fa-graduation-cap text-base" />
-          <span>Admissions Open 2025-26</span>
-          <i className="fas fa-arrow-right text-xs" />
         </Link>
       </div>
     </>
