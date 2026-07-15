@@ -421,6 +421,44 @@ export default function Header({ solid = false }: { solid?: boolean }) {
                     );
                   })}
               </div>
+
+              {/* Quick Links - same as desktop topbar */}
+              <div className="mt-4 pt-4 border-t border-white/10">
+                <h4 className="text-iftm-gold text-[11px] font-bold uppercase tracking-wide mb-3">Quick Links</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { label: "Online Fee", href: "/online-fee" },
+                    { label: "ERP Login", href: "/erp" },
+                    { label: "Library", href: "/library" },
+                    { label: "Career", href: "/career" },
+                    { label: "Enquire", href: "/enquire" },
+                    { label: "IQAC", href: "/iqac" },
+                    { label: "Feedback", href: "/feedback" },
+                    { label: "Grievance", href: "/grievance" },
+                  ].map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="py-2.5 px-3 bg-white/5 rounded-lg text-white/70 text-[12px] font-medium hover:bg-white/10 hover:text-white transition-colors text-center"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Social Links */}
+              <div className="mt-4 pt-4 border-t border-white/10">
+                <h4 className="text-iftm-gold text-[11px] font-bold uppercase tracking-wide mb-3">Connect With Us</h4>
+                <div className="flex items-center justify-center gap-4">
+                  <a href="https://www.facebook.com/iftmuniv" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-iftm-primary hover:text-white transition-colors"><i className="fab fa-facebook-f text-sm" /></a>
+                  <a href="https://twitter.com/IFTMUni" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-iftm-primary hover:text-white transition-colors"><i className="fab fa-twitter text-sm" /></a>
+                  <a href="https://www.instagram.com/iftmuniversity/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-iftm-primary hover:text-white transition-colors"><i className="fab fa-instagram text-sm" /></a>
+                  <a href="https://www.youtube.com/channel/UCYAp-IfRk0ckvrvxFS9hKgQ" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-iftm-primary hover:text-white transition-colors"><i className="fab fa-youtube text-sm" /></a>
+                  <a href="https://www.linkedin.com/in/iftm-university-04006a245/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-iftm-primary hover:text-white transition-colors"><i className="fab fa-linkedin-in text-sm" /></a>
+                  <a href="https://api.whatsapp.com/send/?phone=919639004077" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-green-600 hover:text-white transition-colors"><i className="fab fa-whatsapp text-sm" /></a>
+                </div>
+              </div>
             </div>
           </div>
         )}
