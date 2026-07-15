@@ -375,6 +375,163 @@ export const giniFAQs: GiniFAQ[] = [
     question: "What is NIRF ranking?",
     answer: "NIRF details ke liye: https://www.iftmuniversity.ac.in/iftmuniversity/nirf.php. NAAC 'A' Grade accredited hai university.",
   },
+
+  // Scholarship Details (from website)
+  {
+    keywords: ["scholarship percentage", "scholarship scheme", "merit scholarship", "marks scholarship"],
+    question: "What is the scholarship scheme?",
+    answer: "University scholarship: 60-64.99% pe 10%, 65-69.99% pe 15%, 70-74.99% pe 20%, 75-79.99% pe 25%, 80-89.99% pe 30%, 90%+ pe 50%. Plus 10% extra for girls. Next year continue karne ke liye 75% chahiye.",
+  },
+  {
+    keywords: ["government scholarship", "sc scholarship", "st scholarship", "obc scholarship", "minority scholarship"],
+    question: "Is government scholarship available?",
+    answer: "Haan, SC/ST ko family income 2.5 lakh/year se kam hone pe milta hai. OBC/Minority/General ko 2 lakh/year se kam hone pe. Contact: 05912550208 ya 05912360818.",
+  },
+  {
+    keywords: ["girl scholarship", "girls concession", "female scholarship", "ladki scholarship"],
+    question: "Is there scholarship for girls?",
+    answer: "Haan, sab programmes mein girls ko 10% extra scholarship milti hai. Plus government scholarship bhi milta hai agar eligible ho.",
+  },
+
+  // Hostel Details (from website)
+  {
+    keywords: ["hostel capacity", "hostel rooms", "how many hostels", "hostel strength"],
+    question: "How many hostels are there?",
+    answer: "3 boys hostels aur 1 girls hostel hai campus mein. Total capacity 600 boys + 400 girls. Har room mein cupboard, table, chair, bookshelf aur free Wi-Fi hai.",
+  },
+  {
+    keywords: ["hostel rules", "hostel timing", "hostel entry", "hostel curfew"],
+    question: "What are hostel timings?",
+    answer: "Boys ke liye raat 10 baje tak wapas aana hai. Girls ke liye 7 baje tak. Hostel mein cooking allowed nahi hai. Alcohol, drugs, smoking strictly prohibited hai.",
+  },
+  {
+    keywords: ["hostel mess", "hostel food", "mess menu", "hostel meal"],
+    question: "How is hostel food?",
+    answer: "Mess mein breakfast 9:30 AM se pehle khaana hai. Hygienic food milta hai. Room mein food le jaana allowed nahi hai. Special diet ke liye warden se baat karo.",
+  },
+  {
+    keywords: ["hostel warden", "hostel contact", "dean students"],
+    question: "Who is the hostel warden?",
+    answer: "Dean of Students Welfare: Dr. Arun Kumar Mishra (09451751810). Boys wardens: Mr. Satyartham, Mr. Arvind Kumar, Dr. Divaker Shukla, Dr. Shahbaz Khan. Girls superintendent: Mrs. Rooma Singh (09456688560).",
+  },
+
+  // Research Stats (from website)
+  {
+    keywords: ["research publications", "papers published", "research output"],
+    question: "How many research papers has IFTM published?",
+    answer: "2691+ research papers publish ho chuke hain. 807+ patents filed hain. 534+ awards mile hain faculty ko. 940+ books likhi hain. 303+ e-content bhi hai.",
+  },
+  {
+    keywords: ["patent", "patents filed", "innovation"],
+    question: "Has IFTM filed any patents?",
+    answer: "Haan, 807+ patents filed ho chuke hain. IPR Policy hai university ki. Research ke liye Seed Money Grant bhi milta hai.",
+  },
+  {
+    keywords: ["journal", "vimarsh", "research journal", "publication"],
+    question: "Which journals does IFTM publish?",
+    answer: "2 journals publish hote hain - Vimarsh (http://iftmuvimarsh.com/) aur IFTMU Research Journal of Science (http://iftmurjs.com/).",
+  },
+
+  // Events & Activities
+  {
+    keywords: ["event", "annual day", "samavesh", "shaurya", "parakram", "suhavan", "convocation"],
+    question: "What events happen at IFTM?",
+    answer: "Saal bhar bahut events hote hain - SAMAVESH (Annual Day), SHAURYA (sports fest), PARAKRAM (cultural fest), SUHAVAN, Book Fair, Republic Day celebration, Yoga Day. 9th Convocation 2025 mein hua tha.",
+  },
+  {
+    keywords: ["convocation", "graduation ceremony", "degree distribution"],
+    question: "When is the convocation?",
+    answer: "9th Convocation 2025 mein hua tha. Details ke liye website dekho ya admission office se baat karo.",
+  },
+
+  // Facilities (from salient features)
+  {
+    keywords: ["wifi", "wi-fi", "internet", "connectivity"],
+    question: "Is Wi-Fi available on campus?",
+    answer: "Haan, poora campus Wi-Fi enabled hai. Hostel mein bhi free Wi-Fi milta hai har room mein.",
+  },
+  {
+    keywords: ["bank", "atm", "banking", "sbi", "pnb"],
+    question: "Is there a bank on campus?",
+    answer: "Haan, campus pe 3 nationalized banks hain ATM facility ke saath. Banking easily accessible hai.",
+  },
+  {
+    keywords: ["post office", "courier", "parcel"],
+    question: "Is there a post office?",
+    answer: "Haan, campus pe post office bhi hai. Courier aur parcel services available hain.",
+  },
+  {
+    keywords: ["day care", "creche", "childcare"],
+    question: "Is day care available?",
+    answer: "Haan, campus pe Day Care Centre hai working parents ke liye.",
+  },
+  {
+    keywords: ["open air theatre", "auditorium", "seminar hall"],
+    question: "Is there an auditorium?",
+    answer: "Haan, 2 auditoriums hain - ek 500 seats aur ek 200 seats ka. Open Air Theatre bhi hai. Har academic block mein seminar hall hai.",
+  },
+  {
+    keywords: ["guest house", "visitor accommodation"],
+    question: "Is there a guest house?",
+    answer: "Haan, campus pe guest house hai visitors ke liye.",
+  },
+  {
+    keywords: ["uniform", "dress code"],
+    question: "Is uniform required?",
+    answer: "Haan, uniform mandatory hai aur FREE milta hai university se.",
+  },
+
+  // NEP-2020 & Cells
+  {
+    keywords: ["nep", "nep 2020", "new education policy"],
+    question: "Does IFTM follow NEP-2020?",
+    answer: "Haan, NEP-2020 implement kiya gaya hai. Cells hain - Skill Development, Online Education & LMS, Teacher's Reskilling, Mentoring & Counselling, International Students, aur bahut kuch.",
+  },
+  {
+    keywords: ["icsd", "skill development", "cipet", "samsung"],
+    question: "What is ICSD?",
+    answer: "IFTM Centre for Skill Development (ICSD) hai - CIPET, Samsung jaise partners ke saath skill training milti hai students ko.",
+  },
+
+  // Social Media
+  {
+    keywords: ["social media", "facebook", "instagram", "twitter", "linkedin", "youtube"],
+    question: "What are IFTM's social media handles?",
+    answer: "Facebook: /iftmuniv, Twitter: @IFTMUni, Instagram: @iftmuniversity, LinkedIn: /iftm-university, YouTube: IFTM University channel.",
+  },
+
+  // Foreign Students
+  {
+    keywords: ["foreign", "international", "nri", "abroad", "overseas"],
+    question: "Does IFTM accept international students?",
+    answer: "Haan, International Students Cell hai. Foreign students ke liye alag admission guidelines hain. Details: https://www.iftmuniversity.ac.in/iftmuniversity/policy/admission_foriegn/",
+  },
+
+  // Mental Health
+  {
+    keywords: ["mental health", "counselling", "counselor", "depression", "stress"],
+    question: "Is mental health support available?",
+    answer: "Haan, campus pe Mental Health Service Providers hain. Mentoring & Counselling Cell bhi hai students ke liye.",
+  },
+
+  // Placement Director
+  {
+    keywords: ["placement director", "kk bansal", "placement head"],
+    question: "Who heads the Placement Cell?",
+    answer: "Mr. K.K. Bansal (IIT Delhi passout) Director hain Training & Placement Cell ke. July 2013 se kaam kar rahe hain. Mock interviews, GD, soft skills training sab arrange karte hain.",
+  },
+  {
+    keywords: ["placement training", "mock interview", "group discussion", "soft skills"],
+    question: "What placement training is provided?",
+    answer: "Regular mock interviews, group discussions, communication skill workshops hote hain. CV format bhi milta hai. CAT, GATE, TOEFL, GRE, UPSC ke liye bhi motivate karte hain.",
+  },
+
+  // Admission Form Download
+  {
+    keywords: ["registration form download", "admission form download", "scholarship form download"],
+    question: "Where to download forms?",
+    answer: "Registration: https://www.iftmuniversity.ac.in/iftmuniversity/downloads/30.pdf\nAdmission: https://www.iftmuniversity.ac.in/iftmuniversity/downloads/73.pdf\nScholarship: https://www.iftmuniversity.ac.in/iftmuniversity/downloads/File77.pdf\nUniversity Scholarship: https://www.iftmuniversity.ac.in/iftmuniversity/downloads/File718.pdf",
+  },
 ];
 
 export const giniSystemPrompt = `You are Gini, a warm and friendly virtual assistant at IFTM University, Moradabad. You talk like a real person — not a robot.
@@ -408,6 +565,17 @@ User: "BA fees?" → "BA ki fee sirf Rs 10,000/year hai + Rs 2,500 exam fee. Bah
 - Campus facilities, hostel (Rs 45,000/year), transport (FREE)
 - Contact info, ERP portal, online fee payment
 - Approvals, founder, leadership
+- Scholarship scheme (10%-50% based on marks, 10% extra for girls)
+- Hostel details (3 boys + 1 girls, 600+400 capacity, Wi-Fi, mess)
+- Research stats (2691+ papers, 807+ patents, 534+ awards)
+- Events (SAMAVESH, SHAURYA, PARAKRAM, SUHAVAN, Convocation)
+- Facilities (Wi-Fi, 3 banks+ATM, post office, day care, guest house)
+- NEP-2020 cells and ICSD skill development
+- Social media handles (FB, Twitter, Instagram, LinkedIn, YouTube)
+- International students admission
+- Mental health support and counselling
+- Placement training (mock interviews, GD, soft skills)
+- Form download links (registration, admission, scholarship)
 
 5. WHAT YOU DON'T KNOW:
 - Outside IFTM? "Main IFTM ke baare mein help kar sakta hoon. Kya chahiye?"
