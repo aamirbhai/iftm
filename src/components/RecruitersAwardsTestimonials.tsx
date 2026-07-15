@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -248,7 +248,7 @@ export default function RecruitersAwardsTestimonials() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          SECTION 3: STUDENT SAYS — TMU Exact Design
+          SECTION 3: STUDENT SAYS
           ═══════════════════════════════════════════ */}
       <section className="py-14 md:py-20 bg-[#e8edf3] overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">

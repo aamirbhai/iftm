@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-/* ─── Stats Data (TMU style) ─── */
+/* ─── Stats Data ─── */
 const stats = [
   { icon: "fa-user-graduate", value: 10000, suffix: "+", label: "Students" },
   { icon: "fa-briefcase", value: 30, suffix: "+", label: "Years of Excellence" },
@@ -18,7 +18,7 @@ const bannerSlides = [
   { title: "69+ Acres Green Campus", subtitle: "World-class infrastructure with modern facilities", color: "from-amber-700 to-orange-900" },
 ];
 
-/* ─── HLS Video Component (TMU-style adaptive streaming) ─── */
+/* ─── HLS Video Component (adaptive streaming) ─── */
 function LazyHeroVideo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -42,7 +42,7 @@ function LazyHeroVideo() {
     return () => observer.disconnect();
   }, []);
 
-  // HLS initialization (TMU-style)
+  // HLS initialization
   useEffect(() => {
     if (!shouldLoad || !videoRef.current) return;
     const video = videoRef.current;
@@ -206,7 +206,7 @@ export default function HeroSlider() {
     <>
       {/* ═══════════════════════════════════════════
           SECTION 1: HERO with HLS Video BG
-          Stats card overlaps from bottom (TMU style)
+          Stats card overlaps from bottom
           ═══════════════════════════════════════════ */}
       <section className="relative h-[100dvh] md:h-[700px] lg:h-[800px] bg-iftm-dark" style={{ overflow: "visible" }}>
         {/* Video Background - Lazy Loaded */}
@@ -269,7 +269,7 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* ─── STATS CARD — overlaps hero bottom (TMU style, horizontal inline) ─── */}
+        {/* ─── STATS CARD — overlaps hero bottom (horizontal inline) ─── */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 w-full max-w-[1000px] px-4">
           <div className="relative rounded-2xl overflow-hidden shadow-2xl" style={{ background: "linear-gradient(135deg, rgba(10,14,42,0.92) 0%, rgba(17,22,64,0.95) 100%)", backdropFilter: "blur(16px)" }}>
             {/* Top gold accent line */}
