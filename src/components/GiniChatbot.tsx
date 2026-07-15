@@ -91,10 +91,20 @@ export default function GiniChatbot() {
   const recognitionRef = useRef<any>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
   const voiceCallRef = useRef(false);
+  const messagesRef = useRef<Message[]>([]);
+  const stepRef = useRef(step);
+  const userNameRef = useRef(userName);
+  const languageRef = useRef(language);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Keep refs in sync with state (avoids stale closures in callbacks)
+  useEffect(() => { messagesRef.current = messages; }, [messages]);
+  useEffect(() => { stepRef.current = step; }, [step]);
+  useEffect(() => { userNameRef.current = userName; }, [userName]);
+  useEffect(() => { languageRef.current = language; }, [language]);
 
   // Initialize speech synthesis
   useEffect(() => {
@@ -129,46 +139,80 @@ export default function GiniChatbot() {
       setIsSpeaking(false);
       // In voice call mode, auto-restart listening after Gini finishes speaking
       if (voiceCallRef.current) {
-        setTimeout(() => startListening(), 500);
+        setTimeout(() => {
+          if (voiceCallRef.current) startListening();
+        }, 600);
       }
     };
-    utterance.onerror = () => setIsSpeaking(false);
+    utterance.onerror = () => {
+      setIsSpeaking(false);
+      // Also restart on error in voice call mode
+      if (voiceCallRef.current) {
+        setTimeout(() => {
+          if (voiceCallRef.current) startListening();
+        }, 600);
+      }
+    };
     synthRef.current.speak(utterance);
   }
 
   function startListening() {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      alert("Voice input is not supported in this browser. Please use Chrome.");
+      if (voiceCallRef.current) {
+        simulateTyping(languageRef.current === "hi"
+          ? "Aapka browser voice support nahi karta. Chrome use karo."
+          : "Your browser doesn't support voice. Please use Chrome.", true);
+      }
       return;
     }
-    if (recognitionRef.current) recognitionRef.current.abort();
-    synthRef.current?.cancel();
+    if (recognitionRef.current) {
+      try { recognitionRef.current.abort(); } catch {}
+    }
+    if (synthRef.current) synthRef.current.cancel();
 
-    const recognition = new SpeechRecognition();
-    recognition.lang = language === "hi" ? "hi-IN" : "en-IN";
-    recognition.interimResults = true;
-    recognition.continuous = false;
-    recognition.maxAlternatives = 1;
+    try {
+      const recognition = new SpeechRecognition();
+      const lang = languageRef.current === "hi" ? "hi-IN" : "en-IN";
+      recognition.lang = lang;
+      recognition.interimResults = true;
+      recognition.continuous = false;
+      recognition.maxAlternatives = 1;
 
-    recognition.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript;
-      setInput(transcript);
-      if (event.results[0].isFinal) {
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setInput(transcript);
+        if (event.results[0].isFinal) {
+          setIsListening(false);
+          setTimeout(() => {
+            setInput("");
+            handleSendWithTextRef(transcript);
+          }, 300);
+        }
+      };
+
+      recognition.onerror = (event: any) => {
         setIsListening(false);
-        // Auto-send after final result
-        setTimeout(() => {
-          setInput(transcript);
-          handleSendWithText(transcript);
-        }, 300);
-      }
-    };
+        // In voice call mode, restart on non-fatal errors
+        if (voiceCallRef.current && event.error !== "aborted" && event.error !== "not-allowed") {
+          setTimeout(() => startListening(), 1000);
+        }
+      };
 
-    recognition.onerror = () => setIsListening(false);
-    recognition.onend = () => setIsListening(false);
-    recognition.start();
-    recognitionRef.current = recognition;
-    setIsListening(true);
+      recognition.onend = () => {
+        setIsListening(false);
+        // In voice call mode, restart if not speaking (user stopped talking without result)
+        if (voiceCallRef.current && !synthRef.current?.speaking) {
+          setTimeout(() => startListening(), 800);
+        }
+      };
+
+      recognition.start();
+      recognitionRef.current = recognition;
+      setIsListening(true);
+    } catch {
+      setIsListening(false);
+    }
   }
 
   function stopListening() {
@@ -186,11 +230,45 @@ export default function GiniChatbot() {
   }
 
   function startVoiceCall() {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert(language === "hi"
+        ? "Aapka browser voice support nahi karta. Chrome use karo."
+        : "Your browser doesn't support voice calls. Please use Chrome.");
+      return;
+    }
+
     voiceCallRef.current = true;
     setVoiceCallMode(true);
     setVoiceEnabled(true);
-    // Start listening immediately
-    setTimeout(() => startListening(), 300);
+
+    // Cancel any ongoing speech first
+    if (synthRef.current) synthRef.current.cancel();
+
+    // Show a message and start listening after a brief delay
+    const lang = language || "en";
+    const greeting = lang === "hi"
+      ? "Voice call shuru ho raha hai. Bolo main sun raha hoon."
+      : "Voice call started. Go ahead, I'm listening.";
+    simulateTyping(greeting, true);
+
+    // Start listening after the greeting is spoken
+    const checkSpeaking = setInterval(() => {
+      if (synthRef.current && !synthRef.current.speaking) {
+        clearInterval(checkSpeaking);
+        setTimeout(() => {
+          if (voiceCallRef.current) startListening();
+        }, 300);
+      }
+    }, 200);
+
+    // Safety timeout - start listening after 4 seconds max
+    setTimeout(() => {
+      clearInterval(checkSpeaking);
+      if (voiceCallRef.current && !recognitionRef.current) {
+        startListening();
+      }
+    }, 4000);
   }
 
   function stopVoiceCall() {
@@ -263,6 +341,59 @@ export default function GiniChatbot() {
       simulateTyping(`Bahut accha ${userName}! Ab aap Hindi mein pooch sakte ho. Main aapki kya madad kar sakta hoon?`);
     } else {
       simulateTyping(`Great ${userName}! You can now ask me anything in English. How can I help you?`);
+    }
+  }
+
+  // Ref-based version for use in speech recognition callbacks (avoids stale closures)
+  async function handleSendWithTextRef(text: string) {
+    const trimmed = text.trim();
+    if (!trimmed) return;
+
+    const currentStep = stepRef.current;
+    const currentLang = languageRef.current;
+    const currentName = userNameRef.current;
+
+    const userMessage: Message = { role: "user", content: trimmed };
+    setMessages((prev) => [...prev.filter((m) => !m.isTyping && !m.showLanguageOptions), userMessage]);
+
+    if (currentStep === "name") {
+      setUserName(trimmed);
+      setStep("language");
+      setTimeout(() => showLanguageSelection(), 500);
+      return;
+    }
+
+    const faqAnswer = findFAQMatch(trimmed);
+    if (faqAnswer) {
+      simulateTyping(faqAnswer);
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const chatMessages = [
+        ...messagesRef.current.filter((m) => !m.isTyping && !m.showLanguageOptions).map((m) => ({ role: m.role, content: m.content })),
+        { role: "user", content: trimmed },
+      ];
+
+      const response = await fetch("/api/gini", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: chatMessages, userName: currentName, language: currentLang }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setIsLoading(false);
+        simulateTyping(data.reply);
+      } else {
+        throw new Error("API failed");
+      }
+    } catch {
+      setIsLoading(false);
+      simulateTyping(currentLang === "hi"
+        ? "Mujhe abhi connect hone mein problem ho rahi hai. Call karo +91-591-2486021."
+        : "I'm having trouble connecting. Please call +91-591-2486021.");
     }
   }
 
