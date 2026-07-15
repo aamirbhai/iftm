@@ -206,14 +206,29 @@ export default function HeroSlider() {
     <>
       {/* ═══════════════════════════════════════════
           SECTION 1: HERO with HLS Video BG
+          Stats card overlaps from bottom (TMU style)
           ═══════════════════════════════════════════ */}
-      <section className="relative h-[100dvh] md:h-[700px] lg:h-[800px] overflow-hidden bg-iftm-dark">
+      <section className="relative h-[100dvh] md:h-[700px] lg:h-[800px] bg-iftm-dark" style={{ overflow: "visible" }}>
         {/* Video Background - Lazy Loaded */}
-        <LazyHeroVideo />
+        <div className="absolute inset-0 overflow-hidden">
+          <LazyHeroVideo />
+        </div>
 
         {/* Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
         <div className="absolute inset-0 bg-gradient-to-r from-iftm-navy/40 to-transparent" />
+
+        {/* 30 Years Badge - Top Right */}
+        <div className="absolute top-6 right-6 md:top-10 md:right-10 z-20">
+          <div className="relative">
+            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full border-2 border-iftm-gold/60 flex flex-col items-center justify-center bg-black/30 backdrop-blur-sm">
+              <span className="font-[family-name:var(--font-number)] text-3xl md:text-4xl font-bold text-iftm-gold leading-none">30</span>
+              <span className="text-iftm-gold/80 text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium mt-0.5">Years</span>
+            </div>
+            {/* Glow ring */}
+            <div className="absolute inset-0 rounded-full bg-iftm-gold/10 blur-xl" />
+          </div>
+        </div>
 
         {/* Hero Content - Centered */}
         <div className="relative z-10 h-full flex items-center justify-center">
@@ -251,63 +266,58 @@ export default function HeroSlider() {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ═══════════════════════════════════════════
-          SECTION 2: STATS - Premium Centered Design
-          ═══════════════════════════════════════════ */}
-      <section className="relative -mt-1 z-30">
-        {/* Background with gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e2a] via-[#111640] to-[#0a0e2a]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,193,7,0.06),transparent_70%)]" />
-        {/* Top gold line */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-iftm-gold/40 to-transparent" />
+        {/* ─── STATS CARD — overlaps hero bottom (TMU style, horizontal inline) ─── */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 w-full max-w-[1000px] px-4">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl" style={{ background: "linear-gradient(135deg, rgba(10,14,42,0.92) 0%, rgba(17,22,64,0.95) 100%)", backdropFilter: "blur(16px)" }}>
+            {/* Top gold accent line */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-iftm-gold/60 to-transparent" />
+            {/* Subtle radial glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,193,7,0.05),transparent_70%)]" />
 
-        <div className="relative max-w-[1100px] mx-auto px-4 md:px-6 py-8 md:py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
-            {stats.map((stat, index) => (
-              <div key={index} className="relative group text-center">
-                {/* Vertical divider (desktop) */}
-                {index > 0 && (
-                  <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-14 bg-gradient-to-b from-transparent via-white/15 to-transparent" />
-                )}
+            <div className="relative grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-0 py-5 md:py-6 px-3 md:px-6">
+              {stats.map((stat, index) => (
+                <div key={index} className="relative group">
+                  {/* Vertical divider (desktop) */}
+                  {index > 0 && (
+                    <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-12 bg-gradient-to-b from-transparent via-white/15 to-transparent" />
+                  )}
 
-                <div className="flex flex-col items-center gap-2.5 px-4">
-                  {/* Icon with glow ring */}
-                  <div className="relative">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-iftm-gold/30 group-hover:bg-iftm-gold/10 transition-all duration-300">
-                      <i className={`fas ${stat.icon} text-iftm-gold text-lg md:text-xl`} />
+                  <div className="flex items-center gap-3 px-3 md:px-4 justify-center">
+                    {/* Icon */}
+                    <div className="relative flex-shrink-0">
+                      <div className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-iftm-gold/30 group-hover:bg-iftm-gold/10 transition-all duration-300">
+                        <i className={`fas ${stat.icon} text-iftm-gold text-sm md:text-base`} />
+                      </div>
                     </div>
-                    {/* Glow on hover */}
-                    <div className="absolute inset-0 rounded-full bg-iftm-gold/0 group-hover:bg-iftm-gold/10 blur-lg transition-all duration-300" />
-                  </div>
 
-                  {/* Number */}
-                  <div className="flex items-baseline gap-0.5">
-                    <span className="font-[family-name:var(--font-number)] text-3xl md:text-4xl font-bold text-white leading-none">
-                      <AnimatedCounter value={stat.value} suffix="" />
-                    </span>
-                    <span className="text-iftm-gold text-sm md:text-base font-bold">{stat.suffix}</span>
+                    {/* Count + Label stacked */}
+                    <div className="flex flex-col">
+                      <div className="flex items-baseline gap-0.5">
+                        <span className="font-[family-name:var(--font-number)] text-xl md:text-2xl font-bold text-white leading-none">
+                          <AnimatedCounter value={stat.value} suffix="" />
+                        </span>
+                        <span className="text-iftm-gold text-[10px] md:text-xs font-bold">{stat.suffix}</span>
+                      </div>
+                      <p className="text-white/40 text-[8px] md:text-[9px] uppercase tracking-[0.12em] font-medium mt-0.5">
+                        {stat.label}
+                      </p>
+                    </div>
                   </div>
-
-                  {/* Label */}
-                  <p className="text-white/40 text-[10px] md:text-[11px] uppercase tracking-[0.15em] font-medium">
-                    {stat.label}
-                  </p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Bottom gold accent line */}
+            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-iftm-gold/40 to-transparent" />
           </div>
         </div>
-
-        {/* Bottom gold line */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-iftm-gold/40 to-transparent" />
       </section>
 
       {/* ═══════════════════════════════════════════
-          SECTION 3: BANNER SLIDER
+          SECTION 2: BANNER SLIDER
           ═══════════════════════════════════════════ */}
-      <section className="py-10 md:py-14 bg-white">
+      <section className="pt-20 md:pt-24 pb-10 md:py-14 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           {/* Slider Container */}
           <div className="relative overflow-hidden rounded-2xl shadow-xl">
