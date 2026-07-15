@@ -6,7 +6,7 @@ import Link from "next/link";
 /* ─── Stats Data (TMU style) ─── */
 const stats = [
   { icon: "fa-user-graduate", value: 10000, suffix: "+", label: "Students" },
-  { icon: "fa-briefcase", value: 25, suffix: " Years", label: "of Excellence" },
+  { icon: "fa-briefcase", value: 30, suffix: "+", label: "Years of Excellence" },
   { icon: "fa-chart-line", value: 90, suffix: "%+", label: "Placement Rate" },
   { icon: "fa-handshake", value: 100, suffix: "+", label: "Collaborations" },
 ];
@@ -218,15 +218,17 @@ export default function HeroSlider() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
         <div className="absolute inset-0 bg-gradient-to-r from-iftm-navy/40 to-transparent" />
 
-        {/* 30 Years Badge - Top Right */}
+        {/* 30+ Years of Excellence Badge - Top Right */}
         <div className="absolute top-6 right-6 md:top-10 md:right-10 z-20">
-          <div className="relative">
-            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full border-2 border-iftm-gold/60 flex flex-col items-center justify-center bg-black/30 backdrop-blur-sm">
-              <span className="font-[family-name:var(--font-number)] text-3xl md:text-4xl font-bold text-iftm-gold leading-none">30</span>
-              <span className="text-iftm-gold/80 text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium mt-0.5">Years</span>
+          <div className="relative group">
+            <div className="w-[88px] h-[88px] md:w-[120px] md:h-[120px] rounded-full border-2 border-iftm-gold/50 flex flex-col items-center justify-center bg-gradient-to-br from-black/40 to-black/20 backdrop-blur-md shadow-xl shadow-black/30 group-hover:border-iftm-gold/80 group-hover:shadow-iftm-gold/20 transition-all duration-500">
+              <span className="font-[family-name:var(--font-number)] text-3xl md:text-4xl font-black text-iftm-gold leading-none tracking-tight">30+</span>
+              <span className="text-iftm-gold/90 text-[8px] md:text-[10px] uppercase tracking-[0.15em] font-bold mt-1 text-center leading-tight">Years of<br/>Excellence</span>
             </div>
-            {/* Glow ring */}
-            <div className="absolute inset-0 rounded-full bg-iftm-gold/10 blur-xl" />
+            {/* Animated glow ring */}
+            <div className="absolute inset-0 rounded-full bg-iftm-gold/10 blur-2xl animate-pulse" />
+            {/* Outer ring */}
+            <div className="absolute -inset-1 rounded-full border border-iftm-gold/20" />
           </div>
         </div>
 
