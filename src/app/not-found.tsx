@@ -134,27 +134,16 @@ export default function NotFound() {
 
           {/* Heading */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-            Coming{" "}
-            <span className="bg-gradient-to-r from-iftm-gold to-amber-400 bg-clip-text text-transparent">
-              Soon
-            </span>
+            404
           </h1>
 
           {/* Subtext */}
           <p className="text-white/70 text-lg md:text-xl mb-2">
-            This page is under construction
+            Page Not Found
           </p>
           <p className="text-white/50 text-sm md:text-base mb-10 max-w-md mx-auto">
-            We&apos;re working hard to bring you something amazing. Stay tuned for updates!
+            The page you are looking for does not exist or has been moved. Please check the URL or navigate back to the homepage.
           </p>
-
-          {/* Progress Bar */}
-          <div className="max-w-xs mx-auto mb-10">
-            <div className="h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
-              <div className="h-full w-2/3 bg-gradient-to-r from-iftm-gold to-amber-400 rounded-full animate-pulse" />
-            </div>
-            <p className="text-white/40 text-xs mt-2">65% Complete</p>
-          </div>
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

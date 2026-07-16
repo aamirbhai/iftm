@@ -1,7 +1,19 @@
-"use client";
-
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "NAAC 'A' Grade & Government Approvals - IFTM University Moradabad",
+  description: "IFTM University is accredited with NAAC 'A' Grade and recognized by UGC, AICTE, PCI, BCI, NCTE, and INC. Learn about our accreditations, approvals, and national rankings.",
+  alternates: {
+    canonical: "https://iftmuniversity.ac.in/naac",
+  },
+  openGraph: {
+    title: "NAAC 'A' Grade & Government Approvals - IFTM University Moradabad",
+    description: "IFTM University is accredited with NAAC 'A' Grade and recognized by UGC, AICTE, PCI, BCI, NCTE, and INC.",
+    url: "https://iftmuniversity.ac.in/naac",
+  },
+};
 
 const criteria = [
   { num: "1", title: "Curricular Aspects", desc: "Curriculum design, flexibility, feedback system, and academic enrichment." },

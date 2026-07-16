@@ -291,6 +291,7 @@ export default function Header({ solid = false }: { solid?: boolean }) {
                 className="lg:hidden p-2"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
               >
                 <div className="w-6 flex flex-col gap-1.5">
                   <span

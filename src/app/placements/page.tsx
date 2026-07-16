@@ -1,8 +1,19 @@
-"use client";
-
-import { useState } from "react";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Placements - IFTM University Moradabad",
+  description: "90%+ placement rate with 500+ recruiting partners at IFTM University. Top companies like Google, Microsoft, Amazon, TCS, Infosys visit our campus. Average package 4.5 LPA.",
+  alternates: {
+    canonical: "https://iftmuniversity.ac.in/placements",
+  },
+  openGraph: {
+    title: "Placements - IFTM University Moradabad",
+    description: "90%+ placement rate with 500+ recruiting partners. Top companies visit our campus every year.",
+    url: "https://iftmuniversity.ac.in/placements",
+  },
+};
 
 const stats = [
   { value: "90%+", label: "Placement Rate", icon: "fa-chart-line" },
@@ -46,8 +57,6 @@ const process = [
 ];
 
 export default function PlacementsPage() {
-  const [activeTab, setActiveTab] = useState("all");
-
   return (
     <main className="min-h-screen">
       <Header />

@@ -1,7 +1,19 @@
-"use client";
-
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Campus Life - IFTM University Moradabad",
+  description: "Explore vibrant campus life at IFTM University. 69+ acre green campus with hostels, sports complex, library, gym, canteen, health centre, transport, and 50+ student clubs.",
+  alternates: {
+    canonical: "https://iftmuniversity.ac.in/campus-life",
+  },
+  openGraph: {
+    title: "Campus Life - IFTM University Moradabad",
+    description: "Explore vibrant campus life at IFTM University. 69+ acre green campus with world-class facilities.",
+    url: "https://iftmuniversity.ac.in/campus-life",
+  },
+};
 
 const facilities = [
   { icon: "fa-bed", title: "Hostels", desc: "Separate hostels for boys & girls with Wi-Fi, mess, 24/7 security, and recreational facilities.", color: "from-iftm-primary to-red-700" },

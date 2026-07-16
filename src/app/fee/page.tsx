@@ -1,8 +1,20 @@
-"use client";
-
-import { useState } from "react";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FeeTableSection from "@/components/FeeTableSection";
+
+export const metadata: Metadata = {
+  title: "Fee Structure 2026-27 - IFTM University Moradabad",
+  description: "Complete fee structure for all UG, PG, Diploma and Doctoral programmes at IFTM University for session 2026-27. B.Tech ₹92,000/year, B.Pharm ₹1,25,000/year, MBA ₹1,10,000/year. Scholarships up to 100% available.",
+  alternates: {
+    canonical: "https://iftmuniversity.ac.in/fee",
+  },
+  openGraph: {
+    title: "Fee Structure 2026-27 - IFTM University Moradabad",
+    description: "Complete fee structure for all programmes at IFTM University. Scholarships up to 100% fee waiver available.",
+    url: "https://iftmuniversity.ac.in/fee",
+  },
+};
 
 const ugProgrammes = [
   { sno: 1, name: "BBA (Hons. with Research)", eligibility: "Pass with min 45% (40% SC/ST) in 10+2", fee: "₹50,000 (3 Yrs) / ₹1,10,000 (4th Yr)", examFee: "₹10,000", duration: "3/4 Years", school: "School of Business Management", phones: ["9410071506", "9897093192", "9457269572", "9760200575"] },
@@ -68,51 +80,7 @@ const schools = [
   { name: "School of Agricultural Sciences", short: "SASE", phones: ["8477061540", "9758531198"] },
 ];
 
-function ProgrammeTable({ data }: { data: typeof ugProgrammes }) {
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="bg-iftm-navy text-white">
-            <th className="px-3 py-3 text-left text-xs font-bold uppercase tracking-wider">#</th>
-            <th className="px-3 py-3 text-left text-xs font-bold uppercase tracking-wider">Programme</th>
-            <th className="px-3 py-3 text-left text-xs font-bold uppercase tracking-wider hidden md:table-cell">Eligibility</th>
-            <th className="px-3 py-3 text-left text-xs font-bold uppercase tracking-wider">Fee/Year</th>
-            <th className="px-3 py-3 text-left text-xs font-bold uppercase tracking-wider hidden lg:table-cell">Exam Fee</th>
-            <th className="px-3 py-3 text-left text-xs font-bold uppercase tracking-wider">Duration</th>
-            <th className="px-3 py-3 text-left text-xs font-bold uppercase tracking-wider hidden lg:table-cell">Contact</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((p, i) => (
-            <tr key={p.sno} className={"border-b border-gray-100 " + (i % 2 === 0 ? "bg-white" : "bg-gray-50") + " hover:bg-iftm-gold/5 transition-colors"}>
-              <td className="px-3 py-3 font-bold text-iftm-navy">{p.sno}</td>
-              <td className="px-3 py-3">
-                <p className="font-bold text-iftm-navy text-sm">{p.name}</p>
-                <p className="text-gray-400 text-[11px] mt-0.5 md:hidden">{p.eligibility}</p>
-              </td>
-              <td className="px-3 py-3 text-gray-500 text-xs hidden md:table-cell">{p.eligibility}</td>
-              <td className="px-3 py-3 font-bold text-iftm-primary whitespace-nowrap">{p.fee}</td>
-              <td className="px-3 py-3 text-gray-500 hidden lg:table-cell">{p.examFee}</td>
-              <td className="px-3 py-3 text-gray-600 text-xs whitespace-nowrap">{p.duration}</td>
-              <td className="px-3 py-3 hidden lg:table-cell">
-                <div className="flex flex-wrap gap-1">
-                  {p.phones.map((ph) => (
-                    <a key={ph} href={"tel:+91" + ph} className="text-iftm-primary text-[11px] hover:underline block">{ph}</a>
-                  ))}
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
 export default function FeePage() {
-  const [tab, setTab] = useState<"ug" | "pg">("ug");
-
   return (
     <main className="min-h-screen">
       <Header />
@@ -160,19 +128,7 @@ export default function FeePage() {
             <h2 className="text-3xl md:text-4xl font-extrabold text-iftm-navy mb-3">Programmes & <span className="text-iftm-gold">Fees</span></h2>
           </div>
 
-          {/* Tabs */}
-          <div className="flex gap-2 mb-6 justify-center">
-            <button onClick={() => setTab("ug")} className={"px-6 py-2.5 rounded-lg font-bold text-sm transition-all " + (tab === "ug" ? "bg-iftm-primary text-white shadow-lg" : "bg-gray-100 text-gray-600 hover:bg-gray-200")}>
-              UG Programmes ({ugProgrammes.length})
-            </button>
-            <button onClick={() => setTab("pg")} className={"px-6 py-2.5 rounded-lg font-bold text-sm transition-all " + (tab === "pg" ? "bg-iftm-primary text-white shadow-lg" : "bg-gray-100 text-gray-600 hover:bg-gray-200")}>
-              PG Programmes ({pgProgrammes.length})
-            </button>
-          </div>
-
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
-            {tab === "ug" ? <ProgrammeTable data={ugProgrammes} /> : <ProgrammeTable data={pgProgrammes} />}
-          </div>
+          <FeeTableSection ugProgrammes={ugProgrammes} pgProgrammes={pgProgrammes} />
 
           <p className="text-center text-gray-400 text-xs mt-4">* Fees for admission session 2026-27. Exam fee is per annum.</p>
         </div>

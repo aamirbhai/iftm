@@ -1,7 +1,19 @@
-"use client";
-
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Student Portal - IFTM University Moradabad",
+  description: "Access all student services at IFTM University: ERP login, LMS portal, exam results, online fee payment, academic calendar, ABC/NAD, admission portal, and library resources.",
+  alternates: {
+    canonical: "https://iftmuniversity.ac.in/student-portal",
+  },
+  openGraph: {
+    title: "Student Portal - IFTM University Moradabad",
+    description: "Access all student services at IFTM University: ERP, LMS, results, fee payment, and more.",
+    url: "https://iftmuniversity.ac.in/student-portal",
+  },
+};
 
 const portals = [
   { title: "ERP Login", desc: "Access student ERP for attendance, fees, results, and academic records", icon: "fa-desktop", href: "/erp", color: "from-iftm-primary to-red-700" },

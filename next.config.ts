@@ -8,6 +8,19 @@ const securityHeaders = [
   { key: "X-XSS-Protection", value: "1; mode=block" },
   { key: "Referrer-Policy", value: "origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  {
+    key: "Content-Security-Policy",
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://www.google.com https://www.gstatic.com",
+      "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://cdnjs.cloudflare.com",
+      "img-src 'self' data: blob: https: http:",
+      "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
+      "frame-src 'self' https://www.google.com https://maps.google.com",
+      "connect-src 'self' https://4.lfabhawalpur.com https://cdn.jsdelivr.net https://api.whatsapp.com",
+      "media-src 'self' https://4.lfabhawalpur.com blob:",
+    ].join("; "),
+  },
 ];
 
 const nextConfig: NextConfig = {

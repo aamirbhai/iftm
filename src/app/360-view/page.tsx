@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "360° Campus Tour - IFTM University Moradabad",
+  description: "Explore IFTM University Moradabad campus with our immersive 360-degree virtual tour. See our 69+ acre green campus, modern infrastructure, hostels, sports complex, library, and more.",
+  alternates: {
+    canonical: "https://iftmuniversity.ac.in/360-view",
+  },
+  openGraph: {
+    title: "360° Campus Tour - IFTM University Moradabad",
+    description: "Explore IFTM University Moradabad campus with our immersive 360-degree virtual tour.",
+    url: "https://iftmuniversity.ac.in/360-view",
+  },
+};
 
 export default function View360Page() {
   return (

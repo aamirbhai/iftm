@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Alumni Network - IFTM University Moradabad",
+  description: "Connect with IFTM University alumni network. Our graduates are placed at top companies like Google, Microsoft, Amazon, TCS, Infosys, and more. Join our growing alumni community.",
+  alternates: {
+    canonical: "https://iftmuniversity.ac.in/alumni",
+  },
+  openGraph: {
+    title: "Alumni Network - IFTM University Moradabad",
+    description: "Connect with IFTM University alumni network. Our graduates are placed at top companies worldwide.",
+    url: "https://iftmuniversity.ac.in/alumni",
+  },
+};
 
 export default function AlumniPage() {
   return (

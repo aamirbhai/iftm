@@ -13,7 +13,7 @@ const stats = [
 
 /* ─── Banner Slides ─── */
 const bannerSlides = [
-  { title: "Admissions Open 2025-26", subtitle: "Apply now for UG, PG & Diploma programmes", color: "from-iftm-primary to-red-900" },
+  { title: "Admissions Open 2026-27", subtitle: "Apply now for UG, PG & Diploma programmes", color: "from-iftm-primary to-red-900" },
   { title: "90%+ Placement Record", subtitle: "Top recruiters: Google, Microsoft, Amazon, TCS & more", color: "from-green-800 to-emerald-900" },
   { title: "69+ Acres Green Campus", subtitle: "World-class infrastructure with modern facilities", color: "from-amber-700 to-orange-900" },
 ];
