@@ -127,28 +127,13 @@ export default function RootLayout({
       className={`${plusJakarta.variable} ${teko.variable} antialiased`}
     >
       <head>
-        <link
-          rel="preload"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-          as="style"
-          crossOrigin="anonymous"
-        />
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
-          {...{ media: "print", onload: "this.media='all'" } as any}
         />
-        <noscript>
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-            crossOrigin="anonymous"
-          />
-        </noscript>
         {/* Preconnect for video streaming (HLS.js loads lazily in HeroSlider) */}
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://4.lfabhawalpur.com" />
