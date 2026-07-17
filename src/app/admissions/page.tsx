@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import AdmissionsEnquiryForm, { programmeCategories } from "@/components/AdmissionsEnquiryForm";
+import AdmissionsEnquiryForm from "@/components/AdmissionsEnquiryForm";
+import { programmeCategories } from "@/data/programmeCategories";
 import AdmissionsFAQ from "@/components/AdmissionsFAQ";
 
 export const metadata: Metadata = {
