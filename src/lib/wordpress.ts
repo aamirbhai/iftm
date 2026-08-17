@@ -361,3 +361,5 @@ export async function getPageSlugs() {
   const data = await client!.request<{ pages: { nodes: { slug: string }[] } }>(query);
   return data.pages.nodes.map((node) => node.slug);
 }
+
+ye mai old code de rha hu isko tum  complete update krke do
