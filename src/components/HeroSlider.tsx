@@ -55,7 +55,8 @@ function LazyHeroVideo() {
       {shouldLoad && (
         <video
           ref={videoRef}
-          src="/iftm-small.mp4"
+          src="/2iftm.mp4"
+poster="/images/iftmbanner.jpg"
           className="absolute inset-0 w-full h-full object-cover"
           autoPlay
           muted
