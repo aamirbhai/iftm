@@ -1,4 +1,3 @@
-import { GraphQLClient, gql } from 'graphql-request';
 import type {
   WordPressPost,
   WordPressNews,
@@ -8,16 +7,23 @@ import type {
 
 const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL;
 
-const client = WORDPRESS_API_URL
-  ? new GraphQLClient(WORDPRESS_API_URL)
-  : null;
-
 function isWordPressConfigured(): boolean {
-  return client !== null;
+  return !!WORDPRESS_API_URL;
 }
 
-// --- Fragment: image fields ---
-const IMAGE_FRAGMENT = gql`
+async function gqlRequest<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
+  const res = await fetch(WORDPRESS_API_URL!, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables }),
+  });
+  if (!res.ok) throw new Error(`GraphQL error: ${res.status}`);
+  const json = await res.json();
+  if (json.errors?.length) throw new Error(json.errors[0].message);
+  return json.data as T;
+}
+
+const IMAGE_FRAGMENT = `
   fragment ImageFields on MediaItem {
     id
     sourceUrl
@@ -29,8 +35,7 @@ const IMAGE_FRAGMENT = gql`
   }
 `;
 
-// --- Posts ---
-const GET_POSTS = gql`
+const GET_POSTS = `
   ${IMAGE_FRAGMENT}
   query GetPosts($first: Int = 10, $after: String) {
     posts(first: $first, after: $after) {
@@ -84,13 +89,18 @@ export async function getPosts(first = 10, after?: string) {
   if (!isWordPressConfigured()) {
     return { pageInfo: { hasNextPage: false, endCursor: '' }, nodes: [] };
   }
-  const data = await client!.request<{
-    posts: { pageInfo: { hasNextPage: boolean; endCursor: string }; nodes: WordPressPost[] };
-  }>(GET_POSTS, { first, after });
-  return data.posts;
+  try {
+    const data = await gqlRequest<{
+      posts: { pageInfo: { hasNextPage: boolean; endCursor: string }; nodes: WordPressPost[] };
+    }>(GET_POSTS, { first, after });
+    return data.posts;
+  } catch (e) {
+    console.error('getPosts failed:', e);
+    return { pageInfo: { hasNextPage: false, endCursor: '' }, nodes: [] };
+  }
 }
 
-const GET_POST_SLUGS = gql`
+const GET_POST_SLUGS = `
   query GetPostSlugs($first: Int = 100) {
     posts(first: $first) {
       nodes {
@@ -102,15 +112,20 @@ const GET_POST_SLUGS = gql`
 
 export async function getPostSlugs(): Promise<string[]> {
   if (!isWordPressConfigured()) return [];
-  const data = await client!.request<{
-    posts: { nodes: { slug: string }[] };
-  }>(GET_POST_SLUGS);
-  return data.posts.nodes.map((n) => n.slug);
+  try {
+    const data = await gqlRequest<{
+      posts: { nodes: { slug: string }[] };
+    }>(GET_POST_SLUGS);
+    return data.posts.nodes.map((n) => n.slug);
+  } catch (e) {
+    console.error('getPostSlugs failed:', e);
+    return [];
+  }
 }
 
 export async function getPostBySlug(slug: string) {
   if (!isWordPressConfigured()) return null;
-  const query = gql`
+  const query = `
     ${IMAGE_FRAGMENT}
     query GetPostBySlug($slug: String!) {
       postBy(slug: $slug) {
@@ -153,12 +168,16 @@ export async function getPostBySlug(slug: string) {
       }
     }
   `;
-  const data = await client!.request<{ postBy: WordPressPost | null }>(query, { slug });
-  return data.postBy;
+  try {
+    const data = await gqlRequest<{ postBy: WordPressPost | null }>(query, { slug });
+    return data.postBy;
+  } catch (e) {
+    console.error('getPostBySlug failed:', e);
+    return null;
+  }
 }
 
-// --- News ---
-const GET_NEWS = gql`
+const GET_NEWS = `
   ${IMAGE_FRAGMENT}
   query GetNews($first: Int = 10, $after: String) {
     newsItems(first: $first, after: $after) {
@@ -188,15 +207,20 @@ export async function getNews(first = 10, after?: string) {
   if (!isWordPressConfigured()) {
     return { pageInfo: { hasNextPage: false, endCursor: '' }, nodes: [] };
   }
-  const data = await client!.request<{
-    newsItems: { pageInfo: { hasNextPage: boolean; endCursor: string }; nodes: WordPressNews[] };
-  }>(GET_NEWS, { first, after });
-  return data.newsItems;
+  try {
+    const data = await gqlRequest<{
+      newsItems: { pageInfo: { hasNextPage: boolean; endCursor: string }; nodes: WordPressNews[] };
+    }>(GET_NEWS, { first, after });
+    return data.newsItems;
+  } catch (e) {
+    console.error('getNews failed:', e);
+    return { pageInfo: { hasNextPage: false, endCursor: '' }, nodes: [] };
+  }
 }
 
 export async function getNewsBySlug(slug: string) {
   if (!isWordPressConfigured()) return null;
-  const query = gql`
+  const query = `
     ${IMAGE_FRAGMENT}
     query GetNewsBySlug($slug: String!) {
       newsItemBy(slug: $slug) {
@@ -215,13 +239,18 @@ export async function getNewsBySlug(slug: string) {
       }
     }
   `;
-  const data = await client!.request<{ newsItemBy: WordPressNews | null }>(query, { slug });
-  return data.newsItemBy;
+  try {
+    const data = await gqlRequest<{ newsItemBy: WordPressNews | null }>(query, { slug });
+    return data.newsItemBy;
+  } catch (e) {
+    console.error('getNewsBySlug failed:', e);
+    return null;
+  }
 }
 
 export async function getNewsSlugs() {
   if (!isWordPressConfigured()) return [];
-  const query = gql`
+  const query = `
     query GetNewsSlugs {
       newsItems(first: 100) {
         nodes {
@@ -230,12 +259,16 @@ export async function getNewsSlugs() {
       }
     }
   `;
-  const data = await client!.request<{ newsItems: { nodes: { slug: string }[] } }>(query);
-  return data.newsItems.nodes.map((node) => node.slug);
+  try {
+    const data = await gqlRequest<{ newsItems: { nodes: { slug: string }[] } }>(query);
+    return data.newsItems.nodes.map((node) => node.slug);
+  } catch (e) {
+    console.error('getNewsSlugs failed:', e);
+    return [];
+  }
 }
 
-// --- Programmes ---
-const GET_PROGRAMMES = gql`
+const GET_PROGRAMMES = `
   ${IMAGE_FRAGMENT}
   query GetProgrammes($first: Int = 50) {
     programmes(first: $first) {
@@ -263,15 +296,20 @@ const GET_PROGRAMMES = gql`
 
 export async function getProgrammes(first = 50) {
   if (!isWordPressConfigured()) return [];
-  const data = await client!.request<{
-    programmes: { nodes: WordPressProgramme[] };
-  }>(GET_PROGRAMMES, { first });
-  return data.programmes.nodes;
+  try {
+    const data = await gqlRequest<{
+      programmes: { nodes: WordPressProgramme[] };
+    }>(GET_PROGRAMMES, { first });
+    return data.programmes.nodes;
+  } catch (e) {
+    console.error('getProgrammes failed:', e);
+    return [];
+  }
 }
 
 export async function getProgrammeSlugs() {
   if (!isWordPressConfigured()) return [];
-  const query = gql`
+  const query = `
     query GetProgrammeSlugs($first: Int = 50) {
       programmes(first: $first) {
         nodes {
@@ -280,15 +318,20 @@ export async function getProgrammeSlugs() {
       }
     }
   `;
-  const data = await client!.request<{
-    programmes: { nodes: { slug: string }[] };
-  }>(query);
-  return data.programmes.nodes.map((n) => n.slug);
+  try {
+    const data = await gqlRequest<{
+      programmes: { nodes: { slug: string }[] };
+    }>(query);
+    return data.programmes.nodes.map((n) => n.slug);
+  } catch (e) {
+    console.error('getProgrammeSlugs failed:', e);
+    return [];
+  }
 }
 
 export async function getProgrammeBySlug(slug: string) {
   if (!isWordPressConfigured()) return null;
-  const query = gql`
+  const query = `
     ${IMAGE_FRAGMENT}
     query GetProgrammeBySlug($slug: String!) {
       programmeBy(slug: $slug) {
@@ -319,14 +362,18 @@ export async function getProgrammeBySlug(slug: string) {
       }
     }
   `;
-  const data = await client!.request<{ programmeBy: WordPressProgramme | null }>(query, { slug });
-  return data.programmeBy;
+  try {
+    const data = await gqlRequest<{ programmeBy: WordPressProgramme | null }>(query, { slug });
+    return data.programmeBy;
+  } catch (e) {
+    console.error('getProgrammeBySlug failed:', e);
+    return null;
+  }
 }
 
-// --- Pages ---
 export async function getPageBySlug(slug: string) {
   if (!isWordPressConfigured()) return null;
-  const query = gql`
+  const query = `
     ${IMAGE_FRAGMENT}
     query GetPageBySlug($slug: String!) {
       pageBy(uri: $slug) {
@@ -343,13 +390,18 @@ export async function getPageBySlug(slug: string) {
       }
     }
   `;
-  const data = await client!.request<{ pageBy: WordPressPage | null }>(query, { slug });
-  return data.pageBy;
+  try {
+    const data = await gqlRequest<{ pageBy: WordPressPage | null }>(query, { slug });
+    return data.pageBy;
+  } catch (e) {
+    console.error('getPageBySlug failed:', e);
+    return null;
+  }
 }
 
 export async function getPageSlugs() {
   if (!isWordPressConfigured()) return [];
-  const query = gql`
+  const query = `
     query GetPageSlugs {
       pages(first: 100) {
         nodes {
@@ -358,9 +410,9 @@ export async function getPageSlugs() {
       }
     }
   `;
-  const data = await client!.request<{ pages: { nodes: { slug: string }[] } }>(query);
-  return data.pages.nodes.map((node) => node.slug);
-}
+  try {
+    const data = await gqlRequest<{ pages: { nodes: { slug: string }[] } }>(query);
+    return data.pages.nodes.map((node) => node.slug);
   } catch (e) {
     console.error('getPageSlugs failed:', e);
     return [];
