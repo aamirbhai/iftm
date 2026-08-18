@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "iftm2",
+  "name": "iftm",
   "compatibility_date": "2025-07-14",
   "compatibility_flags": [
     "nodejs_compat"
